@@ -15,6 +15,7 @@ class ScaffoldWithNavBar extends StatelessWidget {
     return Scaffold(
       body: child,
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -23,6 +24,10 @@ class ScaffoldWithNavBar extends StatelessWidget {
           BottomNavigationBarItem(
             icon: Icon(Icons.card_travel),
             label: 'Meeting',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.notifications_active),
+            label: 'Notification',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
@@ -38,6 +43,9 @@ class ScaffoldWithNavBar extends StatelessWidget {
   static int _calculateSelectedIndex(BuildContext context) {
     final String location = GoRouterState.of(context).location;
     if (location.startsWith('/profile')) {
+      return 3;
+    }
+    if (location.startsWith('/notification')) {
       return 2;
     }
     if (location.startsWith('/meeting')) {
@@ -58,6 +66,9 @@ class ScaffoldWithNavBar extends StatelessWidget {
         GoRouter.of(context).go('/meeting');
         break;
       case 2:
+        GoRouter.of(context).go('/notification');
+        break;
+      case 3:
         GoRouter.of(context).go('/profile');
         break;
     }
