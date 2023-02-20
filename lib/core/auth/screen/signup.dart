@@ -139,7 +139,11 @@ class SignUpScreen extends StatelessWidget {
                                     Expanded(
                                       child: CustomButton(
                                           height: 60,
-                                          ontap: () {},
+                                          ontap: () {
+                                            debugPrint("Login Google");
+                                            authController.signup(context);
+                                            // authController.signInWithGoogleSilently();
+                                          },
                                           color: Colors.grey.shade100,
                                           borderColor: Colors.white,
                                           borderWidth: 2,
@@ -148,14 +152,32 @@ class SignUpScreen extends StatelessWidget {
                                               color: Colors.white,
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold),
-                                          child: Image.asset(
-                                            'assets/images/7611770.png',
-                                            fit: BoxFit.cover,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Image.asset(
+                                                'assets/images/7611770.png',
+                                                fit: BoxFit.cover,
+                                              ),
+                                              const SizedBox(
+                                                width: 10,
+                                              ),
+                                              const Text(
+                                                "Login with Google",
+                                                style: TextStyle(
+                                                    color:
+                                                        AppColors.primaryColor,
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )
+                                            ],
                                           )),
                                     ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
+                                    // const SizedBox(
+                                    //   width: 10,
+                                    // ),
                                     // CustomButton(
                                     //     height: 60,
                                     //     width: 90,
@@ -173,24 +195,24 @@ class SignUpScreen extends StatelessWidget {
                                     //       "assets/images/Apple_logo_black.svg.png",
                                     //       fit: BoxFit.cover,
                                     //     )),
-                                    Expanded(
-                                      child: CustomButton(
-                                          height: 60,
-                                          ontap: () {},
-                                          color: Colors.grey.shade100,
-                                          borderColor: Colors.white,
-                                          borderWidth: 2,
-                                          isTitleOnly: false,
-                                          styleBTN: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold),
-                                          child: Image.asset(
-                                            height: 40,
-                                            "assets/images/Facebook_Logo_(2019).png",
-                                            fit: BoxFit.cover,
-                                          )),
-                                    ),
+                                    // Expanded(
+                                    //   child: CustomButton(
+                                    //       height: 60,
+                                    //       ontap: () {},
+                                    //       color: Colors.grey.shade100,
+                                    //       borderColor: Colors.white,
+                                    //       borderWidth: 2,
+                                    //       isTitleOnly: false,
+                                    //       styleBTN: const TextStyle(
+                                    //           color: Colors.white,
+                                    //           fontSize: 16,
+                                    //           fontWeight: FontWeight.bold),
+                                    //       child: Image.asset(
+                                    //         height: 40,
+                                    //         "assets/images/Facebook_Logo_(2019).png",
+                                    //         fit: BoxFit.cover,
+                                    //       )),
+                                    // ),
                                   ],
                                 )
                               ],

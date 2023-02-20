@@ -17,6 +17,7 @@ class CustomButton extends StatelessWidget {
       this.styleBTN})
       : super(key: key);
   final Color? color;
+
   final Color? borderColor;
   final double? borderWidth;
   final double? radius;

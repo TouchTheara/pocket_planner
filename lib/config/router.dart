@@ -3,13 +3,14 @@ import 'package:go_router/go_router.dart';
 import 'package:pocket_planner/core/work_through/splash_screen.dart';
 import 'package:pocket_planner/module/Terms/screen/terms.dart';
 import 'package:pocket_planner/module/meeting/screen/meeting_screen.dart';
+import 'package:pocket_planner/module/planner/model/planner_model.dart';
+import 'package:pocket_planner/module/planner/screen/planner_detail_screen.dart';
 import 'package:pocket_planner/module/planner/screen/planner_screen.dart';
 
 import '../core/auth/screen/create_password.dart';
 import '../core/auth/screen/login.dart';
 import '../core/auth/screen/otp_screen.dart';
 import '../core/auth/screen/signup.dart';
-import '../module/bottom_nav_bar/bottom_nav_bar.dart';
 
 import '../module/notification/screen/notification_screen.dart';
 import '../module/onboarding/screen/onboarding_screen.dart';
@@ -73,42 +74,51 @@ final router = GoRouter(
       },
       routes: const <RouteBase>[],
     ),
-    ShellRoute(
-      navigatorKey: _shellNavigatorKey,
-      builder: (BuildContext context, GoRouterState state, Widget child) {
-        return ScaffoldWithNavBar(child: child);
+    // ShellRoute(
+    //   navigatorKey: _shellNavigatorKey,
+    //   builder: (BuildContext context, GoRouterState state, Widget child) {
+    //     return CustomDrawer(child: child);
+    //   },
+    //   routes: <RouteBase>[
+    GoRoute(
+      path: '/',
+      builder: (BuildContext context, GoRouterState state) {
+        return const PlannerScreen();
       },
       routes: <RouteBase>[
         GoRoute(
-          path: '/',
+          path: 'detail',
           builder: (BuildContext context, GoRouterState state) {
-            return const PlannerScreen();
+            return PlannerDetailScreen(
+              plannerModel: state.extra as PlannerModel,
+            );
           },
-          routes: const <RouteBase>[],
-        ),
-        GoRoute(
-          path: '/meeting',
-          builder: (BuildContext context, GoRouterState state) {
-            return const MeetingScreen();
-          },
-          routes: const <RouteBase>[],
-        ),
-        GoRoute(
-          path: '/notification',
-          builder: (BuildContext context, GoRouterState state) {
-            return const NotificationScreen();
-          },
-          routes: const <RouteBase>[],
-        ),
-        GoRoute(
-          path: '/profile',
-          builder: (BuildContext context, GoRouterState state) {
-            return const ProfileScreen();
-          },
-          routes: const <RouteBase>[],
-        ),
+        )
       ],
     ),
+    GoRoute(
+      path: '/meeting',
+      builder: (BuildContext context, GoRouterState state) {
+        return const MeetingScreen();
+      },
+      routes: const <RouteBase>[],
+    ),
+    GoRoute(
+      path: '/notification',
+      builder: (BuildContext context, GoRouterState state) {
+        return const NotificationScreen();
+      },
+      routes: const <RouteBase>[],
+    ),
+    GoRoute(
+      path: '/profile',
+      builder: (BuildContext context, GoRouterState state) {
+        return const ProfileScreen();
+      },
+      routes: const <RouteBase>[],
+    ),
+    //   ],
+    // ),
     GoRoute(
       path: '/terms',
       builder: (BuildContext context, GoRouterState state) {

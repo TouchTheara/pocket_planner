@@ -115,7 +115,7 @@ class OnBoardingScreen extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(
-                          width: 2,
+                          width: 10,
                         ),
                         Expanded(
                           child: CustomButton(

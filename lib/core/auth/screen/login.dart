@@ -175,7 +175,11 @@ class LoginSignUpScreen extends StatelessWidget {
                                     Expanded(
                                       child: CustomButton(
                                           height: 60,
-                                          ontap: () {},
+                                          ontap: () {
+                                            debugPrint("Login Google");
+                                            authController.signup(context);
+                                            // authController.signInWithGoogleSilently();
+                                          },
                                           color: Colors.grey.shade100,
                                           borderColor: Colors.white,
                                           borderWidth: 2,
@@ -184,9 +188,27 @@ class LoginSignUpScreen extends StatelessWidget {
                                               color: Colors.white,
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold),
-                                          child: Image.asset(
-                                            'assets/images/7611770.png',
-                                            fit: BoxFit.cover,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Image.asset(
+                                                'assets/images/7611770.png',
+                                                fit: BoxFit.cover,
+                                              ),
+                                              const SizedBox(
+                                                width: 10,
+                                              ),
+                                              const Text(
+                                                "Login with Google",
+                                                style: TextStyle(
+                                                    color:
+                                                        AppColors.primaryColor,
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )
+                                            ],
                                           )),
                                     ),
                                     // CustomButton(
@@ -209,24 +231,58 @@ class LoginSignUpScreen extends StatelessWidget {
                                     const SizedBox(
                                       width: 10,
                                     ),
-                                    Expanded(
-                                      child: CustomButton(
-                                          height: 60,
-                                          ontap: () {},
-                                          color: Colors.grey.shade100,
-                                          borderColor: Colors.white,
-                                          borderWidth: 2,
-                                          isTitleOnly: false,
-                                          styleBTN: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold),
-                                          child: Image.asset(
-                                            height: 40,
-                                            "assets/images/Facebook_Logo_(2019).png",
-                                            fit: BoxFit.cover,
-                                          )),
-                                    ),
+                                    // Expanded(
+                                    //   child: CustomButton(
+                                    //       height: 60,
+                                    //       ontap: () async {
+                                    //         // final translator =
+                                    //         //     GoogleTranslator();
+                                    //         // const input =
+                                    //         //     "សួស្តីតើអ្នកមិនអីទេ?";
+
+                                    //         // // Using the Future API
+                                    //         // translator
+                                    //         //     .translate(input, to: 'en')
+                                    //         //     .then((result) => print(
+                                    //         //         "Source: $input\nTranslated: $result"));
+
+                                    //         // // Passing the translation to a variable
+                                    //         // var translation =
+                                    //         //     await translator.translate(
+                                    //         //         "I would buy a car, if I had money.",
+                                    //         //         from: 'en',
+                                    //         //         to: 'it');
+
+                                    //         // // You can also call the extension method directly on the input
+                                    //         // print(
+                                    //         //     'Translated: ${await input.translate(to: 'en')}');
+
+                                    //         // // For countries that default base URL doesn't work
+                                    //         // translator.baseUrl =
+                                    //         //     "translate.google.cn";
+                                    //         // translator.translateAndPrint(
+                                    //         //     "This means 'testing' in chinese",
+                                    //         //     to: 'zh-cn');
+                                    //         // //prints 这意味着用中文'测试'
+
+                                    //         // print("translation: $translation");
+                                    //         // await authController
+                                    //         //     .signInWithFacebook(context);
+                                    //       },
+                                    //       color: Colors.grey.shade100,
+                                    //       borderColor: Colors.white,
+                                    //       borderWidth: 2,
+                                    //       isTitleOnly: false,
+                                    //       styleBTN: const TextStyle(
+                                    //           color: Colors.white,
+                                    //           fontSize: 16,
+                                    //           fontWeight: FontWeight.bold),
+                                    //       child: Image.asset(
+                                    //         height: 40,
+                                    //         "assets/images/Facebook_Logo_(2019).png",
+                                    //         fit: BoxFit.cover,
+                                    //       )),
+                                    // ),
                                   ],
                                 )
                               ],

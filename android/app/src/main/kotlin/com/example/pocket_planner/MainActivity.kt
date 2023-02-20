@@ -1,4 +1,4 @@
-package com.example.pocket_planner
+package com.app.plannerpro
 
 import io.flutter.embedding.android.FlutterActivity
 

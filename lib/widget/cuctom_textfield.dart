@@ -65,6 +65,9 @@ class CustomTextField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextFormField(
+          onTap: () {
+            onTap?.call();
+          },
           onFieldSubmitted: onFieldSubmitted,
           minLines: minLines,
           autofocus: autoFocus ?? false,
@@ -87,9 +90,9 @@ class CustomTextField extends StatelessWidget {
 
           onSaved: onSave,
           keyboardType: keyboardType,
-          showCursor: true,
+          showCursor: suffixIcon != null ? false : true,
           enabled: enable,
-          readOnly: isReadOnly ?? false,
+          readOnly: suffixIcon != null ? true : isReadOnly ?? false,
           decoration: InputDecoration(
             alignLabelWithHint: true,
             //=======new updade====

@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "952229417862",
+    "project_id": "totaplanpro",
+    "storage_bucket": "totaplanpro.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:952229417862:android:09b9205c9bc128c0c71207",
+        "android_client_info": {
+          "package_name": "com.app.plannerpro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "952229417862-i0a9hga0gdv7do7fjjpripj0iut0jvoe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGcrkbDefEifMm_31LAErBXpP07otPgX0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "952229417862-20smpp20l2jjpsc11vu6s8iru0h7upt8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "952229417862-k85dfbeb31st79alsmal0vemh0gfg9nb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.pocketPlanner"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
