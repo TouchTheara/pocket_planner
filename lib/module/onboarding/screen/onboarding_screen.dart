@@ -6,7 +6,7 @@ import 'package:pocket_planner/config/app_colors.dart';
 import 'package:pocket_planner/widget/custom_button.dart';
 import 'package:pocket_planner/widget/custom_card_blur.dart';
 
-import '../../../core/auth/controller/auth_controller.dart';
+import '../../auth/presentation/logic/auth_controller.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({Key? key}) : super(key: key);

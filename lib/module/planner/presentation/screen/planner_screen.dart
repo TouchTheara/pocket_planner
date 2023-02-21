@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pocket_planner/config/app_colors.dart';
 import 'package:pocket_planner/module/bottom_nav_bar/custom_drawer.dart';
-import 'package:pocket_planner/module/planner/model/planner_model.dart';
+import 'package:pocket_planner/module/planner/data/model/planner_model.dart';
 import 'package:pocket_planner/widget/custom_card_pin.dart';
 import 'package:pocket_planner/widget/custom_card_project.dart';
 
-import '../../../util/form_builder/create_project_form.dart';
-import '../../../widget/custom_modal_sheet.dart';
+import '../../../../util/form_builder/create_project_form.dart';
+import '../../../../widget/custom_modal_sheet.dart';
 
 class PlannerScreen extends StatelessWidget {
   const PlannerScreen({Key? key}) : super(key: key);

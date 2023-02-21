@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pocket_planner/core/auth/controller/auth_controller.dart';
+import 'package:pocket_planner/module/auth/presentation/logic/auth_controller.dart';
 
-import '../../../config/app_colors.dart';
-import '../../../widget/cuctom_textfield.dart';
-import '../../../widget/custom_button.dart';
-import '../../../widget/custom_card_blur.dart';
-import '../../../widget/custom_validation_message.dart';
+import '../../../../config/app_colors.dart';
+import '../../../../widget/cuctom_textfield.dart';
+import '../../../../widget/custom_button.dart';
+import '../../../../widget/custom_card_blur.dart';
+import '../../../../widget/custom_validation_message.dart';
 
 class CreatePassword extends StatelessWidget {
   const CreatePassword({Key? key}) : super(key: key);

@@ -4,9 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'dart:math' as math;
 
-import 'package:pocket_planner/core/auth/controller/auth_controller.dart';
+import 'package:pocket_planner/module/auth/presentation/logic/auth_controller.dart';
 
-import '../../../widget/custom_card_blur.dart';
+import '../../../../widget/custom_card_blur.dart';
 
 class OTPScreen extends StatelessWidget {
   const OTPScreen({Key? key}) : super(key: key);

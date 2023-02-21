@@ -9,10 +9,14 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:injectable/injectable.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class AuthController extends GetxController
     with GetSingleTickerProviderStateMixin {
+  @factoryMethod
+  static init() => Get.put(AuthController());
+
   ///Bool Checking:
   final isRegister = true.obs;
   final phoneValidator = false.obs;
@@ -28,6 +32,7 @@ class AuthController extends GetxController
   final segmentedControlGroupValue = 0.obs;
   final countController = 1.obs;
   final fullNameController = TextEditingController().obs;
+  final focusScopePhoneNumber = FocusNode().obs;
 
   ///Funciton Check time animation:
   String get timerString {
@@ -58,15 +63,24 @@ class AuthController extends GetxController
     return false;
   }
 
-  ///Key:
+  ///Key form:
   final formKey = GlobalKey<FormState>();
 
-  ///Function Fetching Or Posting API:
+  ///////////////Function Fetching Or Posting API//////////////// :
+
+  ///Function Get OTP:
+  fucntionRequesOtp(BuildContext context) {
+    try {} catch (e) {
+      debugPrint("======Error $e");
+    }
+  }
+
+  ///Function Verify OTP:
   fucntionVerifyOtp(BuildContext context, {String? code}) {}
-  fucntionRequesOtp(BuildContext context) {}
 
   final FirebaseAuth auth = FirebaseAuth.instance;
 
+  ///Function Login google with silently:
   Future<void> signInWithGoogleSilently() async {
     try {
       final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -90,7 +104,9 @@ class AuthController extends GetxController
     }
   }
 
-  Future<void> signup(BuildContext context) async {
+  ///Fucntion Login Google:
+
+  Future<void> signupWithGoogle(BuildContext context) async {
     try {
       final GoogleSignIn googleSignIn = GoogleSignIn();
       GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
@@ -113,6 +129,7 @@ class AuthController extends GetxController
     }
   }
 
+  ///Function Login Facebook
   signInWithFacebook(BuildContext context) async {
     final LoginResult result = await FacebookAuth.instance.login(permissions: [
       'email',

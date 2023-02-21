@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pocket_planner/core/work_through/splash_screen.dart';
 import 'package:pocket_planner/module/Terms/screen/terms.dart';
-import 'package:pocket_planner/module/meeting/screen/meeting_screen.dart';
-import 'package:pocket_planner/module/planner/model/planner_model.dart';
-import 'package:pocket_planner/module/planner/screen/planner_detail_screen.dart';
-import 'package:pocket_planner/module/planner/screen/planner_screen.dart';
+import 'package:pocket_planner/module/meeting/presentaion/screen/meeting_screen.dart';
+import 'package:pocket_planner/module/planner/data/model/planner_model.dart';
+import 'package:pocket_planner/module/planner/presentation/screen/planner_detail_screen.dart';
+import 'package:pocket_planner/module/planner/presentation/screen/planner_screen.dart';
 
-import '../core/auth/screen/create_password.dart';
-import '../core/auth/screen/login.dart';
-import '../core/auth/screen/otp_screen.dart';
-import '../core/auth/screen/signup.dart';
+import '../module/auth/presentation/screen/create_password.dart';
+import '../module/auth/presentation/screen/login.dart';
+import '../module/auth/presentation/screen/otp_screen.dart';
+import '../module/auth/presentation/screen/signup.dart';
 
-import '../module/notification/screen/notification_screen.dart';
+import '../module/notification/presentation/screen/notification_screen.dart';
 import '../module/onboarding/screen/onboarding_screen.dart';
-import '../module/profile/screen/profile_screen.dart';
+import '../module/profile/presentation/screen/profile_screen.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'root');

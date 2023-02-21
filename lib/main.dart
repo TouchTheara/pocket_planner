@@ -2,9 +2,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:pocket_planner/config/router.dart';
 
+import 'core/service_locator/service_locator.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  configureDependencies();
   runApp(const MyApp());
 }
 

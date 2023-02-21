@@ -2,12 +2,12 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pocket_planner/core/auth/controller/auth_controller.dart';
+import 'package:pocket_planner/module/auth/presentation/logic/auth_controller.dart';
 import 'package:pocket_planner/widget/custom_button.dart';
 
-import '../../../config/app_colors.dart';
-import '../../../widget/cuctom_textfield.dart';
-import '../../../widget/custom_card_blur.dart';
+import '../../../../config/app_colors.dart';
+import '../../../../widget/cuctom_textfield.dart';
+import '../../../../widget/custom_card_blur.dart';
 
 class LoginSignUpScreen extends StatelessWidget {
   const LoginSignUpScreen({Key? key}) : super(key: key);
@@ -177,7 +177,8 @@ class LoginSignUpScreen extends StatelessWidget {
                                           height: 60,
                                           ontap: () {
                                             debugPrint("Login Google");
-                                            authController.signup(context);
+                                            authController
+                                                .signupWithGoogle(context);
                                             // authController.signInWithGoogleSilently();
                                           },
                                           color: Colors.grey.shade100,
