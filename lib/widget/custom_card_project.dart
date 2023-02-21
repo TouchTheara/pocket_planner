@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:pocket_planner/config/app_colors.dart';
-import 'package:pocket_planner/module/planner/model/planner_model.dart';
+import 'package:pocket_planner/module/planner/data/model/planner_model.dart';
 
 import 'custom_list_member.dart';
 

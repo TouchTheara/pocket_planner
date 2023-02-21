@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pocket_planner/config/app_colors.dart';
-import 'package:pocket_planner/module/planner/controller/planner_controller.dart';
+import 'package:pocket_planner/module/planner/presentation/logic/planner_controller.dart';
 import 'package:pocket_planner/widget/cuctom_textfield.dart';
 import 'package:pocket_planner/widget/custom_button.dart';
 
