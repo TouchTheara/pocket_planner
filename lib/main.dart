@@ -9,9 +9,8 @@ void main() async {
   await Firebase.initializeApp();
   configureDependencies();
   runApp(const MyApp());
-debugPrint("");
-
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
