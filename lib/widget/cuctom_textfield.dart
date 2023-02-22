@@ -94,23 +94,24 @@ class CustomTextField extends StatelessWidget {
           enabled: enable,
           readOnly: suffixIcon != null ? true : isReadOnly ?? false,
           decoration: InputDecoration(
+            // labelText: "",
             alignLabelWithHint: true,
             //=======new updade====
-            label: RichText(
-              text: TextSpan(
-                text: labelText,
-                style: const TextStyle(color: Colors.grey, fontSize: 14),
-                children: [
-                  if (isRequired != null)
-                    const TextSpan(
-                      text: ' *',
-                      style: TextStyle(
-                        color: Colors.red,
-                      ),
-                    )
-                ],
-              ),
-            ),
+            // label: RichText(
+            //   text: TextSpan(
+            //     text: labelText,
+            //     style: const TextStyle(color: Colors.grey, fontSize: 14),
+            //     children: [
+            //       if (isRequired != null)
+            //         const TextSpan(
+            //           text: ' *',
+            //           style: TextStyle(
+            //             color: Colors.red,
+            //           ),
+            //         )
+            //     ],
+            //   ),
+            // ),
             counterText: '',
             fillColor:
                 initialValue == '' || enable == false || isReadOnly == true

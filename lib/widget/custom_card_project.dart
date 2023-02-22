@@ -27,6 +27,7 @@ class CustomCardProject extends StatelessWidget {
         ontap?.call();
       },
       child: Container(
+        margin: const EdgeInsets.all(3),
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: Colors.white,
@@ -35,7 +36,7 @@ class CustomCardProject extends StatelessWidget {
             BoxShadow(
                 offset: const Offset(1, 0),
                 color: Colors.grey.shade200,
-                blurRadius: 2,
+                blurRadius: 10,
                 spreadRadius: 2),
           ],
         ),
