@@ -7,10 +7,10 @@ import 'package:pocket_planner/module/planner/data/model/planner_model.dart';
 import 'package:pocket_planner/module/planner/presentation/screen/planner_detail_screen.dart';
 import 'package:pocket_planner/module/planner/presentation/screen/planner_screen.dart';
 
-import '../module/auth/presentation/screen/create_password.dart';
-import '../module/auth/presentation/screen/login.dart';
-import '../module/auth/presentation/screen/otp_screen.dart';
-import '../module/auth/presentation/screen/signup.dart';
+import '../core/auth/presentation/screen/create_password.dart';
+import '../core/auth/presentation/screen/login.dart';
+import '../core/auth/presentation/screen/otp_screen.dart';
+import '../core/auth/presentation/screen/signup.dart';
 
 import '../module/notification/presentation/screen/notification_screen.dart';
 import '../module/onboarding/screen/onboarding_screen.dart';

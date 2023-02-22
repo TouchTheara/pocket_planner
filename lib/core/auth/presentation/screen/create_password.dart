@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pocket_planner/module/auth/presentation/logic/auth_controller.dart';
+import 'package:pocket_planner/core/auth/presentation/logic/auth_controller.dart';
 
 import '../../../../config/app_colors.dart';
 import '../../../../widget/cuctom_textfield.dart';

@@ -2,34 +2,31 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pocket_planner/config/app_colors.dart';
-import 'package:pocket_planner/module/auth/presentation/logic/auth_controller.dart';
+import 'package:pocket_planner/core/service_locator/service_locator.dart';
+import 'package:pocket_planner/core/auth/presentation/logic/auth_controller.dart';
 import 'package:pocket_planner/widget/custom_button.dart';
 
-import '../../../../core/service_locator/service_locator.dart';
+import '../../../../config/app_colors.dart';
 import '../../../../widget/cuctom_textfield.dart';
 import '../../../../widget/custom_card_blur.dart';
 
-class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({Key? key, this.isRegister = true}) : super(key: key);
-  final bool isRegister;
+class LoginSignUpScreen extends StatelessWidget {
+  const LoginSignUpScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final authController = Get.put(AuthController());
-
+    // final authController = Get.put(AuthController());
     return Scaffold(
       body: Obx(
         () => GestureDetector(
-          onPanDown: (details) {
+          onPanDown: (value) {
+            getIt<AuthController>().focusScopePassword.value.unfocus();
             getIt<AuthController>().focusScopePhoneNumber.value.unfocus();
           },
           child: SizedBox(
+            height: MediaQuery.of(context).size.height,
             child: CustomScrollView(
-              physics:
-                  getIt<AuthController>().focusScopePhoneNumber.value.hasFocus
-                      ? const ClampingScrollPhysics()
-                      : const NeverScrollableScrollPhysics(),
+              physics: const ClampingScrollPhysics(),
               slivers: [
                 SliverFillRemaining(
                   hasScrollBody: false,
@@ -44,7 +41,7 @@ class SignUpScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         Expanded(
-                          flex: 2,
+                          flex: 1,
                           child: Container(
                             width: MediaQuery.of(context).size.width,
                             decoration: const BoxDecoration(),
@@ -79,29 +76,75 @@ class SignUpScreen extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
                                       children: [
                                         CustomTextField(
-                                            focusScope: authController
-                                                .focusScopePhoneNumber.value,
-                                            keyboardType: TextInputType.number,
-                                            controller: authController
-                                                .phoneController.value,
-                                            isValidate: !authController
-                                                .phoneValidator.value,
+                                            focusScope: getIt<AuthController>()
+                                                .focusScopePhoneNumber
+                                                .value,
+                                            controller: getIt<AuthController>()
+                                                .phoneController
+                                                .value,
+                                            isValidate: !getIt<AuthController>()
+                                                .phoneValidator
+                                                .value,
                                             labelText: 'Phone Number',
                                             hintText: 'Phone Number',
                                             onChange: (value) {
                                               if (value == "") {
-                                                authController.phoneValidator
+                                                getIt<AuthController>()
+                                                    .phoneValidator
                                                     .value = true;
                                               } else {
-                                                authController.phoneValidator
+                                                getIt<AuthController>()
+                                                    .phoneValidator
                                                     .value = false;
                                               }
                                             }),
                                         const SizedBox(
                                           height: 20,
-                                        )
+                                        ),
+                                        CustomTextField(
+                                            focusScope: getIt<AuthController>()
+                                                .focusScopePassword
+                                                .value,
+                                            controller: getIt<AuthController>()
+                                                .passwordController
+                                                .value,
+                                            isValidate: !getIt<AuthController>()
+                                                .passwordValidator
+                                                .value,
+                                            labelText: 'Password',
+                                            hintText: 'Password',
+                                            onChange: (value) {
+                                              if (value == "") {
+                                                getIt<AuthController>()
+                                                    .passwordValidator
+                                                    .value = true;
+                                              } else {
+                                                getIt<AuthController>()
+                                                    .passwordValidator
+                                                    .value = false;
+                                              }
+                                            }),
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+                                        InkWell(
+                                            onTap: () {
+                                              context.go('/signup/false');
+                                            },
+                                            child: const Text(
+                                              "Recovery Password",
+                                              style: TextStyle(
+                                                  color: Colors.grey,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -109,15 +152,10 @@ class SignUpScreen extends StatelessWidget {
                                     child: CustomButton(
                                       height: 60,
                                       ontap: () {
-                                        context.go('/otp');
-                                        getIt<AuthController>()
-                                            .phoneController
-                                            .value
-                                            .text = '';
+                                        context.go('/');
                                       },
                                       color: AppColors.btnColor,
-                                      titleBTN:
-                                          isRegister ? "Register" : "Reset",
+                                      titleBTN: "Log In",
                                       styleBTN: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 16,
@@ -125,7 +163,7 @@ class SignUpScreen extends StatelessWidget {
                                     ),
                                   ),
                                   const SizedBox(
-                                    height: 30,
+                                    height: 20,
                                   ),
                                   Row(
                                     crossAxisAlignment:
@@ -155,14 +193,14 @@ class SignUpScreen extends StatelessWidget {
                                   ),
                                   Row(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceAround,
                                     children: [
                                       Expanded(
                                         child: CustomButton(
                                             height: 60,
                                             ontap: () {
                                               debugPrint("Login Google");
-                                              authController
+                                              getIt<AuthController>()
                                                   .signupWithGoogle(context);
                                               // authController.signInWithGoogleSilently();
                                             },
@@ -197,9 +235,6 @@ class SignUpScreen extends StatelessWidget {
                                               ],
                                             )),
                                       ),
-                                      // const SizedBox(
-                                      //   width: 10,
-                                      // ),
                                       // CustomButton(
                                       //     height: 60,
                                       //     width: 90,
@@ -217,10 +252,47 @@ class SignUpScreen extends StatelessWidget {
                                       //       "assets/images/Apple_logo_black.svg.png",
                                       //       fit: BoxFit.cover,
                                       //     )),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
                                       // Expanded(
                                       //   child: CustomButton(
                                       //       height: 60,
-                                      //       ontap: () {},
+                                      //       ontap: () async {
+                                      //         // final translator =
+                                      //         //     GoogleTranslator();
+                                      //         // const input =
+                                      //         //     "សួស្តីតើអ្នកមិនអីទេ?";
+
+                                      //         // // Using the Future API
+                                      //         // translator
+                                      //         //     .translate(input, to: 'en')
+                                      //         //     .then((result) => print(
+                                      //         //         "Source: $input\nTranslated: $result"));
+
+                                      //         // // Passing the translation to a variable
+                                      //         // var translation =
+                                      //         //     await translator.translate(
+                                      //         //         "I would buy a car, if I had money.",
+                                      //         //         from: 'en',
+                                      //         //         to: 'it');
+
+                                      //         // // You can also call the extension method directly on the input
+                                      //         // print(
+                                      //         //     'Translated: ${await input.translate(to: 'en')}');
+
+                                      //         // // For countries that default base URL doesn't work
+                                      //         // translator.baseUrl =
+                                      //         //     "translate.google.cn";
+                                      //         // translator.translateAndPrint(
+                                      //         //     "This means 'testing' in chinese",
+                                      //         //     to: 'zh-cn');
+                                      //         // //prints 这意味着用中文'测试'
+
+                                      //         // print("translation: $translation");
+                                      //         // await authController
+                                      //         //     .signInWithFacebook(context);
+                                      //       },
                                       //       color: Colors.grey.shade100,
                                       //       borderColor: Colors.white,
                                       //       borderWidth: 2,
@@ -247,12 +319,12 @@ class SignUpScreen extends StatelessWidget {
                           child: Text.rich(
                             TextSpan(
                               children: [
-                                const TextSpan(text: "Already have account? "),
+                                const TextSpan(text: "Create new one? "),
                                 TextSpan(
-                                    text: "Log In",
+                                    text: "Sign up",
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
-                                        context.go("/login");
+                                        context.go('/signup/true');
                                       },
                                     style: const TextStyle(
                                         fontSize: 14, color: Colors.purple)),

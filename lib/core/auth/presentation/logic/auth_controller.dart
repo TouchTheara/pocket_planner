@@ -11,9 +11,11 @@ import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:pocket_planner/util/helper/dio_bese_helper.dart';
+import 'package:pocket_planner/core/auth/data/repository/auth_repository.dart';
 
-import '../../../../core/service_locator/service_locator.dart';
+import 'package:pocket_planner/util/helper/extension.dart';
+
+import '../../../service_locator/service_locator.dart';
 
 class AuthController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -74,23 +76,14 @@ class AuthController extends GetxController
 
   ///Function Get OTP:
   final isLoadingGetOTP = false.obs;
-  fucntionRequesOtp(BuildContext context) async {
+  fucntionRequesOtp(BuildContext context,
+      {required String phone, Function? funcWhenSuccess}) async {
     isLoadingGetOTP(true);
-    try {
-      await getIt<DioBaseHelper>().onRequest(
-          methode: METHODE.post,
-          isAuthorize: false,
-          url: 'get-otp',
-          body: {
-            "user_name": "855${phoneController.value.text}"
-          }).then((value) {
-        isLoadingGetOTP(true);
-        debugPrint("--------------$value----------");
-      });
-    } catch (e) {
-      isLoadingGetOTP(true);
-      debugPrint("======Error $e");
-    }
+    await getIt<AuthReposity>()
+        .getAuthOTP("855${phone.removeZeroFront()}", context, funcWhenSuccess)
+        .then((value) {});
+
+    isLoadingGetOTP(false);
   }
 
   ///Function Verify OTP:

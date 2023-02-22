@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:get/get_connect.dart';
+import 'package:injectable/injectable.dart';
 
 import 'local_data/get_local_data.dart';
 
@@ -16,10 +17,12 @@ enum METHODE {
   update,
 }
 
+@injectable
 class ApiBaseHelper extends GetConnect {
   // final String? baseurl = "${GlobalConfiguration().get("baseUrl")}";
   // final String? baseurl = dotenv.get('baseUrl');
-  final String baseurl = '';
+
+  final String _baseUrl = 'https://pocketplaner.onrender.com/api/v1/';
 
   Future<dynamic> onNetworkRequesting(
       {required String url,
@@ -31,7 +34,7 @@ class ApiBaseHelper extends GetConnect {
       bool isConvertToByte = false}) async {
     final token = await LocalDataStorage.getCurrentUser();
 
-    final fullUrl = isFullUrl ? url : baseurl + url;
+    final fullUrl = isFullUrl ? url : _baseUrl + url;
     Map<String, String> header = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',

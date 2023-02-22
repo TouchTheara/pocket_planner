@@ -12,9 +12,9 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/applelogo.svg.png
-  AssetGenImage get applelogoSvg =>
-      const AssetGenImage('assets/images/applelogo.svg.png');
+  /// File path: assets/images/applelogo.png
+  AssetGenImage get applelogo =>
+      const AssetGenImage('assets/images/applelogo.png');
 
   /// File path: assets/images/fblogo.png
   AssetGenImage get fblogo => const AssetGenImage('assets/images/fblogo.png');
@@ -24,7 +24,7 @@ class $AssetsImagesGen {
       const AssetGenImage('assets/images/googlelogo.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [applelogoSvg, fblogo, googlelogo];
+  List<AssetGenImage> get values => [applelogo, fblogo, googlelogo];
 }
 
 class $AssetsLottieAnimationGen {

@@ -3,13 +3,12 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 
 import 'local_data/get_local_data.dart';
 
+@injectable
 class DioBaseHelper {
-  DioBaseHelper() {
-    debugPrint('Constructor Initialized');
-  }
   final String _baseUrl = 'https://pocketplaner.onrender.com/api/v1/';
 
   Future<dynamic> onRequest({

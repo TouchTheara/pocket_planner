@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'dart:math' as math;
 
-import 'package:pocket_planner/module/auth/presentation/logic/auth_controller.dart';
+import 'package:pocket_planner/core/auth/presentation/logic/auth_controller.dart';
 
 import '../../../../widget/custom_card_blur.dart';
 
@@ -212,17 +212,17 @@ class OTPScreen extends StatelessWidget {
                           animation: authController.animatedController!,
                           builder: (context, child) {
                             return GestureDetector(
-                              onTap: authController
-                                      .animatedController!.isAnimating
-                                  ? null
-                                  : () {
-                                      authController.animatedController!
-                                          .reverse(
-                                              from: authController
-                                                  .animatedController!
-                                                  .value = 1.0);
-                                      authController.fucntionRequesOtp(context);
-                                    },
+                              onTap:
+                                  authController.animatedController!.isAnimating
+                                      ? null
+                                      : () {
+                                          authController.animatedController!
+                                              .reverse(
+                                                  from: authController
+                                                      .animatedController!
+                                                      .value = 1.0);
+                                          // authController.fucntionRequesOtp(context);
+                                        },
                               child: Text(
                                 ' Request Again',
                                 style: TextStyle(
