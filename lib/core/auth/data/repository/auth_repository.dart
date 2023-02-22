@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:pocket_planner/core/auth/presentation/logic/auth_controller.dart';
 
 import '../../../../util/helper/dio_bese_helper.dart';
 import '../../../service_locator/service_locator.dart';
@@ -12,16 +12,37 @@ class AuthReposity implements AuthRepositoryBase {
     BuildContext context,
     Function? funcWhenSuccess,
   ) async {
-    await getIt<DioBaseHelper>().onRequest(
-        methode: METHODE.post,
-        isAuthorize: false,
-        url: 'get-otp',
-        body: {"user_name": phone}).then((value) {
-      context.go('/otp');
-      debugPrint("--------------$value----------");
-    });
+    try {
+      await getIt<DioBaseHelper>().onRequest(
+          methode: METHODE.post,
+          isAuthorize: false,
+          url: 'get-otp',
+          body: {"user_name": phone}).then((value) {
+        funcWhenSuccess;
+        getIt<AuthController>().hashValue.value = value['hash'];
+
+        debugPrint("--------------$value----------");
+      });
+    } catch (e) {
+      debugPrint("============Error $e --=============");
+    }
   }
 
   @override
-  Future<void> verifyAuthOTP() async {}
+  Future<void> verifyAuthOTP(String phone, BuildContext context,
+      Function? funcWhenSuccess, String otp, String hash) async {
+    try {
+      await getIt<DioBaseHelper>().onRequest(
+          methode: METHODE.post,
+          isAuthorize: false,
+          url: 'get-otp',
+          body: {"user_name": phone, "otp": otp, "hash": hash}).then((value) {
+        funcWhenSuccess;
+
+        debugPrint("--------------$value----------");
+      });
+    } catch (e) {
+      debugPrint("============Error $e --=============");
+    }
+  }
 }

@@ -120,7 +120,10 @@ class SignUpScreen extends StatelessWidget {
                                                         getIt<AuthController>()
                                                             .phoneController
                                                             .value
-                                                            .text);
+                                                            .text,
+                                                    funcWhenSuccess: () {
+                                              context.go('/otp');
+                                            });
 
                                             // getIt<AuthController>()
                                             //     .phoneController
@@ -309,8 +312,7 @@ class SignUpScreen extends StatelessWidget {
               ),
             ),
           ),
-          if (getIt<AuthController>().isLoadingGetOTP.value)
-            const CustomLoading()
+          if (getIt<AuthController>().isLoading.value) const CustomLoading()
         ],
       ),
     );

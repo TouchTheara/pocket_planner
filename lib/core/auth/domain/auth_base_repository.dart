@@ -4,8 +4,8 @@ abstract class AuthRepositoryBase {
   Future<void> getAuthOTP(
     String phone,
     BuildContext context,
-    //int resendOTP,
     Function? funcWhenSuccess,
   );
-  Future<void> verifyAuthOTP();
+  Future<void> verifyAuthOTP(String phone, BuildContext context,
+      Function? funcWhenSuccess, String otp, String hash);
 }

@@ -39,6 +39,7 @@ class AuthController extends GetxController
   final fullNameController = TextEditingController().obs;
   final focusScopePhoneNumber = FocusNode().obs;
   final focusScopePassword = FocusNode().obs;
+  final hashValue = ''.obs;
 
   ///Funciton Check time animation:
   String get timerString {
@@ -71,23 +72,32 @@ class AuthController extends GetxController
 
   ///Key form:
   final formKey = GlobalKey<FormState>();
+  final isLoading = false.obs;
 
   ///////////////Function Fetching Or Posting API//////////////// :
 
   ///Function Get OTP:
-  final isLoadingGetOTP = false.obs;
   fucntionRequesOtp(BuildContext context,
       {required String phone, Function? funcWhenSuccess}) async {
-    isLoadingGetOTP(true);
+    isLoading(true);
     await getIt<AuthReposity>()
         .getAuthOTP("855${phone.removeZeroFront()}", context, funcWhenSuccess)
         .then((value) {});
 
-    isLoadingGetOTP(false);
+    isLoading(false);
   }
 
   ///Function Verify OTP:
-  fucntionVerifyOtp(BuildContext context, {String? code}) {}
+
+  fucntionVerifyOtp(BuildContext context,
+      {required String code, Function? funcWhenSuccess, String? phone}) async {
+    isLoading(true);
+    await getIt<AuthReposity>()
+        .verifyAuthOTP("855${phone!.removeZeroFront()}", context,
+            funcWhenSuccess, code, hashValue.value)
+        .then((value) {});
+    isLoading(false);
+  }
 
   final FirebaseAuth auth = FirebaseAuth.instance;
 

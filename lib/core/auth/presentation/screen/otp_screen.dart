@@ -178,8 +178,10 @@ class OTPScreen extends StatelessWidget {
                           )
                         ],
                         onCompleted: (code) {
-                          context.go("/create-password");
-                          authController.fucntionVerifyOtp(context, code: code);
+                          authController.fucntionVerifyOtp(context, code: code,
+                              funcWhenSuccess: () {
+                            context.go("/create-password");
+                          });
                           authController.update();
                         },
 
