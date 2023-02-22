@@ -176,7 +176,7 @@ class SignUpScreen extends StatelessWidget {
                                                   MainAxisAlignment.center,
                                               children: [
                                                 Image.asset(
-                                                  'assets/images/7611770.png',
+                                                  'assets/images/googlelogo.png',
                                                   fit: BoxFit.cover,
                                                 ),
                                                 const SizedBox(

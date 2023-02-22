@@ -55,8 +55,7 @@ class OnBoardingScreen extends StatelessWidget {
                       color: Colors.blueGrey.shade200,
                       borderRadius: BorderRadius.circular(10)),
                   width: double.infinity,
-                  child: Lottie.asset(
-                      'assets/lottie_animation/77622-remote-work-management.json',
+                  child: Lottie.asset('assets/lottie_animation/onboard.json',
                       fit: BoxFit.cover),
                 ),
               ),

@@ -11,6 +11,9 @@ import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:pocket_planner/util/helper/dio_bese_helper.dart';
+
+import '../../../../core/service_locator/service_locator.dart';
 
 class AuthController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -33,6 +36,7 @@ class AuthController extends GetxController
   final countController = 1.obs;
   final fullNameController = TextEditingController().obs;
   final focusScopePhoneNumber = FocusNode().obs;
+  final focusScopePassword = FocusNode().obs;
 
   ///Funciton Check time animation:
   String get timerString {
@@ -69,8 +73,22 @@ class AuthController extends GetxController
   ///////////////Function Fetching Or Posting API//////////////// :
 
   ///Function Get OTP:
-  fucntionRequesOtp(BuildContext context) {
-    try {} catch (e) {
+  final isLoadingGetOTP = false.obs;
+  fucntionRequesOtp(BuildContext context) async {
+    isLoadingGetOTP(true);
+    try {
+      await getIt<DioBaseHelper>().onRequest(
+          methode: METHODE.post,
+          isAuthorize: false,
+          url: 'get-otp',
+          body: {
+            "user_name": "855${phoneController.value.text}"
+          }).then((value) {
+        isLoadingGetOTP(true);
+        debugPrint("--------------$value----------");
+      });
+    } catch (e) {
+      isLoadingGetOTP(true);
       debugPrint("======Error $e");
     }
   }
