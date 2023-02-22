@@ -25,7 +25,14 @@ class LoginSignUpScreen extends StatelessWidget {
           },
           child: SizedBox(
             child: CustomScrollView(
-              physics: const ClampingScrollPhysics(),
+              physics:
+                  getIt<AuthController>().focusScopePassword.value.hasFocus ||
+                          getIt<AuthController>()
+                              .focusScopePhoneNumber
+                              .value
+                              .hasFocus
+                      ? const ClampingScrollPhysics()
+                      : const NeverScrollableScrollPhysics(),
               slivers: [
                 SliverFillRemaining(
                   hasScrollBody: false,
