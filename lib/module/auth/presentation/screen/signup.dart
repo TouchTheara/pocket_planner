@@ -22,11 +22,14 @@ class SignUpScreen extends StatelessWidget {
       body: Obx(
         () => GestureDetector(
           onPanDown: (details) {
-            authController.focusScopePhoneNumber.value.unfocus();
+            getIt<AuthController>().focusScopePhoneNumber.value.unfocus();
           },
           child: SizedBox(
             child: CustomScrollView(
-              physics: const ClampingScrollPhysics(),
+              physics:
+                  getIt<AuthController>().focusScopePhoneNumber.value.hasFocus
+                      ? const ClampingScrollPhysics()
+                      : const NeverScrollableScrollPhysics(),
               slivers: [
                 SliverFillRemaining(
                   hasScrollBody: false,

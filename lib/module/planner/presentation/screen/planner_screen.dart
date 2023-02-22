@@ -23,6 +23,7 @@ class PlannerScreen extends StatelessWidget {
       body: SafeArea(
         bottom: false,
         child: CustomScrollView(
+          physics: const ClampingScrollPhysics(),
           controller: controller,
           slivers: <Widget>[
             SliverFillRemaining(
