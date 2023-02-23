@@ -39,6 +39,7 @@ class AuthController extends GetxController
   final fullNameController = TextEditingController().obs;
   final focusScopePhoneNumber = FocusNode().obs;
   final focusScopePassword = FocusNode().obs;
+  ValueNotifier<String> appNotifier = ValueNotifier('');
   final hashValue = ''.obs;
 
   ///Funciton Check time animation:
@@ -81,7 +82,10 @@ class AuthController extends GetxController
       {required String phone, Function? funcWhenSuccess}) async {
     isLoading(true);
     await getIt<AuthReposity>()
-        .getAuthOTP("855${phone.removeZeroFront()}", context, funcWhenSuccess)
+        .getAuthOTP(
+            phone: "855${phone.removeZeroFront()}",
+            context,
+            funcWhenSuccess: funcWhenSuccess)
         .then((value) {});
 
     isLoading(false);
@@ -92,10 +96,38 @@ class AuthController extends GetxController
   fucntionVerifyOtp(BuildContext context,
       {required String code, Function? funcWhenSuccess, String? phone}) async {
     isLoading(true);
-    await getIt<AuthReposity>()
-        .verifyAuthOTP("855${phone!.removeZeroFront()}", context,
-            funcWhenSuccess, code, hashValue.value)
-        .then((value) {});
+    await getIt<AuthReposity>().verifyAuthOTP(
+        phone: "855${phone!.removeZeroFront()}",
+        context,
+        funcWhenSuccess: funcWhenSuccess,
+        otp: code,
+        hash: hashValue.value);
+    isLoading(false);
+  }
+
+  ///Function Sign Up:
+
+  functionSignUp(BuildContext context,
+      {Function? funcWhenSuccess, String? phone, String? password}) async {
+    isLoading(true);
+    await getIt<AuthReposity>().signUpAuth(
+        phone: "855${phone!.removeZeroFront()}",
+        context,
+        funcWhenSuccess: funcWhenSuccess,
+        password: password);
+    isLoading(false);
+  }
+
+  ///Function LogIn:
+
+  functionLogIn(BuildContext context,
+      {Function? funcWhenSuccess, String? phone, String? password}) async {
+    isLoading(true);
+    await getIt<AuthReposity>().logInAuth(
+        phone: "855${phone!.removeZeroFront()}",
+        context,
+        funcWhenSuccess: funcWhenSuccess,
+        password: password);
     isLoading(false);
   }
 

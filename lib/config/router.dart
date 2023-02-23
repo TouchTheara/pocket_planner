@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pocket_planner/core/auth/presentation/logic/auth_controller.dart';
 import 'package:pocket_planner/core/work_through/splash_screen.dart';
 import 'package:pocket_planner/module/Terms/screen/terms.dart';
 import 'package:pocket_planner/module/meeting/presentaion/screen/meeting_screen.dart';
@@ -12,6 +13,7 @@ import '../core/auth/presentation/screen/login.dart';
 import '../core/auth/presentation/screen/otp_screen.dart';
 import '../core/auth/presentation/screen/signup.dart';
 
+import '../core/service_locator/service_locator.dart';
 import '../module/notification/presentation/screen/notification_screen.dart';
 import '../module/onboarding/screen/onboarding_screen.dart';
 import '../module/profile/presentation/screen/profile_screen.dart';
@@ -22,12 +24,12 @@ final GlobalKey<NavigatorState> _shellNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'shell');
 final router = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  // redirect: (context, state) {
-  //   if (appController.appNotifier.value != '') {
-  //     return '/';
-  //   }
-  //   return null;
-  // },
+  redirect: (context, state) {
+    if (getIt<AuthController>().appNotifier.value != '') {
+      return '/';
+    }
+    return null;
+  },
   initialLocation: '/sso',
   routes: <RouteBase>[
     GoRoute(

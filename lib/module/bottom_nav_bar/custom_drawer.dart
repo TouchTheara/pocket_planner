@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pocket_planner/config/app_colors.dart';
+
+import '../../util/helper/local_data/get_local_data.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({Key? key, this.child}) : super(key: key);
@@ -110,7 +113,11 @@ class CustomDrawer extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: ListTile(
-                onTap: () {},
+                onTap: () async {
+                  await LocalDataStorage.removeCurrentUser().then((value) {
+                    context.go('/sso');
+                  });
+                },
                 leading: const Icon(Icons.arrow_back),
                 title: const Text("Sign Out"),
                 // Some Code
