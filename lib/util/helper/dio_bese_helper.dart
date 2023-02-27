@@ -15,7 +15,7 @@ class DioBaseHelper {
     String? url,
     required METHODE? methode,
     Map<dynamic, dynamic>? body,
-    bool? isAuthorize = false,
+    bool isAuthorize = false,
     bool isDebugOn = false,
     bool showBodyInput = false,
   }) async {
@@ -31,11 +31,7 @@ class DioBaseHelper {
     Map<String, String> header = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'Authorization': isAuthorize!
-          ? token != ''
-              ? 'Token $token'
-              : 'Token $session'
-          : ""
+      'Authorization': isAuthorize ? 'Bearer $token' : ""
     };
 
     if (showBodyInput) {

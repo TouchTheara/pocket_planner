@@ -15,6 +15,7 @@ import 'package:pocket_planner/core/auth/data/repository/auth_repository.dart';
 
 import 'package:pocket_planner/util/helper/extension.dart';
 
+import '../../../../util/helper/local_data/get_local_data.dart';
 import '../../../service_locator/service_locator.dart';
 
 class AuthController extends GetxController
@@ -211,6 +212,18 @@ class AuthController extends GetxController
       debugPrint(result.status.toString());
       debugPrint(result.message);
     }
+  }
+
+  functionClearToken(BuildContext context) async {
+    await LocalDataStorage.removeCurrentUser().then((value) {
+      try {
+        context.go('/onBoarding');
+        phoneController.value.text = '';
+        passwordController.value.text = '';
+      } catch (e) {
+        debugPrint("============+$e");
+      }
+    });
   }
 
   @override

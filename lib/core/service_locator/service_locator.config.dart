@@ -8,8 +8,6 @@
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import '../auth/data/repository/auth_repository.dart' as _i5;
-import '../auth/presentation/logic/auth_controller.dart' as _i4;
 import '../../module/meeting/data/repository/meeting_repository.dart' as _i8;
 import '../../module/meeting/presentaion/logic/meeting_controller.dart' as _i7;
 import '../../module/notification/data/repository/notification_repository.dart'
@@ -23,8 +21,10 @@ import '../../module/profile/data/repository/profile_repository.dart' as _i14;
 import '../../module/profile/presentation/logic/profile_controller.dart'
     as _i13;
 import '../../util/helper/api_base_helper.dart' as _i3;
-import '../../util/helper/dio_bese_helper.dart'
-    as _i6; // ignore_for_file: unnecessary_lambdas
+import '../../util/helper/dio_bese_helper.dart' as _i6;
+import '../auth/data/repository/auth_repository.dart' as _i5;
+import '../auth/presentation/logic/auth_controller.dart'
+    as _i4; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -46,7 +46,7 @@ _i1.GetIt $initGetIt(
   gh.factory<_i8.MeetingReposity>(() => _i8.MeetingReposity());
   gh.factory<_i9.NotificationController>(() => _i9.NotificationController());
   gh.factory<_i10.NotificationReposity>(() => _i10.NotificationReposity());
-  gh.factory<_i11.PlannerController>(() => _i11.PlannerController());
+  gh.factory<_i11.PlannerController>(() => _i11.PlannerController.init());
   gh.factory<_i12.PlannerRepository>(() => _i12.PlannerRepository());
   gh.factory<_i13.ProfileController>(() => _i13.ProfileController());
   gh.factory<_i14.ProfileRepository>(() => _i14.ProfileRepository());

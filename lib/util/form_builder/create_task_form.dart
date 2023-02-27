@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pocket_planner/config/app_colors.dart';
+import 'package:pocket_planner/core/service_locator/service_locator.dart';
 import 'package:pocket_planner/module/planner/presentation/logic/planner_controller.dart';
 import 'package:pocket_planner/widget/cuctom_textfield.dart';
 import 'package:pocket_planner/widget/custom_button.dart';
@@ -190,7 +192,12 @@ class CreateTaskFrom extends StatelessWidget {
                     minimum: const EdgeInsets.only(bottom: 10),
                     child: CustomButton(
                       height: 60,
-                      ontap: () {},
+                      ontap: () {
+                        getIt<PlannerController>().functionCreateTask(context,
+                            functionSuccess: () {
+                          context.pop();
+                        });
+                      },
                       color: AppColors.secondColor,
                       borderColor: Colors.white,
                       borderWidth: 2,

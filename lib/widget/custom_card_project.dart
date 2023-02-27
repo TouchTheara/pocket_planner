@@ -24,7 +24,7 @@ class CustomCardProject extends StatelessWidget {
     ];
     return InkWell(
       onTap: () {
-        ontap?.call();
+        ontap!();
       },
       child: Container(
         margin: const EdgeInsets.all(3),
@@ -51,9 +51,10 @@ class CustomCardProject extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
-                    image: const DecorationImage(
-                        image: NetworkImage(
-                            'https://img.freepik.com/free-photo/rpa-concept-with-blurry-hand-touching-screen_23-2149311914.jpg'),
+                    image: DecorationImage(
+                        image: NetworkImage(plannerModel.imageApp != ''
+                            ? "${plannerModel.imageApp}"
+                            : 'https://img.freepik.com/free-photo/rpa-concept-with-blurry-hand-touching-screen_23-2149311914.jpg'),
                         fit: BoxFit.cover),
                   ),
                 ),
@@ -66,9 +67,11 @@ class CustomCardProject extends StatelessWidget {
             const SizedBox(
               height: 8,
             ),
-            const Text(
-              "Driving App",
-              style: TextStyle(
+            Text(
+              plannerModel.titleApp != ''
+                  ? '${plannerModel.titleApp}'
+                  : "No Title",
+              style: const TextStyle(
                 color: Colors.black,
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -88,7 +91,7 @@ class CustomCardProject extends StatelessWidget {
             const SizedBox(
               height: 8,
             ),
-            progressApp(context, percent: 0.7),
+            progressApp(context, percent: 0.7, data: plannerModel),
           ],
         ),
       ),
@@ -96,14 +99,15 @@ class CustomCardProject extends StatelessWidget {
   }
 }
 
-Widget progressApp(BuildContext context, {double percent = 1.0}) {
+Widget progressApp(BuildContext context,
+    {double percent = 1.0, PlannerModel? data}) {
   return SizedBox(
     width: Get.width * 0.5,
     child: Column(
       children: [
         Row(
-          children: const [
-            Text(
+          children: [
+            const Text(
               "Due",
               style: TextStyle(
                 color: Colors.grey,
@@ -111,10 +115,10 @@ Widget progressApp(BuildContext context, {double percent = 1.0}) {
                 fontWeight: FontWeight.normal,
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Text(
-              "Dec 20, 2023",
-              style: TextStyle(
+              "${data!.endDateApp}",
+              style: const TextStyle(
                 color: Colors.grey,
                 fontSize: 11,
                 fontWeight: FontWeight.normal,

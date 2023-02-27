@@ -66,7 +66,7 @@ class AuthReposity implements AuthRepositoryBase {
           url: 'sign-up',
           body: {"user_name": phone, "password": password}).then((value) async {
         funcWhenSuccess?.call();
-        await LocalDataStorage.storeCurrentUser(value['token'].toString());
+        await LocalDataStorage.storeCurrentUser(value['token']);
         debugPrint("--------------$value----------");
       }).onError((ErrorModel error, stackTrace) {
         debugPrint(error.bodyString.toString());
@@ -90,7 +90,7 @@ class AuthReposity implements AuthRepositoryBase {
           url: 'login',
           body: {"user_name": phone, "password": password}).then((value) async {
         funcWhenSuccess?.call();
-        await LocalDataStorage.storeCurrentUser(value['token'].toString());
+        await LocalDataStorage.storeCurrentUser(value['token']);
         debugPrint("--------------$value----------");
       }).onError((ErrorModel error, stackTrace) {
         debugPrint(error.bodyString.toString());
