@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+
 import 'package:pocket_planner/config/app_colors.dart';
 import 'package:pocket_planner/core/service_locator/service_locator.dart';
 import 'package:pocket_planner/module/bottom_nav_bar/custom_drawer.dart';
@@ -12,7 +13,6 @@ import 'package:pocket_planner/widget/custom_loading.dart';
 
 import '../../../../util/form_builder/create_project_form.dart';
 import '../../../../widget/custom_modal_sheet.dart';
-import 'planner_detail_screen.dart';
 
 class PlannerScreen extends StatelessWidget {
   const PlannerScreen({Key? key}) : super(key: key);
@@ -156,22 +156,25 @@ class PlannerScreen extends StatelessWidget {
                                               .map(
                                                 (data) => CustomCardProject(
                                                   ontap: () {
-                                                    Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                PlannerDetailScreen(
-                                                                  plannerModel:
-                                                                      PlannerModel(),
-                                                                )));
-                                                    // context.push('/detail',
-                                                    //     extra: data.value);
+                                                    // Navigator.push(
+                                                    //     context,
+                                                    //     MaterialPageRoute(
+                                                    //         builder: (context) =>
+                                                    //             PlannerDetailScreen(
+                                                    //               plannerModel:
+                                                    //                   PlannerModel(),
+                                                    //             )));
+                                                    context.push('/detail',
+                                                        extra: data.value);
+                                                    // GoRouter.of(context)
+                                                    //     .push('/detail');
                                                     debugPrint("-----Hello");
                                                   },
                                                   plannerModel: data.value,
                                                 ),
                                               )
                                               .toList()
+                                              .reversed
                                           // CustomCardProject(
                                           //   ontap: () {
                                           //     Navigator.push(

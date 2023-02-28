@@ -65,6 +65,10 @@ class CreateTaskFrom extends StatelessWidget {
                     height: 20,
                   ),
                   CustomTextField(
+                      height: 120,
+                      textAlignVertical: TextAlignVertical.top,
+                      maxLine: null,
+                      expands: true,
                       controller:
                           plannerController.descriptionTaskController.value,
                       isValidate:

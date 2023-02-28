@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pocket_planner/config/app_colors.dart';
 import 'package:pocket_planner/core/auth/presentation/logic/auth_controller.dart';
+import 'package:pocket_planner/module/planner/presentation/logic/planner_controller.dart';
 
 import '../../core/service_locator/service_locator.dart';
 
@@ -20,7 +22,9 @@ class CustomDrawer extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  context.push('/profile');
+                },
                 child: Container(
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
@@ -34,6 +38,8 @@ class CustomDrawer extends StatelessWidget {
                       const CircleAvatar(
                         radius: 30,
                         backgroundColor: AppColors.primaryColor,
+                        backgroundImage: NetworkImage(
+                            'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,6 +71,15 @@ class CustomDrawer extends StatelessWidget {
                   children: <Widget>[
                     ListTile(
                       onTap: () {},
+                      leading: const Icon(Icons.feed),
+                      title: const Text("Feeds"),
+                      // Some Code
+                    ),
+                    ListTile(
+                      onTap: () {
+                        getIt<PlannerController>().functionFetchDataPlanner();
+                        context.pop();
+                      },
                       leading: const Icon(Icons.home),
                       title: const Text("Home"),
                       // Some Code
@@ -73,12 +88,6 @@ class CustomDrawer extends StatelessWidget {
                       onTap: () {},
                       leading: const Icon(Icons.card_travel),
                       title: const Text("Meeting"),
-                      // Some Code
-                    ),
-                    ListTile(
-                      onTap: () {},
-                      leading: const Icon(Icons.feed),
-                      title: const Text("Feeds"),
                       // Some Code
                     ),
                     ListTile(
@@ -100,7 +109,9 @@ class CustomDrawer extends StatelessWidget {
                       // Some Code
                     ),
                     ListTile(
-                      onTap: () {},
+                      onTap: () {
+                        context.push('/setting');
+                      },
                       leading: const Icon(Icons.settings),
                       title: const Text("Setting"),
                       // Some Code

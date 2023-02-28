@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:pocket_planner/config/router.dart';
@@ -10,6 +12,13 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   configureDependencies();
+  await runZonedGuarded(() async {
+    await LocalDataStorage.getCurrentUser();
+    await getIt<AuthController>().funtionFetchFirst();
+  }, (error, stackTrace) {
+    // FirebaseCrashlytics.instance.recordError(error, stackTrace);
+  });
+
   runApp(const MyApp());
 }
 
@@ -21,14 +30,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  funtionFetchFirst() async {
-    getIt<AuthController>().appNotifier =
-        ValueNotifier(await LocalDataStorage.getCurrentUser());
-  }
-
   @override
   void initState() {
-    funtionFetchFirst();
+    getIt<AuthController>().funtionFetchFirst();
     super.initState();
   }
 
@@ -36,16 +40,17 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-        valueListenable: getIt<AuthController>().appNotifier,
-        builder: (context, String value, _) {
-          return MaterialApp.router(
-            debugShowCheckedModeBanner: false,
-            title: 'Flutter Demo',
-            theme: ThemeData(
-              primarySwatch: Colors.blue,
-            ),
-            routerConfig: router,
-          );
-        });
+      valueListenable: getIt<AuthController>().appNotifier,
+      builder: (context, String value, _) {
+        return MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          routerConfig: router,
+        );
+      },
+    );
   }
 }

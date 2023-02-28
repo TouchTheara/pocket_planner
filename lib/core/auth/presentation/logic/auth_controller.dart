@@ -226,6 +226,14 @@ class AuthController extends GetxController
     });
   }
 
+  funtionFetchFirst() async {
+    var token = await LocalDataStorage.getCurrentUser();
+    getIt<AuthController>().appNotifier.value = token;
+    getIt<AuthController>().appNotifier.notifyListeners();
+    debugPrint("-----------------${getIt<AuthController>().appNotifier}");
+    update();
+  }
+
   @override
   void onInit() {
     super.onInit();

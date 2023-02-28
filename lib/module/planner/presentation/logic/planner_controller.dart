@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+
 import 'package:injectable/injectable.dart';
 import 'package:pocket_planner/core/service_locator/service_locator.dart';
 import 'package:pocket_planner/module/planner/data/model/tesk_model/task_model.dart';
 import 'package:pocket_planner/util/helper/local_data/get_local_data.dart';
 
-import '../../../../core/auth/presentation/logic/auth_controller.dart';
 import '../../data/model/planner_model.dart';
 import '../../data/repository/planner_repository.dart';
 
@@ -40,11 +40,11 @@ class PlannerController extends GetxController {
   final isLoading = false.obs;
 
   ///Function Fetch Data Planner:
-  final plannerDataList = <PlannerModel>[].obs;
+  var plannerDataList = <PlannerModel>[];
   Future<List<PlannerModel>> functionFetchDataPlanner() async {
     isLoading(true);
     getIt<PlannerRepository>().getPlannerData().then((value) {
-      plannerDataList.value = value;
+      plannerDataList = value;
       debugPrint("-----success get controller Planner ==$value}");
       isLoading(false);
     });
@@ -71,11 +71,12 @@ class PlannerController extends GetxController {
       String? startDateApp,
       String? endDateApp,
       String? description,
+      String? title,
       Function? functionSuccess}) async {
     isLoading(true);
-    await getIt<PlannerRepository>().createPlannerData(
+    await getIt<PlannerRepository>().createPlannerData(context,
+        title: title,
         priorityApp: priorityApp,
-        context,
         functionSuccess: functionSuccess,
         endDateApp: endDateApp,
         startDateApp: startDateApp,
@@ -114,6 +115,14 @@ class PlannerController extends GetxController {
   functionTesting() async {
     var token = await LocalDataStorage.getCurrentUser();
     debugPrint("===========Testing $token");
+  }
+
+  functionSuccessCreateData(BuildContext context) async {
+    context.pop();
+    descriptionController.value.clear();
+    priorityController.value.clear();
+    selectionDueDateController.value.clear();
+    await getIt<PlannerController>().functionFetchDataPlanner();
   }
 
   @override

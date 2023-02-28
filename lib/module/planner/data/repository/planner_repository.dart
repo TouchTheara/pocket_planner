@@ -55,12 +55,14 @@ class PlannerRepository implements PlannerRepositoryBase {
       String? startDateApp,
       String? endDateApp,
       String? description,
+      String? title,
       Function? functionSuccess}) async {
     await getIt<DioBaseHelper>().onRequest(
         url: "create-active-planing",
         methode: METHODE.post,
         isAuthorize: true,
         body: {
+          "title_ap": title,
           "priority_ap": priorityApp ?? "High",
           "start_date_ap": startDateApp ?? "11/12/2022",
           "end_date_ap": endDateApp ?? "11/09/2023",
