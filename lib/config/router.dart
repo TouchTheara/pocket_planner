@@ -17,6 +17,7 @@ import '../core/service_locator/service_locator.dart';
 import '../module/notification/presentation/screen/notification_screen.dart';
 import '../module/onboarding/screen/onboarding_screen.dart';
 import '../module/profile/presentation/screen/profile_screen.dart';
+import '../module/setting/presentation/screen/setting_screen.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'root');
@@ -131,6 +132,13 @@ final router = GoRouter(
         path: '/feed',
         builder: (BuildContext context, GoRouterState state) {
           return const ProfileScreen();
+        },
+        routes: const <RouteBase>[],
+      ),
+      GoRoute(
+        path: '/setting',
+        builder: (BuildContext context, GoRouterState state) {
+          return const SettingScreen();
         },
         routes: const <RouteBase>[],
       ),

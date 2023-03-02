@@ -26,7 +26,7 @@ mixin _$PlannerModel {
   String? get idApp => throw _privateConstructorUsedError;
   @JsonKey(name: "user_name")
   String? get userName => throw _privateConstructorUsedError;
-  @JsonKey(name: "image_ap")
+  @JsonKey(name: "public_id_image")
   String? get imageApp => throw _privateConstructorUsedError;
   @JsonKey(name: "title_ap")
   String? get titleApp => throw _privateConstructorUsedError;
@@ -38,6 +38,12 @@ mixin _$PlannerModel {
   String? get endDateApp => throw _privateConstructorUsedError;
   @JsonKey(name: "description")
   String? get description => throw _privateConstructorUsedError;
+  @JsonKey(name: "progress_ap")
+  String? get progressAp => throw _privateConstructorUsedError;
+  @JsonKey(name: "project_type")
+  String? get projectType => throw _privateConstructorUsedError;
+  @JsonKey(name: "ispin")
+  bool? get ispin => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -55,12 +61,15 @@ abstract class $PlannerModelCopyWith<$Res> {
       {@JsonKey(name: "record_type") String? recordType,
       @JsonKey(name: "id_ap") String? idApp,
       @JsonKey(name: "user_name") String? userName,
-      @JsonKey(name: "image_ap") String? imageApp,
+      @JsonKey(name: "public_id_image") String? imageApp,
       @JsonKey(name: "title_ap") String? titleApp,
       @JsonKey(name: "priority_ap") String? priorityApp,
       @JsonKey(name: "start_date_ap") String? startDateApp,
       @JsonKey(name: "end_date_ap") String? endDateApp,
-      @JsonKey(name: "description") String? description});
+      @JsonKey(name: "description") String? description,
+      @JsonKey(name: "progress_ap") String? progressAp,
+      @JsonKey(name: "project_type") String? projectType,
+      @JsonKey(name: "ispin") bool? ispin});
 }
 
 /// @nodoc
@@ -85,6 +94,9 @@ class _$PlannerModelCopyWithImpl<$Res, $Val extends PlannerModel>
     Object? startDateApp = freezed,
     Object? endDateApp = freezed,
     Object? description = freezed,
+    Object? progressAp = freezed,
+    Object? projectType = freezed,
+    Object? ispin = freezed,
   }) {
     return _then(_value.copyWith(
       recordType: freezed == recordType
@@ -123,6 +135,18 @@ class _$PlannerModelCopyWithImpl<$Res, $Val extends PlannerModel>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      progressAp: freezed == progressAp
+          ? _value.progressAp
+          : progressAp // ignore: cast_nullable_to_non_nullable
+              as String?,
+      projectType: freezed == projectType
+          ? _value.projectType
+          : projectType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      ispin: freezed == ispin
+          ? _value.ispin
+          : ispin // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 }
@@ -139,12 +163,15 @@ abstract class _$$_PlannerModelCopyWith<$Res>
       {@JsonKey(name: "record_type") String? recordType,
       @JsonKey(name: "id_ap") String? idApp,
       @JsonKey(name: "user_name") String? userName,
-      @JsonKey(name: "image_ap") String? imageApp,
+      @JsonKey(name: "public_id_image") String? imageApp,
       @JsonKey(name: "title_ap") String? titleApp,
       @JsonKey(name: "priority_ap") String? priorityApp,
       @JsonKey(name: "start_date_ap") String? startDateApp,
       @JsonKey(name: "end_date_ap") String? endDateApp,
-      @JsonKey(name: "description") String? description});
+      @JsonKey(name: "description") String? description,
+      @JsonKey(name: "progress_ap") String? progressAp,
+      @JsonKey(name: "project_type") String? projectType,
+      @JsonKey(name: "ispin") bool? ispin});
 }
 
 /// @nodoc
@@ -167,6 +194,9 @@ class __$$_PlannerModelCopyWithImpl<$Res>
     Object? startDateApp = freezed,
     Object? endDateApp = freezed,
     Object? description = freezed,
+    Object? progressAp = freezed,
+    Object? projectType = freezed,
+    Object? ispin = freezed,
   }) {
     return _then(_$_PlannerModel(
       recordType: freezed == recordType
@@ -205,6 +235,18 @@ class __$$_PlannerModelCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      progressAp: freezed == progressAp
+          ? _value.progressAp
+          : progressAp // ignore: cast_nullable_to_non_nullable
+              as String?,
+      projectType: freezed == projectType
+          ? _value.projectType
+          : projectType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      ispin: freezed == ispin
+          ? _value.ispin
+          : ispin // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -216,12 +258,15 @@ class _$_PlannerModel implements _PlannerModel {
       {@JsonKey(name: "record_type") this.recordType,
       @JsonKey(name: "id_ap") this.idApp,
       @JsonKey(name: "user_name") this.userName,
-      @JsonKey(name: "image_ap") this.imageApp,
+      @JsonKey(name: "public_id_image") this.imageApp,
       @JsonKey(name: "title_ap") this.titleApp,
       @JsonKey(name: "priority_ap") this.priorityApp,
       @JsonKey(name: "start_date_ap") this.startDateApp,
       @JsonKey(name: "end_date_ap") this.endDateApp,
-      @JsonKey(name: "description") this.description});
+      @JsonKey(name: "description") this.description,
+      @JsonKey(name: "progress_ap") this.progressAp,
+      @JsonKey(name: "project_type") this.projectType,
+      @JsonKey(name: "ispin") this.ispin});
 
   factory _$_PlannerModel.fromJson(Map<String, dynamic> json) =>
       _$$_PlannerModelFromJson(json);
@@ -236,7 +281,7 @@ class _$_PlannerModel implements _PlannerModel {
   @JsonKey(name: "user_name")
   final String? userName;
   @override
-  @JsonKey(name: "image_ap")
+  @JsonKey(name: "public_id_image")
   final String? imageApp;
   @override
   @JsonKey(name: "title_ap")
@@ -253,10 +298,19 @@ class _$_PlannerModel implements _PlannerModel {
   @override
   @JsonKey(name: "description")
   final String? description;
+  @override
+  @JsonKey(name: "progress_ap")
+  final String? progressAp;
+  @override
+  @JsonKey(name: "project_type")
+  final String? projectType;
+  @override
+  @JsonKey(name: "ispin")
+  final bool? ispin;
 
   @override
   String toString() {
-    return 'PlannerModel(recordType: $recordType, idApp: $idApp, userName: $userName, imageApp: $imageApp, titleApp: $titleApp, priorityApp: $priorityApp, startDateApp: $startDateApp, endDateApp: $endDateApp, description: $description)';
+    return 'PlannerModel(recordType: $recordType, idApp: $idApp, userName: $userName, imageApp: $imageApp, titleApp: $titleApp, priorityApp: $priorityApp, startDateApp: $startDateApp, endDateApp: $endDateApp, description: $description, progressAp: $progressAp, projectType: $projectType, ispin: $ispin)';
   }
 
   @override
@@ -280,13 +334,30 @@ class _$_PlannerModel implements _PlannerModel {
             (identical(other.endDateApp, endDateApp) ||
                 other.endDateApp == endDateApp) &&
             (identical(other.description, description) ||
-                other.description == description));
+                other.description == description) &&
+            (identical(other.progressAp, progressAp) ||
+                other.progressAp == progressAp) &&
+            (identical(other.projectType, projectType) ||
+                other.projectType == projectType) &&
+            (identical(other.ispin, ispin) || other.ispin == ispin));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, recordType, idApp, userName,
-      imageApp, titleApp, priorityApp, startDateApp, endDateApp, description);
+  int get hashCode => Object.hash(
+      runtimeType,
+      recordType,
+      idApp,
+      userName,
+      imageApp,
+      titleApp,
+      priorityApp,
+      startDateApp,
+      endDateApp,
+      description,
+      progressAp,
+      projectType,
+      ispin);
 
   @JsonKey(ignore: true)
   @override
@@ -304,16 +375,18 @@ class _$_PlannerModel implements _PlannerModel {
 
 abstract class _PlannerModel implements PlannerModel {
   factory _PlannerModel(
-          {@JsonKey(name: "record_type") final String? recordType,
-          @JsonKey(name: "id_ap") final String? idApp,
-          @JsonKey(name: "user_name") final String? userName,
-          @JsonKey(name: "image_ap") final String? imageApp,
-          @JsonKey(name: "title_ap") final String? titleApp,
-          @JsonKey(name: "priority_ap") final String? priorityApp,
-          @JsonKey(name: "start_date_ap") final String? startDateApp,
-          @JsonKey(name: "end_date_ap") final String? endDateApp,
-          @JsonKey(name: "description") final String? description}) =
-      _$_PlannerModel;
+      {@JsonKey(name: "record_type") final String? recordType,
+      @JsonKey(name: "id_ap") final String? idApp,
+      @JsonKey(name: "user_name") final String? userName,
+      @JsonKey(name: "public_id_image") final String? imageApp,
+      @JsonKey(name: "title_ap") final String? titleApp,
+      @JsonKey(name: "priority_ap") final String? priorityApp,
+      @JsonKey(name: "start_date_ap") final String? startDateApp,
+      @JsonKey(name: "end_date_ap") final String? endDateApp,
+      @JsonKey(name: "description") final String? description,
+      @JsonKey(name: "progress_ap") final String? progressAp,
+      @JsonKey(name: "project_type") final String? projectType,
+      @JsonKey(name: "ispin") final bool? ispin}) = _$_PlannerModel;
 
   factory _PlannerModel.fromJson(Map<String, dynamic> json) =
       _$_PlannerModel.fromJson;
@@ -328,7 +401,7 @@ abstract class _PlannerModel implements PlannerModel {
   @JsonKey(name: "user_name")
   String? get userName;
   @override
-  @JsonKey(name: "image_ap")
+  @JsonKey(name: "public_id_image")
   String? get imageApp;
   @override
   @JsonKey(name: "title_ap")
@@ -345,6 +418,15 @@ abstract class _PlannerModel implements PlannerModel {
   @override
   @JsonKey(name: "description")
   String? get description;
+  @override
+  @JsonKey(name: "progress_ap")
+  String? get progressAp;
+  @override
+  @JsonKey(name: "project_type")
+  String? get projectType;
+  @override
+  @JsonKey(name: "ispin")
+  bool? get ispin;
   @override
   @JsonKey(ignore: true)
   _$$_PlannerModelCopyWith<_$_PlannerModel> get copyWith =>

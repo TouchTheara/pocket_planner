@@ -85,13 +85,17 @@ class CustomDrawer extends StatelessWidget {
                       // Some Code
                     ),
                     ListTile(
-                      onTap: () {},
+                      onTap: () {
+                        context.push('/meeting');
+                      },
                       leading: const Icon(Icons.card_travel),
                       title: const Text("Meeting"),
                       // Some Code
                     ),
                     ListTile(
-                      onTap: () {},
+                      onTap: () {
+                        context.push('/notification');
+                      },
                       leading: const Icon(Icons.notification_add),
                       title: const Text("Notification"),
                       // Some Code

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:pocket_planner/config/app_colors.dart';
 
-import 'custom_list_member.dart';
+import '../../../../widget/custom_list_member.dart';
 
 Widget customCardPin(BuildContext context,
     {Function? ontap,

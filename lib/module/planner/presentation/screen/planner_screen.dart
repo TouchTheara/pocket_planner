@@ -7,12 +7,12 @@ import 'package:pocket_planner/core/service_locator/service_locator.dart';
 import 'package:pocket_planner/module/bottom_nav_bar/custom_drawer.dart';
 import 'package:pocket_planner/module/planner/data/model/planner_model.dart';
 import 'package:pocket_planner/module/planner/presentation/logic/planner_controller.dart';
-import 'package:pocket_planner/widget/custom_card_pin.dart';
-import 'package:pocket_planner/widget/custom_card_project.dart';
 import 'package:pocket_planner/widget/custom_loading.dart';
 
 import '../../../../util/form_builder/create_project_form.dart';
 import '../../../../widget/custom_modal_sheet.dart';
+import '../widget/custom_card_pin.dart';
+import '../widget/custom_card_project.dart';
 
 class PlannerScreen extends StatelessWidget {
   const PlannerScreen({Key? key}) : super(key: key);
@@ -156,18 +156,13 @@ class PlannerScreen extends StatelessWidget {
                                               .map(
                                                 (data) => CustomCardProject(
                                                   ontap: () {
-                                                    // Navigator.push(
-                                                    //     context,
-                                                    //     MaterialPageRoute(
-                                                    //         builder: (context) =>
-                                                    //             PlannerDetailScreen(
-                                                    //               plannerModel:
-                                                    //                   PlannerModel(),
-                                                    //             )));
                                                     context.push('/detail',
                                                         extra: data.value);
-                                                    // GoRouter.of(context)
-                                                    //     .push('/detail');
+                                                    getIt<PlannerController>()
+                                                        .functionFetchDataTask(
+                                                            context,
+                                                            id: data
+                                                                .value.idApp);
                                                     debugPrint("-----Hello");
                                                   },
                                                   plannerModel: data.value,

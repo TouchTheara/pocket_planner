@@ -35,17 +35,31 @@ class PlannerController extends GetxController {
   final priorityTaskValidator = false.obs;
   final selectionDueDateTaskController = TextEditingController().obs;
   final selectionDueDateTaskValidator = false.obs;
+  final hintTextProjectPriority = ''.obs;
+  final hintTextTaskPriority = ''.obs;
+  final hintTextTaskDueDate = ''.obs;
+  final hintTextProjectDueDate = ''.obs;
+
+  final getValueDropDown1 = ''.obs;
+  final getValueDropDown2 = ''.obs;
+  final startDate = ''.obs;
+  final endDate = ''.obs;
+  // Rxn<DateTime> startDate = Rxn<DateTime>();
+  // Rxn<DateTime> endDate = Rxn<DateTime>();
 
   final memberList = <Object>[].obs;
   final isLoading = false.obs;
 
   ///Function Fetch Data Planner:
   var plannerDataList = <PlannerModel>[];
+  final pagePlanData = 1.obs;
   Future<List<PlannerModel>> functionFetchDataPlanner() async {
     isLoading(true);
-    getIt<PlannerRepository>().getPlannerData().then((value) {
+    getIt<PlannerRepository>()
+        .getPlannerData(page: pagePlanData.value)
+        .then((value) {
       plannerDataList = value;
-      debugPrint("-----success get controller Planner ==$value}");
+      // debugPrint("-----success get controller Planner ==$value}");
       isLoading(false);
     });
     return plannerDataList;
@@ -54,7 +68,7 @@ class PlannerController extends GetxController {
   ///Function Fetch Data Planner:
   final taskDataList = <TaskModel>[].obs;
   Future<List<TaskModel>> functionFetchDataTask(BuildContext context,
-      {int? id}) async {
+      {String? id}) async {
     isLoading(true);
     getIt<PlannerRepository>().getTaskData(context, id: id).then((value) {
       taskDataList.value = value;
@@ -72,6 +86,9 @@ class PlannerController extends GetxController {
       String? endDateApp,
       String? description,
       String? title,
+      bool? ispin,
+      String? projectType,
+      String? progressAp,
       Function? functionSuccess}) async {
     isLoading(true);
     await getIt<PlannerRepository>().createPlannerData(context,
@@ -80,7 +97,10 @@ class PlannerController extends GetxController {
         functionSuccess: functionSuccess,
         endDateApp: endDateApp,
         startDateApp: startDateApp,
-        description: description);
+        description: description,
+        ispin: ispin,
+        progressAp: progressAp,
+        projectType: projectType);
     isLoading(false);
   }
 
@@ -118,11 +138,33 @@ class PlannerController extends GetxController {
   }
 
   functionSuccessCreateData(BuildContext context) async {
-    context.pop();
-    descriptionController.value.clear();
-    priorityController.value.clear();
-    selectionDueDateController.value.clear();
-    await getIt<PlannerController>().functionFetchDataPlanner();
+    try {
+      context.pop();
+      projectNameController.value.clear();
+      selectionDueDateController.value.clear();
+      startDate.value = '';
+      endDate.value = '';
+      descriptionController.value.clear();
+      priorityController.value.clear();
+      await getIt<PlannerController>().functionFetchDataPlanner();
+    } catch (e) {
+      debugPrint("-------- $e");
+    }
+  }
+
+  functionSuccessCreateTask(BuildContext context, {String? id}) async {
+    try {
+      context.pop();
+      taskNameController.value.clear();
+      selectionDueDateTaskController.value.clear();
+      startDate.value = '';
+      endDate.value = '';
+      descriptionTaskController.value.clear();
+      priorityTaskController.value.clear();
+      await getIt<PlannerController>().functionFetchDataTask(context, id: id);
+    } catch (e) {
+      debugPrint("----------$e");
+    }
   }
 
   @override

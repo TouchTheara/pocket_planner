@@ -5,16 +5,20 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pocket_planner/config/app_colors.dart';
 import 'package:pocket_planner/module/planner/data/model/planner_model.dart';
+import 'package:pocket_planner/module/planner/presentation/logic/planner_controller.dart';
 import 'package:pocket_planner/widget/custom_button.dart';
 import 'package:pocket_planner/widget/custom_list_member.dart';
 
+import '../../../../core/service_locator/service_locator.dart';
 import '../../../../util/form_builder/create_task_form.dart';
 import '../../../../widget/custom_alert_popup.dart';
-import '../../../../widget/custom_card_task.dart';
+
 import '../../../../widget/custom_modal_sheet.dart';
+import '../widget/custom_card_task.dart';
 
 class PlannerDetailScreen extends StatelessWidget {
   final PlannerModel plannerModel;
+
   const PlannerDetailScreen({Key? key, required this.plannerModel})
       : super(key: key);
 
@@ -29,11 +33,11 @@ class PlannerDetailScreen extends StatelessWidget {
       'https://cdn.pixabay.com/photo/2015/01/08/18/29/entrepreneur-593358__340.jpg',
       'https://cdn.pixabay.com/photo/2015/01/08/18/29/entrepreneur-593358__340.jpg',
     ];
-    final List<Widget> listTask = [
-      Container(),
-      Container(),
-      Container(),
-    ];
+    // final List<Widget> listTask = [
+    //   Container(),
+    //   Container(),
+    //   Container(),
+    // ];
     return Scaffold(
       body: CustomScrollView(
         controller: controller,
@@ -97,7 +101,9 @@ class PlannerDetailScreen extends StatelessWidget {
             flexibleSpace: FlexibleSpaceBar(
               title: const Text(''),
               background: Image.network(
-                'https://img.freepik.com/free-photo/rpa-concept-with-blurry-hand-touching-screen_23-2149311914.jpg',
+                plannerModel.imageApp != '' && plannerModel.imageApp != null
+                    ? "${plannerModel.imageApp}"
+                    : 'https://upload.wikimedia.org/wikipedia/commons/b/b9/No_Cover.jpg',
                 fit: BoxFit.cover,
               ),
             ),
@@ -113,23 +119,29 @@ class PlannerDetailScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const Text(
-                        "CIC App",
-                        style: TextStyle(
+                      Text(
+                        plannerModel.titleApp != '' &&
+                                plannerModel.titleApp != null
+                            ? "${plannerModel.titleApp}"
+                            : "No Title",
+                        style: const TextStyle(
                             color: Colors.black,
                             fontSize: 18,
                             fontWeight: FontWeight.bold),
                       ),
                       Row(
-                        children: const [
-                          Icon(
+                        children: [
+                          const Icon(
                             Icons.calendar_today,
                             size: 20,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
-                          Text("Due 14 Fab"),
+                          Text(plannerModel.endDateApp != '' &&
+                                  plannerModel.endDateApp != null
+                              ? "${plannerModel.endDateApp}"
+                              : "No Due"),
                         ],
                       ),
                     ],
@@ -137,9 +149,12 @@ class PlannerDetailScreen extends StatelessWidget {
                   const SizedBox(
                     height: 8,
                   ),
-                  const Text(
-                    "Mobile | API Development",
-                    style: TextStyle(
+                  Text(
+                    plannerModel.projectType != '' &&
+                            plannerModel.projectType != null
+                        ? "${plannerModel.projectType}"
+                        : "No Type",
+                    style: const TextStyle(
                         color: Colors.grey,
                         fontSize: 14,
                         fontWeight: FontWeight.normal),
@@ -162,9 +177,12 @@ class PlannerDetailScreen extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  const Text(
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Volutpat ac tincidunt vitae semper quis. Molestie at elementum eu facilisis. Diam quis enim lobortis scelerisque fermentum dui faucibus. Ipsum nunc aliquet bibendum enim facilisis gravida neque convallis. Augue neque gravida in fermentum.",
-                    style: TextStyle(
+                  Text(
+                    plannerModel.description != '' &&
+                            plannerModel.description != null
+                        ? "${plannerModel.description}"
+                        : "No Description",
+                    style: const TextStyle(
                         wordSpacing: 1.8,
                         height: 1.4,
                         color: Colors.grey,
@@ -187,17 +205,21 @@ class PlannerDetailScreen extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  SingleChildScrollView(
-                    child: Column(
-                      children: listTask
-                          .map((e) => Padding(
-                                padding: const EdgeInsets.only(bottom: 12),
-                                child:
-                                    customCardTask(context, object: Object()),
-                              ))
-                          .toList(),
-                    ),
-                  ),
+                  getIt<PlannerController>().taskDataList.isEmpty
+                      ? const Text("No Task Yet")
+                      : SingleChildScrollView(
+                          child: Column(
+                            children: getIt<PlannerController>()
+                                .taskDataList
+                                .map((e) => Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 12),
+                                      child: customCardTask(context,
+                                          object: Object()),
+                                    ))
+                                .toList(),
+                          ),
+                        ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -207,7 +229,9 @@ class PlannerDetailScreen extends StatelessWidget {
                     child: CustomButton(
                       ontap: () {
                         customModelSheet(context,
-                            child: const CreateTaskFrom());
+                            child: CreateTaskFrom(
+                              id: plannerModel.idApp,
+                            ));
                       },
                       titleBTN: 'Create Task',
                       styleBTN: const TextStyle(

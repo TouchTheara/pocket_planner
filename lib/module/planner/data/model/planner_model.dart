@@ -11,12 +11,15 @@ class PlannerModel with _$PlannerModel {
     @JsonKey(name: "record_type") String? recordType,
     @JsonKey(name: "id_ap") String? idApp,
     @JsonKey(name: "user_name") String? userName,
-    @JsonKey(name: "image_ap") String? imageApp,
+    @JsonKey(name: "public_id_image") String? imageApp,
     @JsonKey(name: "title_ap") String? titleApp,
     @JsonKey(name: "priority_ap") String? priorityApp,
     @JsonKey(name: "start_date_ap") String? startDateApp,
     @JsonKey(name: "end_date_ap") String? endDateApp,
     @JsonKey(name: "description") String? description,
+    @JsonKey(name: "progress_ap") String? progressAp,
+    @JsonKey(name: "project_type") String? projectType,
+    @JsonKey(name: "ispin") bool? ispin,
   }) = _PlannerModel;
 
   factory PlannerModel.fromJson(Map<String, dynamic> json) =>
