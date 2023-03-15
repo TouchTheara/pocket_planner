@@ -16,6 +16,7 @@ import 'package:pocket_planner/core/auth/data/repository/auth_repository.dart';
 import 'package:pocket_planner/util/helper/extension.dart';
 
 import '../../../../util/helper/local_data/get_local_data.dart';
+import '../../../../util/helper/notification_helper.dart';
 import '../../../service_locator/service_locator.dart';
 
 class AuthController extends GetxController
@@ -42,6 +43,7 @@ class AuthController extends GetxController
   final focusScopePassword = FocusNode().obs;
   ValueNotifier<String> appNotifier = ValueNotifier('');
   final hashValue = ''.obs;
+  final refreshToken = ''.obs;
 
   ///Funciton Check time animation:
   String get timerString {
@@ -132,6 +134,23 @@ class AuthController extends GetxController
     isLoading(false);
   }
 
+  ///Function Refresh Token:
+
+  getRefreshToken() async {
+    final refreshToken = await LocalDataStorage.getString('refreshToken');
+    debugPrint("----------->>>>refresh token$refreshToken");
+    isLoading(true);
+
+    await getIt<AuthReposity>()
+        .getRefreshToken(
+            phone: "855${phoneController.value.text.removeZeroFront()}",
+            refreshToken: refreshToken)
+        .then((value) {
+      isLoading(false);
+    });
+    isLoading(false);
+  }
+
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   ///Function Login google with silently:
@@ -215,18 +234,21 @@ class AuthController extends GetxController
   }
 
   functionClearToken(BuildContext context) async {
-    await LocalDataStorage.removeCurrentUser().then((value) {
-      try {
-        context.go('/onBoarding');
-        phoneController.value.text = '';
-        passwordController.value.text = '';
-      } catch (e) {
-        debugPrint("============+$e");
-      }
-    });
+    await LocalDataStorage.removeCurrentUser();
+    // .then((value) {
+    //   try {
+    //     // context.go('/onBoarding');
+    //     // phoneController.value.text = '';
+    //     // passwordController.value.text = '';
+    //   } catch (e) {
+    //     debugPrint("============+$e");
+    //   }
+    // });
   }
 
   funtionFetchFirst() async {
+    await NotificationHelper.initial();
+    await LocalDataStorage.getString('refreshToken');
     var token = await LocalDataStorage.getCurrentUser();
     getIt<AuthController>().appNotifier.value = token;
     getIt<AuthController>().appNotifier.notifyListeners();

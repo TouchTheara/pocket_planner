@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pocket_planner/config/app_colors.dart';
+import 'package:pocket_planner/module/planner/presentation/logic/planner_controller.dart';
 
-openAlertBox(BuildContext context) {
+import '../core/service_locator/service_locator.dart';
+import '../util/form_builder/create_project_form.dart';
+import 'custom_modal_sheet.dart';
+
+openAlertBox(BuildContext context, {required int appID}) {
   return showDialog(
       context: context,
       builder: (BuildContext contextAlert) {
@@ -44,6 +49,11 @@ openAlertBox(BuildContext context) {
               InkWell(
                 onTap: () {
                   contextAlert.pop();
+                  getIt<PlannerController>().functionDeleteDataPlanner(context,
+                      id: appID, functionSuccess: () {
+                    context.pop();
+                    getIt<PlannerController>().functionFetchDataPlanner();
+                  });
                 },
                 child: Row(
                   children: [
@@ -91,6 +101,41 @@ openAlertBox(BuildContext context) {
                         // borderRadius: BorderRadius.circular(60),
                       ),
                       child: const Text('Pin to dashboard'),
+                    ),
+                  ],
+                ),
+              ),
+              const Divider(
+                color: Colors.grey,
+                height: 4.0,
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              InkWell(
+                onTap: () {
+                  context.pop();
+                  customModelSheet(context,
+                      child: const CreateProjectFrom(
+                        isCreate: false,
+                      ));
+                },
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.system_security_update,
+                      color: AppColors.primaryColor,
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        // borderRadius: BorderRadius.circular(60),
+                      ),
+                      child: const Text('Update Project'),
                     ),
                   ],
                 ),

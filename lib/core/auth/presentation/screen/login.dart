@@ -177,9 +177,10 @@ class LoginSignUpScreen extends StatelessWidget {
                                                             .passwordController
                                                             .value
                                                             .text,
-                                                    funcWhenSuccess: () {
-                                              context.go('/');
-                                            });
+                                            //         funcWhenSuccess: () {
+                                            //   context.go('/');
+                                            // }
+                                            );
                                           },
                                           color: AppColors.btnColor,
                                           titleBTN: "Log In",

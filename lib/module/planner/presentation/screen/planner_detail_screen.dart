@@ -80,7 +80,8 @@ class PlannerDetailScreen extends StatelessWidget {
                 child: InkWell(
                   borderRadius: BorderRadius.circular(30),
                   onTap: () {
-                    openAlertBox(context);
+                    openAlertBox(context,
+                        appID: int.parse(plannerModel.idApp.toString()));
                   },
                   child: Container(
                       padding: const EdgeInsets.all(11),
@@ -223,8 +224,10 @@ class PlannerDetailScreen extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
+                  const Spacer(),
                   SafeArea(
                     top: false,
+                    bottom: false,
                     minimum: const EdgeInsets.only(bottom: 10),
                     child: CustomButton(
                       ontap: () {

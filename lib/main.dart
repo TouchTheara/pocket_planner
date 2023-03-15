@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/material.dart';
 import 'package:pocket_planner/config/router.dart';
 import 'package:pocket_planner/core/auth/presentation/logic/auth_controller.dart';
@@ -13,6 +14,7 @@ void main() async {
   await Firebase.initializeApp();
   configureDependencies();
   await runZonedGuarded(() async {
+    await LocalDataStorage.getString('refreshToken');
     await LocalDataStorage.getCurrentUser();
     await getIt<AuthController>().funtionFetchFirst();
   }, (error, stackTrace) {

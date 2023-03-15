@@ -3,12 +3,14 @@ import 'package:pocket_planner/module/planner/data/model/tesk_model/task_model.d
 import 'package:pocket_planner/module/planner/domain/planner_base_repository.dart';
 import 'package:pocket_planner/util/helper/dio_bese_helper.dart';
 
+import '../../../../core/auth/presentation/logic/auth_controller.dart';
 import '../../../../core/service_locator/service_locator.dart';
 import '../model/planner_model.dart';
 
 class PlannerRepository implements PlannerRepositoryBase {
   @override
-  Future<List<PlannerModel>> getPlannerData({int page = 1}) async {
+  Future<List<PlannerModel>> getPlannerData(
+      {int page = 1, Function? errorTokenFunc}) async {
     var plannerList = <PlannerModel>[];
 
     await getIt<DioBaseHelper>()
@@ -23,11 +25,35 @@ class PlannerRepository implements PlannerRepositoryBase {
 
       debugPrint(
           "############# get data success Planner : ${response['result']}");
-    }).onError((ErrorModel error, stackTrace) {
+    }).onError((
+      ErrorModel error,
+      stackTrace,
+    ) async {
+      if (error.statusCode == 401 || error.statusCode == 403) {
+        await getIt<AuthController>().getRefreshToken();
+      }
       debugPrint("on status error data planner : ${error.statusCode}");
       debugPrint("on status error data Body planner: ${error.bodyString}");
     });
     return plannerList;
+  }
+
+  @override
+  Future<void> deletePlannerData(BuildContext context,
+      {required int appId, Function? functionSuccess}) async {
+    await getIt<DioBaseHelper>()
+        .onRequest(
+      url: "delete-active-planing?id_ap=$appId",
+      methode: METHODE.delete,
+      isAuthorize: true,
+    )
+        .then((response) {
+      debugPrint(' ============= > $response');
+      functionSuccess?.call();
+    }).onError((ErrorModel error, stackTrace) {
+      debugPrint("on status error data planner : ${error.statusCode}");
+      debugPrint("on status error data Body planner: ${error.bodyString}");
+    });
   }
 
   @override

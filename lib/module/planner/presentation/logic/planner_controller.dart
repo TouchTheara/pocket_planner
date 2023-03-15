@@ -1,6 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'package:injectable/injectable.dart';
 import 'package:pocket_planner/core/service_locator/service_locator.dart';
@@ -15,6 +17,7 @@ class PlannerController extends GetxController {
   static init() => Get.put(PlannerController());
 
   ///Controller:
+  ///
 
   final projectNameController = TextEditingController().obs;
   final projectNameValidator = false.obs;
@@ -51,18 +54,34 @@ class PlannerController extends GetxController {
   final isLoading = false.obs;
 
   ///Function Fetch Data Planner:
-  var plannerDataList = <PlannerModel>[];
+  var plannerDataList = <PlannerModel>[].obs;
   final pagePlanData = 1.obs;
   Future<List<PlannerModel>> functionFetchDataPlanner() async {
     isLoading(true);
-    getIt<PlannerRepository>()
-        .getPlannerData(page: pagePlanData.value)
+    await getIt<PlannerRepository>()
+        .getPlannerData(
+      page: pagePlanData.value,
+    )
         .then((value) {
-      plannerDataList = value;
-      // debugPrint("-----success get controller Planner ==$value}");
+      isLoading(false);
+      plannerDataList.value = value;
+      update();
+      refresh();
+    });
+    isLoading(false);
+    refresh();
+    return plannerDataList;
+  }
+
+  Future<void> functionDeleteDataPlanner(BuildContext context,
+      {required int id, Function? functionSuccess}) async {
+    isLoading(true);
+    await getIt<PlannerRepository>()
+        .deletePlannerData(context, appId: id, functionSuccess: functionSuccess)
+        .then((value) {
+      update();
       isLoading(false);
     });
-    return plannerDataList;
   }
 
   ///Function Fetch Data Planner:
@@ -139,13 +158,12 @@ class PlannerController extends GetxController {
 
   functionSuccessCreateData(BuildContext context) async {
     try {
-      context.pop();
-      projectNameController.value.clear();
-      selectionDueDateController.value.clear();
-      startDate.value = '';
-      endDate.value = '';
-      descriptionController.value.clear();
-      priorityController.value.clear();
+      // projectNameController.value.clear();
+      // selectionDueDateController.value.clear();
+      // startDate.value = '';
+      // endDate.value = '';
+      // descriptionController.value.clear();
+      // priorityController.value.clear();
       await getIt<PlannerController>().functionFetchDataPlanner();
     } catch (e) {
       debugPrint("-------- $e");
@@ -154,7 +172,6 @@ class PlannerController extends GetxController {
 
   functionSuccessCreateTask(BuildContext context, {String? id}) async {
     try {
-      context.pop();
       taskNameController.value.clear();
       selectionDueDateTaskController.value.clear();
       startDate.value = '';
@@ -167,11 +184,36 @@ class PlannerController extends GetxController {
     }
   }
 
+  Future getImage() async {
+    File? image;
+    final picker = ImagePicker();
+
+    var pickedFile = await picker.pickImage(
+        source: ImageSource.camera,
+        imageQuality: 50, // <- Reduce Image quality
+        maxHeight: 500, // <- reduce the image size
+        maxWidth: 500);
+
+    image = File(pickedFile!.path);
+
+    // funcUploadProjectImage(image);
+  }
+
+  // funcUploadProjectImage(File file) async {
+  //   String fileName = file.path.split('/').last;
+  //   FormData formData = FormData.fromMap({
+  //     "file": await MultipartFile.fromFile(file.path, filename: fileName),
+  //   });
+
+  //   var response = await dio.post("/info", data: formData);
+  //   return response.data['id'];
+  // }
+
   @override
   void onInit() {
-    functionTesting();
-    functionFetchDataPlanner();
-    getIt<PlannerRepository>().getPlannerData();
+    // functionTesting();
+
+    // getIt<PlannerRepository>().getPlannerData();
     super.onInit();
   }
 }

@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "952229417862-36s1mtvjv4s25g1fcqvoq5nl4rk64mfa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.plannerpro",
+            "certificate_hash": "df7355eb121cacae24f47f2aa70946feda9a7e04"
+          }
+        },
+        {
           "client_id": "952229417862-i0a9hga0gdv7do7fjjpripj0iut0jvoe.apps.googleusercontent.com",
           "client_type": 3
         }

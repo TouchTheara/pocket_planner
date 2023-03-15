@@ -5,6 +5,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../core/auth/presentation/logic/auth_controller.dart';
+import '../../core/service_locator/service_locator.dart';
 import 'local_data/get_local_data.dart';
 
 @injectable
@@ -19,7 +21,7 @@ class DioBaseHelper {
     bool isDebugOn = false,
     bool showBodyInput = false,
   }) async {
-    if (methode != METHODE.get && body == null) {
+    if (methode != METHODE.get && methode != METHODE.delete && body == null) {
       throw Exception('Body must not be null of $methode');
       // debugPrint('Error=======');
     }
@@ -71,7 +73,7 @@ class DioBaseHelper {
         case METHODE.delete:
           {
             response = await dio.delete(fullUrl,
-                data: json.encode(body),
+                data: body == null ? null : json.encode(body),
                 options: Options(
                   headers: header,
                 ));
@@ -165,12 +167,14 @@ class DioBaseHelper {
         return Future.error(ErrorModel(
             statusCode: response.statusCode, bodyString: response.data));
       case 401:
+        await getIt<AuthController>().getRefreshToken();
         return Future.error(ErrorModel(
             statusCode: response.statusCode, bodyString: response.data));
       case 404:
         return Future.error(ErrorModel(
             statusCode: response.statusCode, bodyString: response.data));
       case 403:
+        await getIt<AuthController>().getRefreshToken();
         return Future.error(ErrorModel(
             statusCode: response.statusCode, bodyString: response.data));
       case 500:

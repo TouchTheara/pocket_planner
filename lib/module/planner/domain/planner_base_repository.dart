@@ -4,7 +4,11 @@ import '../data/model/planner_model.dart';
 import '../data/model/tesk_model/task_model.dart';
 
 abstract class PlannerRepositoryBase {
-  Future<List<PlannerModel>> getPlannerData({int page = 1});
+  Future<List<PlannerModel>> getPlannerData({
+    int page = 1,
+  });
+  Future<void> deletePlannerData(BuildContext context,
+      {required int appId, Function functionSuccess});
   Future<List<TaskModel>> getTaskData(BuildContext context, {String id});
   Future<void> createPlannerData(BuildContext context,
       {String priorityApp,

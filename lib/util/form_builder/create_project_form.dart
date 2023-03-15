@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pocket_planner/config/app_colors.dart';
 import 'package:pocket_planner/module/planner/presentation/logic/planner_controller.dart';
 import 'package:pocket_planner/widget/custom_button.dart';
-import 'package:pocket_planner/widget/custom_loading.dart';
 
 import '../../core/service_locator/service_locator.dart';
 import '../../widget/cuctom_textfield.dart';
@@ -11,8 +11,9 @@ import '../../widget/custom_popup_selection.dart';
 import '../../widget/custom_list_member.dart';
 
 class CreateProjectFrom extends StatelessWidget {
-  const CreateProjectFrom({Key? key}) : super(key: key);
+  const CreateProjectFrom({Key? key, this.isCreate = true}) : super(key: key);
 
+  final bool isCreate;
   @override
   Widget build(BuildContext context) {
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -270,34 +271,70 @@ class CreateProjectFrom extends StatelessWidget {
                             child: CustomButton(
                               height: 60,
                               ontap: () {
-                                getIt<PlannerController>()
-                                    .functionCreatePlanner(context,
-                                        title: getIt<PlannerController>()
-                                            .projectNameController
-                                            .value
-                                            .text,
-                                        description: getIt<PlannerController>()
-                                            .descriptionController
-                                            .value
-                                            .text,
-                                        priorityApp: getIt<PlannerController>()
-                                            .priorityController
-                                            .value
-                                            .text,
-                                        startDateApp: getIt<PlannerController>()
-                                            .startDate
-                                            .value,
-                                        endDateApp: getIt<PlannerController>()
-                                            .endDate
-                                            .value, functionSuccess: () {
+                                if (isCreate) {
+                                  context.pop();
                                   getIt<PlannerController>()
-                                      .functionSuccessCreateData(context);
-                                });
+                                      .functionCreatePlanner(context,
+                                          title: getIt<PlannerController>()
+                                              .projectNameController
+                                              .value
+                                              .text,
+                                          description:
+                                              getIt<PlannerController>()
+                                                  .descriptionController
+                                                  .value
+                                                  .text,
+                                          priorityApp:
+                                              getIt<PlannerController>()
+                                                  .priorityController
+                                                  .value
+                                                  .text,
+                                          startDateApp:
+                                              getIt<PlannerController>()
+                                                  .startDate
+                                                  .value,
+                                          endDateApp: getIt<PlannerController>()
+                                              .endDate
+                                              .value, functionSuccess: () {
+                                    getIt<PlannerController>()
+                                        .functionSuccessCreateData(context);
+                                  });
+                                } else {
+                                  context.pop();
+                                  getIt<PlannerController>()
+                                      .functionCreatePlanner(context,
+                                          title: getIt<PlannerController>()
+                                              .projectNameController
+                                              .value
+                                              .text,
+                                          description:
+                                              getIt<PlannerController>()
+                                                  .descriptionController
+                                                  .value
+                                                  .text,
+                                          priorityApp:
+                                              getIt<PlannerController>()
+                                                  .priorityController
+                                                  .value
+                                                  .text,
+                                          startDateApp:
+                                              getIt<PlannerController>()
+                                                  .startDate
+                                                  .value,
+                                          endDateApp: getIt<PlannerController>()
+                                              .endDate
+                                              .value, functionSuccess: () {
+                                    getIt<PlannerController>()
+                                        .functionSuccessCreateData(context);
+                                  });
+                                }
                               },
                               color: AppColors.secondColor,
                               borderColor: Colors.white,
                               borderWidth: 2,
-                              titleBTN: 'Create Project',
+                              titleBTN: isCreate
+                                  ? 'Create Project'
+                                  : 'Update Project',
                               styleBTN: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,

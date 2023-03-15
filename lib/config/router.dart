@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pocket_planner/core/work_through/splash_screen.dart';
 import 'package:pocket_planner/module/Terms/screen/terms.dart';
 import 'package:pocket_planner/module/meeting/presentaion/screen/meeting_screen.dart';
 import 'package:pocket_planner/module/planner/data/model/planner_model.dart';
@@ -25,21 +24,28 @@ final GlobalKey<NavigatorState> _rootNavigatorKey =
 //     GlobalKey<NavigatorState>(debugLabel: 'shell');
 final router = GoRouter(
     navigatorKey: _rootNavigatorKey,
-    // redirect: (context, state) {
-    //   if (getIt<AuthController>().appNotifier.value != '') {
-    //     return '/';
-    //   }
-    //   return '/';
-    // },
-    initialLocation: '/sso',
+    redirect: (context, state) {
+      debugPrint(
+          "++++++++Token++++++${getIt<AuthController>().appNotifier.value}");
+      if (getIt<AuthController>().appNotifier.value == '' &&
+          !state.location.contains('/signup') &&
+          !state.location.contains('/otp') &&
+          !state.location.contains('/create-password') &&
+          !state.location.contains('/onBoarding') &&
+          !state.location.contains('/terms')) {
+        return '/login';
+      }
+      return null;
+    },
+    initialLocation: '/',
     routes: <RouteBase>[
-      GoRoute(
-        path: '/sso',
-        builder: (BuildContext context, GoRouterState state) {
-          return const SplashScreen();
-        },
-        routes: const <RouteBase>[],
-      ),
+      // GoRoute(
+      //   path: '/sso',
+      //   builder: (BuildContext context, GoRouterState state) {
+      //     return const SplashScreen();
+      //   },
+      //   routes: const <RouteBase>[],
+      // ),
       GoRoute(
         path: '/onBoarding',
         builder: (BuildContext context, GoRouterState state) {
