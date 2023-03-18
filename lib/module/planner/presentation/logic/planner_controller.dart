@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:injectable/injectable.dart';
@@ -17,7 +18,6 @@ class PlannerController extends GetxController {
   static init() => Get.put(PlannerController());
 
   ///Controller:
-  ///
 
   final projectNameController = TextEditingController().obs;
   final projectNameValidator = false.obs;
@@ -38,6 +38,8 @@ class PlannerController extends GetxController {
   final priorityTaskValidator = false.obs;
   final selectionDueDateTaskController = TextEditingController().obs;
   final selectionDueDateTaskValidator = false.obs;
+
+  ///init value:
   final hintTextProjectPriority = ''.obs;
   final hintTextTaskPriority = ''.obs;
   final hintTextTaskDueDate = ''.obs;
@@ -47,6 +49,14 @@ class PlannerController extends GetxController {
   final getValueDropDown2 = ''.obs;
   final startDate = ''.obs;
   final endDate = ''.obs;
+  final projectName = ''.obs;
+  final projectDisciption = ''.obs;
+  final projectPriority = ''.obs;
+  final projectStartDate = ''.obs;
+  final projectEndDate = ''.obs;
+  final projectCover = ''.obs;
+  final projectMember = <String>[].obs;
+
   // Rxn<DateTime> startDate = Rxn<DateTime>();
   // Rxn<DateTime> endDate = Rxn<DateTime>();
 
@@ -123,6 +133,34 @@ class PlannerController extends GetxController {
     isLoading(false);
   }
 
+  ///Function Create Data Planner:
+
+  functionUpdatePlanner(BuildContext context,
+      {String? priorityApp,
+      required int id,
+      String? startDateApp,
+      String? endDateApp,
+      String? description,
+      String? title,
+      bool? ispin,
+      String? projectType,
+      String? progressAp,
+      Function? functionSuccess}) async {
+    isLoading(true);
+    await getIt<PlannerRepository>().updatePlannerData(context,
+        id: id,
+        title: title,
+        priorityApp: priorityApp,
+        functionSuccess: functionSuccess,
+        endDateApp: endDateApp,
+        startDateApp: startDateApp,
+        description: description,
+        ispin: ispin,
+        progressAp: progressAp,
+        projectType: projectType);
+    isLoading(false);
+  }
+
   ///Function Create Task :
 
   functionCreateTask(BuildContext context,
@@ -158,12 +196,15 @@ class PlannerController extends GetxController {
 
   functionSuccessCreateData(BuildContext context) async {
     try {
-      // projectNameController.value.clear();
-      // selectionDueDateController.value.clear();
-      // startDate.value = '';
-      // endDate.value = '';
-      // descriptionController.value.clear();
-      // priorityController.value.clear();
+      await getIt<PlannerController>().functionFetchDataPlanner();
+    } catch (e) {
+      debugPrint("-------- $e");
+    }
+  }
+
+  functionSuccessUpdateData(BuildContext context) async {
+    try {
+      context.pop('/');
       await getIt<PlannerController>().functionFetchDataPlanner();
     } catch (e) {
       debugPrint("-------- $e");

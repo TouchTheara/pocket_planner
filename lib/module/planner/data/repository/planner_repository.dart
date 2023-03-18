@@ -87,6 +87,7 @@ class PlannerRepository implements PlannerRepositoryBase {
       String? description,
       String? title,
       bool? ispin,
+      bool? isOwner,
       String? projectType,
       String? progressAp,
       Function? functionSuccess}) async {
@@ -102,7 +103,45 @@ class PlannerRepository implements PlannerRepositoryBase {
           "description": description ?? "not hard 2",
           "progress_ap": progressAp ?? "",
           "project_type": projectType ?? "",
-          "ispin": ispin ?? false
+          "ispin": ispin ?? false,
+          "is_owner": isOwner ?? true
+        }).then((response) {
+      functionSuccess?.call();
+
+      debugPrint("------- get data success project : $response");
+    }).onError((ErrorModel error, stackTrace) {
+      debugPrint("on status error data : ${error.statusCode}");
+      debugPrint("on status error data Body: ${error.bodyString}");
+    });
+  }
+
+  @override
+  Future<void> updatePlannerData(BuildContext context,
+      {String? priorityApp,
+      required int id,
+      String? startDateApp,
+      String? endDateApp,
+      String? description,
+      String? title,
+      bool? ispin,
+      bool? isOwner,
+      String? projectType,
+      String? progressAp,
+      Function? functionSuccess}) async {
+    await getIt<DioBaseHelper>().onRequest(
+        url: "update-active-planing?id_ap=$id",
+        methode: METHODE.put,
+        isAuthorize: true,
+        body: {
+          "title_ap": title,
+          "priority_ap": priorityApp ?? "High",
+          "start_date_ap": startDateApp ?? "11/12/2022",
+          "end_date_ap": endDateApp ?? "11/09/2023",
+          "description": description ?? "not hard 2",
+          "progress_ap": progressAp ?? "",
+          "project_type": projectType ?? "",
+          "ispin": ispin ?? false,
+          "is_owner": isOwner ?? true
         }).then((response) {
       functionSuccess?.call();
 

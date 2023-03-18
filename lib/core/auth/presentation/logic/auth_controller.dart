@@ -137,14 +137,12 @@ class AuthController extends GetxController
   ///Function Refresh Token:
 
   getRefreshToken() async {
-    final refreshToken = await LocalDataStorage.getString('refreshToken');
-    debugPrint("----------->>>>refresh token$refreshToken");
     isLoading(true);
 
     await getIt<AuthReposity>()
         .getRefreshToken(
-            phone: "855${phoneController.value.text.removeZeroFront()}",
-            refreshToken: refreshToken)
+      phone: "855${phoneController.value.text.removeZeroFront()}",
+    )
         .then((value) {
       isLoading(false);
     });
@@ -252,7 +250,7 @@ class AuthController extends GetxController
     var token = await LocalDataStorage.getCurrentUser();
     getIt<AuthController>().appNotifier.value = token;
     getIt<AuthController>().appNotifier.notifyListeners();
-    debugPrint("-----------------${getIt<AuthController>().appNotifier}");
+    // debugPrint("-----------------${getIt<AuthController>().appNotifier}");
     update();
   }
 

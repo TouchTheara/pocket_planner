@@ -116,8 +116,9 @@ openAlertBox(BuildContext context, {required int appID}) {
                 onTap: () {
                   context.pop();
                   customModelSheet(context,
-                      child: const CreateProjectFrom(
+                      child: CreateProjectFrom(
                         isCreate: false,
+                        id: appID,
                       ));
                 },
                 child: Row(

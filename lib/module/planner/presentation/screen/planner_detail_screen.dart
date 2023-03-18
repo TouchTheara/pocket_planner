@@ -82,6 +82,7 @@ class PlannerDetailScreen extends StatelessWidget {
                   onTap: () {
                     openAlertBox(context,
                         appID: int.parse(plannerModel.idApp.toString()));
+                    debugPrint("------->>>><<<<< ID : ${plannerModel.idApp}");
                   },
                   child: Container(
                       padding: const EdgeInsets.all(11),

@@ -25,8 +25,8 @@ final GlobalKey<NavigatorState> _rootNavigatorKey =
 final router = GoRouter(
     navigatorKey: _rootNavigatorKey,
     redirect: (context, state) {
-      debugPrint(
-          "++++++++Token++++++${getIt<AuthController>().appNotifier.value}");
+      // debugPrint(
+      //     "++++++++Token++++++${getIt<AuthController>().appNotifier.value}");
       if (getIt<AuthController>().appNotifier.value == '' &&
           !state.location.contains('/signup') &&
           !state.location.contains('/otp') &&

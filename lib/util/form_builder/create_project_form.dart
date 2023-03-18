@@ -11,9 +11,29 @@ import '../../widget/custom_popup_selection.dart';
 import '../../widget/custom_list_member.dart';
 
 class CreateProjectFrom extends StatelessWidget {
-  const CreateProjectFrom({Key? key, this.isCreate = true}) : super(key: key);
+  CreateProjectFrom(
+      {Key? key,
+      this.isCreate = true,
+      this.id,
+      this.name = 'theara',
+      this.disciption,
+      this.priority,
+      this.startDate,
+      this.endDate,
+      this.cover,
+      this.memberList})
+      : super(key: key);
 
   final bool isCreate;
+  final int? id;
+  String? name;
+  String? disciption;
+  String? priority;
+  String? startDate;
+  String? endDate;
+  String? cover;
+  List<String>? memberList;
+
   @override
   Widget build(BuildContext context) {
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -55,15 +75,14 @@ class CreateProjectFrom extends StatelessWidget {
                             height: 20,
                           ),
                           CustomTextField(
-                              controller: getIt<PlannerController>()
-                                  .projectNameController
-                                  .value,
+                              initialValue: name,
                               isValidate: !getIt<PlannerController>()
                                   .projectNameValidator
                                   .value,
                               labelText: 'Project name',
                               hintText: 'Project name',
                               onChange: (value) {
+                                name = value;
                                 if (value == "") {
                                   getIt<PlannerController>()
                                       .projectNameValidator
@@ -82,15 +101,14 @@ class CreateProjectFrom extends StatelessWidget {
                               textAlignVertical: TextAlignVertical.top,
                               maxLine: null,
                               expands: true,
-                              controller: getIt<PlannerController>()
-                                  .descriptionController
-                                  .value,
+                              initialValue: disciption,
                               isValidate: !getIt<PlannerController>()
                                   .descriptionValidator
                                   .value,
                               labelText: 'Description',
                               hintText: 'Description',
                               onChange: (value) {
+                                disciption = value;
                                 if (value == "") {
                                   getIt<PlannerController>()
                                       .descriptionValidator
@@ -300,9 +318,11 @@ class CreateProjectFrom extends StatelessWidget {
                                         .functionSuccessCreateData(context);
                                   });
                                 } else {
+                                  debugPrint("-------Update");
                                   context.pop();
                                   getIt<PlannerController>()
-                                      .functionCreatePlanner(context,
+                                      .functionUpdatePlanner(context,
+                                          id: id!,
                                           title: getIt<PlannerController>()
                                               .projectNameController
                                               .value
@@ -325,7 +345,7 @@ class CreateProjectFrom extends StatelessWidget {
                                               .endDate
                                               .value, functionSuccess: () {
                                     getIt<PlannerController>()
-                                        .functionSuccessCreateData(context);
+                                        .functionSuccessUpdateData(context);
                                   });
                                 }
                               },

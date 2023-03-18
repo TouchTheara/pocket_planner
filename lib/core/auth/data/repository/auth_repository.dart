@@ -98,10 +98,6 @@ class AuthReposity implements AuthRepositoryBase {
           body: {"user_name": phone, "password": password}).then((value) async {
         await LocalDataStorage.storeString(
             'refreshToken', value['refreshToken']);
-        var refresh = await LocalDataStorage.getString(
-          'refreshToken',
-        );
-        debugPrint("========>>>><<<<>> $refresh");
 
         await LocalDataStorage.storeCurrentUser(value['token']).then((value) {
           getIt<AuthController>().funtionFetchFirst();
@@ -122,9 +118,10 @@ class AuthReposity implements AuthRepositoryBase {
   }
 
   @override
-  Future<void> getRefreshToken({String? phone, String? refreshToken}) async {
-    debugPrint("------>>>>>$refreshToken");
+  Future<void> getRefreshToken({String? phone}) async {
     try {
+      var refreshToken = await LocalDataStorage.getString('refreshToken');
+
       await getIt<DioBaseHelper>().onRequest(
           methode: METHODE.post,
           isAuthorize: false,
@@ -133,13 +130,16 @@ class AuthReposity implements AuthRepositoryBase {
             "user_name": phone,
             "refreshToken": refreshToken
           }).then((value) async {
+        // await LocalDataStorage.removeCurrentUser();
+        debugPrint("=========>>>Testing refresh token: $value");
+
         await LocalDataStorage.storeCurrentUser(value['token'])
             .then((value) async {
           await getIt<AuthController>().funtionFetchFirst();
           await getIt<PlannerController>().functionFetchDataPlanner();
         });
 
-        debugPrint("----ddd----------$value----------");
+        // debugPrint("----ddd----------$value----------");
       }).onError((ErrorModel error, stackTrace) {
         debugPrint(error.bodyString.toString());
       });

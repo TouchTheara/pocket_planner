@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
@@ -167,14 +168,18 @@ class DioBaseHelper {
         return Future.error(ErrorModel(
             statusCode: response.statusCode, bodyString: response.data));
       case 401:
-        await getIt<AuthController>().getRefreshToken();
+        Timer.periodic(const Duration(seconds: 1), (timer) async {
+          await getIt<AuthController>().getRefreshToken();
+        });
         return Future.error(ErrorModel(
             statusCode: response.statusCode, bodyString: response.data));
       case 404:
         return Future.error(ErrorModel(
             statusCode: response.statusCode, bodyString: response.data));
       case 403:
-        await getIt<AuthController>().getRefreshToken();
+        Timer.periodic(const Duration(seconds: 1), (timer) async {
+          await getIt<AuthController>().getRefreshToken();
+        });
         return Future.error(ErrorModel(
             statusCode: response.statusCode, bodyString: response.data));
       case 500:

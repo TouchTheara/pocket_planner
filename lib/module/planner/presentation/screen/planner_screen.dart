@@ -115,7 +115,7 @@ class _PlannerScreenState extends State<PlannerScreen> {
                                     InkWell(
                                       onTap: () async {
                                         customModelSheet(context,
-                                            child: const CreateProjectFrom(
+                                            child:  CreateProjectFrom(
                                               isCreate: true,
                                             ));
                                       },

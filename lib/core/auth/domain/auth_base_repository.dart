@@ -20,5 +20,5 @@ abstract class AuthRepositoryBase {
   });
   Future<void> verifyAuthOTP(BuildContext context,
       {String phone, Function? funcWhenSuccess, String otp, String hash});
-  Future<void> getRefreshToken({String phone, String refreshToken});
+  Future<void> getRefreshToken({String phone});
 }
