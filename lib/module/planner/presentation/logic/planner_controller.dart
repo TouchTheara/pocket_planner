@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dio_base_helper/dio_base_helper.dart' as dio;
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
@@ -225,30 +226,33 @@ class PlannerController extends GetxController {
     }
   }
 
-  Future getImage() async {
-    File? image;
-    final picker = ImagePicker();
-
-    var pickedFile = await picker.pickImage(
-        source: ImageSource.camera,
-        imageQuality: 50, // <- Reduce Image quality
-        maxHeight: 500, // <- reduce the image size
-        maxWidth: 500);
-
-    image = File(pickedFile!.path);
-
-    // funcUploadProjectImage(image);
+  Future<void> uploadImage() async {
+    final token = await LocalDataStorage.getCurrentUser();
+    final dioBaseHelper = dio.DioBaseHelper(
+        "https://pocketplaner.onrender.com/api/v1/",
+        token: "Bearer $token");
+    XFile? file = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (file != null) {
+      debugPrint("file: ${file.path}");
+      await dioBaseHelper
+          .onRequestFormData(
+            showBodyInput: true,
+            isDebugOn: true,
+            formData: {
+              "image": await dio.MultipartFile.fromFile(file.path),
+              "tag": "profile",
+            },
+            endPoint: "upload-image",
+            isAuthorize: true,
+          )
+          .then((value) => {
+                debugPrint("value$value"),
+              })
+          .onError((dio.ErrorModel error, stackTrace) => {
+                debugPrint("Error Status code: ${error.statusCode}"),
+              });
+    }
   }
-
-  // funcUploadProjectImage(File file) async {
-  //   String fileName = file.path.split('/').last;
-  //   FormData formData = FormData.fromMap({
-  //     "file": await MultipartFile.fromFile(file.path, filename: fileName),
-  //   });
-
-  //   var response = await dio.post("/info", data: formData);
-  //   return response.data['id'];
-  // }
 
   @override
   void onInit() {

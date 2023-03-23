@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pocket_planner/config/app_colors.dart';
+import 'package:pocket_planner/module/planner/data/model/form_data_model/form_data_model.dart';
 import 'package:pocket_planner/module/planner/data/model/planner_model.dart';
 import 'package:pocket_planner/module/planner/presentation/logic/planner_controller.dart';
 import 'package:pocket_planner/widget/custom_button.dart';
@@ -80,8 +81,21 @@ class PlannerDetailScreen extends StatelessWidget {
                 child: InkWell(
                   borderRadius: BorderRadius.circular(30),
                   onTap: () {
-                    openAlertBox(context,
-                        appID: int.parse(plannerModel.idApp.toString()));
+                    openAlertBox(
+                      context,
+                      formDataModel: FormDataModel(
+                          isCreate: false,
+                          id: int.parse(
+                            plannerModel.idApp.toString(),
+                          ),
+                          name: plannerModel.titleApp,
+                          disciption: plannerModel.description,
+                          startDate: plannerModel.startDateApp,
+                          endDate: plannerModel.endDateApp,
+                          priority: plannerModel.priorityApp,
+                          cover: plannerModel.imageApp,
+                          memberList: []),
+                    );
                     debugPrint("------->>>><<<<< ID : ${plannerModel.idApp}");
                   },
                   child: Container(
