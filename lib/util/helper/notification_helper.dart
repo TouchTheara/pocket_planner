@@ -169,7 +169,7 @@ class NotificationHelper {
     }
 
     const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('ic_launcher');
+        AndroidInitializationSettings('@mipmap/ic_launcher');
 
     final List<DarwinNotificationCategory> darwinNotificationCategories =
         <DarwinNotificationCategory>[
@@ -274,6 +274,7 @@ class NotificationHelper {
     //   sound: true,
     // );
     selectNotificationStream.stream.listen((String? payload) async {
+      debugPrint("Stream================================");
       if (payload == 'notification') {
         // GetIt.instance<AppRouter>().navigate(const NotificationScreen());
       }
@@ -341,7 +342,7 @@ class NotificationHelper {
       {String? title, String? body, String? payload}) async {
     const AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails('your channel id', 'your channel name',
-            icon: 'ic_launcher',
+            icon: '@mipmap/ic_launcher',
             channelDescription: 'your channel description',
             importance: Importance.max,
             priority: Priority.high,
