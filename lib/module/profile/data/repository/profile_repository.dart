@@ -13,11 +13,11 @@ class ProfileRepository implements ProfileRepositoryBase {
 
     await getIt<DioBaseHelper>()
         .onRequest(
-            url: isGoogle ? "get-profile?login_from=google" : "get-profile",
+            url: isGoogle ? "getx-profile?login_from=google" : "get-profile",
             methode: METHODE.get,
             isAuthorize: true)
         .then((response) {
-      profileData = ProfileModel.fromJson(response['result']);
+      profileData = ProfileModel.fromJson(response['result'][0]);
 
       debugPrint(
           "------- get profile success from repo : ${response['result']}");
@@ -26,5 +26,22 @@ class ProfileRepository implements ProfileRepositoryBase {
       debugPrint("on status error data Body: ${error.bodyString}");
     });
     return profileData;
+  }
+
+  @override
+  Future<void> uploadProfileImage({String? image}) async {
+    await getIt<DioBaseHelper>()
+        .onRequestFormData(
+            url: "upload-image",
+            keyName: "tag",
+            valueName: "profile",
+            isAuthorize: true,
+            filePath: image!)
+        .then((value) {
+      debugPrint(value.toString());
+    }).onError((ErrorModel error, stackTrace) {
+      debugPrint("on status error data : ${error.statusCode}");
+      debugPrint("on status error data Body: ${error.bodyString}");
+    });
   }
 }

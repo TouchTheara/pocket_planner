@@ -120,8 +120,8 @@ class DioBaseHelper {
       'Accept': 'application/json',
       'Authorization': isAuthorize!
           ? token != ''
-              ? 'Token $token'
-              : 'Token $session'
+              ? 'Bearer $token'
+              : 'Bearer $session'
           : ""
     };
 
@@ -133,7 +133,7 @@ class DioBaseHelper {
       var fullUrl = _baseUrl + url.toString();
       var formData = FormData.fromMap({
         "$keyName": valueName,
-        'file': await MultipartFile.fromFile(filePath),
+        'image': await MultipartFile.fromFile(filePath),
       });
       Response response = await dio.post(fullUrl,
           data: formData,

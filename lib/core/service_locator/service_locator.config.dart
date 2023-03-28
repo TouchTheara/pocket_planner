@@ -48,7 +48,7 @@ _i1.GetIt $initGetIt(
   gh.factory<_i10.NotificationReposity>(() => _i10.NotificationReposity());
   gh.factory<_i11.PlannerController>(() => _i11.PlannerController.init());
   gh.factory<_i12.PlannerRepository>(() => _i12.PlannerRepository());
-  gh.factory<_i13.ProfileController>(() => _i13.ProfileController());
+  gh.factory<_i13.ProfileController>(() => _i13.ProfileController.init());
   gh.factory<_i14.ProfileRepository>(() => _i14.ProfileRepository());
   return get;
 }

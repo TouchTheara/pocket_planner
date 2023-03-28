@@ -16,6 +16,7 @@ _$_ProfileModel _$$_ProfileModelFromJson(Map<String, dynamic> json) =>
       publicIdImage: json['public_id_image'] as String?,
       firstName: json['first_name'] as String?,
       lastName: json['last_name'] as String?,
+      imageUrl: json['image_url'] as String?,
     );
 
 Map<String, dynamic> _$$_ProfileModelToJson(_$_ProfileModel instance) =>
@@ -28,4 +29,5 @@ Map<String, dynamic> _$$_ProfileModelToJson(_$_ProfileModel instance) =>
       'public_id_image': instance.publicIdImage,
       'first_name': instance.firstName,
       'last_name': instance.lastName,
+      'image_url': instance.imageUrl,
     };

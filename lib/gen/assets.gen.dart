@@ -9,6 +9,16 @@
 
 import 'package:flutter/widgets.dart';
 
+class $AssetsFontsGen {
+  const $AssetsFontsGen();
+
+  /// File path: assets/fonts/NotoSans-Regular.ttf
+  String get notoSansRegular => 'assets/fonts/NotoSans-Regular.ttf';
+
+  /// List of all assets
+  List<String> get values => [notoSansRegular];
+}
+
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
@@ -23,8 +33,11 @@ class $AssetsImagesGen {
   AssetGenImage get googlelogo =>
       const AssetGenImage('assets/images/googlelogo.png');
 
+  /// File path: assets/images/splash.png
+  AssetGenImage get splash => const AssetGenImage('assets/images/splash.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [applelogo, fblogo, googlelogo];
+  List<AssetGenImage> get values => [applelogo, fblogo, googlelogo, splash];
 }
 
 class $AssetsLottieAnimationGen {
@@ -40,6 +53,7 @@ class $AssetsLottieAnimationGen {
 class Assets {
   Assets._();
 
+  static const $AssetsFontsGen fonts = $AssetsFontsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsLottieAnimationGen lottieAnimation =
       $AssetsLottieAnimationGen();

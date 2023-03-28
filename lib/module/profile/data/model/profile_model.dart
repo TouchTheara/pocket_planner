@@ -16,6 +16,7 @@ class ProfileModel with _$ProfileModel {
     @JsonKey(name: "public_id_image") String? publicIdImage,
     @JsonKey(name: "first_name") String? firstName,
     @JsonKey(name: "last_name") String? lastName,
+    @JsonKey(name: "image_url") String? imageUrl,
   }) = _ProfileModel;
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) =>
