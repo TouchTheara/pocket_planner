@@ -9,10 +9,12 @@ import 'package:pocket_planner/core/auth/presentation/logic/auth_controller.dart
 import 'package:pocket_planner/util/helper/local_data/get_local_data.dart';
 
 import 'core/service_locator/service_locator.dart';
+import 'util/helper/notification_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await NotificationHelper.initial();
   configureDependencies();
   await runZonedGuarded(() async {
     await LocalDataStorage.getString('refreshToken');

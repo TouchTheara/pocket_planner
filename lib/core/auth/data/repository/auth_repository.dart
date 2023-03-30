@@ -131,7 +131,7 @@ class AuthReposity implements AuthRepositoryBase {
             "refreshToken": refreshToken
           }).then((value) async {
         // await LocalDataStorage.removeCurrentUser();
-        debugPrint("=========>>>Testing refresh token: $value");
+        // debugPrint("=========>>>Testing refresh token: $value");
 
         await LocalDataStorage.storeCurrentUser(value['token'])
             .then((value) async {

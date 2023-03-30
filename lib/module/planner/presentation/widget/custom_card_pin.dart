@@ -19,24 +19,23 @@ Widget customCardPin(BuildContext context,
     int totalGoal = 0,
     int completedGoal = 0,
     double percentage = 0.7}) {
-  return InkWell(
-    onTap: () {
-      ontap?.call();
-      // debugPrint("Testing.............");
-    },
-    child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            projectName,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Container(
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 20),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          projectName,
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        InkWell(
+          onTap: () {
+            ontap?.call();
+          },
+          child: Container(
             width: Get.width,
             padding: const EdgeInsets.all(15),
             decoration: BoxDecoration(
@@ -104,8 +103,8 @@ Widget customCardPin(BuildContext context,
               ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     ),
   );
 }

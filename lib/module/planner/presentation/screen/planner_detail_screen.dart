@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pocket_planner/config/app_colors.dart';
-import 'package:pocket_planner/module/planner/data/model/form_data_model/form_data_model.dart';
 import 'package:pocket_planner/module/planner/data/model/planner_model.dart';
 import 'package:pocket_planner/module/planner/presentation/logic/planner_controller.dart';
 import 'package:pocket_planner/widget/custom_button.dart';
@@ -81,20 +80,23 @@ class PlannerDetailScreen extends StatelessWidget {
                 child: InkWell(
                   borderRadius: BorderRadius.circular(30),
                   onTap: () {
+                    getIt<PlannerController>().projectName.value =
+                        plannerModel.titleApp ?? '';
+                    getIt<PlannerController>().projectDisciption.value =
+                        plannerModel.description ?? '';
+                    getIt<PlannerController>().projectPriority.value =
+                        plannerModel.priorityApp ?? '';
+                    getIt<PlannerController>().startDate.value =
+                        plannerModel.startDateApp ?? '';
+                    getIt<PlannerController>().endDate.value =
+                        plannerModel.endDateApp ?? '';
+                    getIt<PlannerController>().projectCover.value =
+                        plannerModel.imageApp ?? '';
+                    getIt<PlannerController>().projectId.value =
+                        int.parse(plannerModel.idApp ?? '');
+
                     openAlertBox(
                       context,
-                      formDataModel: FormDataModel(
-                          isCreate: false,
-                          id: int.parse(
-                            plannerModel.idApp.toString(),
-                          ),
-                          name: plannerModel.titleApp,
-                          disciption: plannerModel.description,
-                          startDate: plannerModel.startDateApp,
-                          endDate: plannerModel.endDateApp,
-                          priority: plannerModel.priorityApp,
-                          cover: plannerModel.imageApp,
-                          memberList: []),
                     );
                     debugPrint("------->>>><<<<< ID : ${plannerModel.idApp}");
                   },
@@ -119,7 +121,7 @@ class PlannerDetailScreen extends StatelessWidget {
               background: Image.network(
                 plannerModel.imageApp != '' && plannerModel.imageApp != null
                     ? "${plannerModel.imageApp}"
-                    : 'https://upload.wikimedia.org/wikipedia/commons/b/b9/No_Cover.jpg',
+                    : 'https://img.freepik.com/free-photo/rpa-concept-with-blurry-hand-touching-screen_23-2149311914.jpg',
                 fit: BoxFit.cover,
               ),
             ),

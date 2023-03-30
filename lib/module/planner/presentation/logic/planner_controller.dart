@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dio_base_helper/dio_base_helper.dart' as dio;
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -56,6 +54,7 @@ class PlannerController extends GetxController {
   final projectStartDate = ''.obs;
   final projectEndDate = ''.obs;
   final projectCover = ''.obs;
+  final projectId = 0.obs;
   final projectMember = <String>[].obs;
 
   // Rxn<DateTime> startDate = Rxn<DateTime>();
@@ -197,7 +196,9 @@ class PlannerController extends GetxController {
 
   functionSuccessCreateData(BuildContext context) async {
     try {
-      await getIt<PlannerController>().functionFetchDataPlanner();
+      await getIt<PlannerController>().functionFetchDataPlanner().then((value) {
+        functionClearDataForm();
+      });
     } catch (e) {
       debugPrint("-------- $e");
     }
@@ -206,10 +207,22 @@ class PlannerController extends GetxController {
   functionSuccessUpdateData(BuildContext context) async {
     try {
       context.pop('/');
-      await getIt<PlannerController>().functionFetchDataPlanner();
+      await getIt<PlannerController>()
+          .functionFetchDataPlanner()
+          .then((value) {});
     } catch (e) {
       debugPrint("-------- $e");
     }
+  }
+
+  functionClearDataForm() {
+    projectName.value = '';
+    projectCover.value = '';
+    projectDisciption.value = '';
+    projectMember.value = [];
+    endDate.value = '';
+    startDate.value = '';
+    projectPriority.value = '';
   }
 
   functionSuccessCreateTask(BuildContext context, {String? id}) async {

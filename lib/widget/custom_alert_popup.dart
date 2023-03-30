@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pocket_planner/config/app_colors.dart';
-import 'package:pocket_planner/module/planner/data/model/form_data_model/form_data_model.dart';
 import 'package:pocket_planner/module/planner/presentation/logic/planner_controller.dart';
 
 import '../core/service_locator/service_locator.dart';
 import '../util/form_builder/create_project_form.dart';
 import 'custom_modal_sheet.dart';
 
-openAlertBox(BuildContext context, {required FormDataModel formDataModel}) {
+openAlertBox(BuildContext context) {
   return showDialog(
       context: context,
       builder: (BuildContext contextAlert) {
@@ -51,7 +50,8 @@ openAlertBox(BuildContext context, {required FormDataModel formDataModel}) {
                 onTap: () {
                   contextAlert.pop();
                   getIt<PlannerController>().functionDeleteDataPlanner(context,
-                      id: formDataModel.id!, functionSuccess: () {
+                      id: getIt<PlannerController>().projectId.value,
+                      functionSuccess: () {
                     context.pop();
                     getIt<PlannerController>().functionFetchDataPlanner();
                   });
@@ -117,7 +117,9 @@ openAlertBox(BuildContext context, {required FormDataModel formDataModel}) {
                 onTap: () {
                   context.pop();
                   customModelSheet(context,
-                      child: CreateProjectFrom(formDataModel: formDataModel));
+                      child: const CreateProjectFrom(
+                        isCreate: false,
+                      ));
                 },
                 child: Row(
                   children: [

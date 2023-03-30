@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pocket_planner/config/app_colors.dart';
-import 'package:pocket_planner/module/planner/data/model/form_data_model/form_data_model.dart';
 import 'package:pocket_planner/module/planner/presentation/logic/planner_controller.dart';
 import 'package:pocket_planner/widget/custom_button.dart';
 
@@ -12,47 +11,34 @@ import '../../widget/custom_popup_selection.dart';
 import '../../widget/custom_list_member.dart';
 
 class CreateProjectFrom extends StatelessWidget {
-  const CreateProjectFrom({Key? key, required this.formDataModel})
-      : super(key: key);
+  const CreateProjectFrom({Key? key, this.isCreate = true}) : super(key: key);
 
-  final FormDataModel formDataModel;
+  final bool isCreate;
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("--fff----${formDataModel.priority}");
-    debugPrint("------${formDataModel.startDate}");
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-    // final List<String> listImage = [
-    //   'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80',
-    //   'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-    //   'https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80',
-    //   'https://cdn.pixabay.com/photo/2015/01/08/18/29/entrepreneur-593358__340.jpg',
-    //   'https://cdn.pixabay.com/photo/2015/01/08/18/29/entrepreneur-593358__340.jpg',
-    //   'https://cdn.pixabay.com/photo/2015/01/08/18/29/entrepreneur-593358__340.jpg',
-    // ];
-    return Obx(
-      () => Stack(
-        children: [
-          SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    height: 8,
-                    width: 40,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
-                        color: Colors.grey.shade400),
-                  ),
-                  SizedBox(
-                    height: Get.height - 80,
-                    child: Form(
+    return Obx(() => Stack(
+          children: [
+            SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      height: 8,
+                      width: 40,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4),
+                          color: Colors.grey.shade400),
+                    ),
+                    SizedBox(
+                      height: Get.height - 80,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -60,14 +46,19 @@ class CreateProjectFrom extends StatelessWidget {
                             height: 20,
                           ),
                           CustomTextField(
-                              initialValue: formDataModel.name,
+                              initialValue:
+                                  getIt<PlannerController>().projectName.value,
+                              // getIt<PlannerController>(): getIt<PlannerController>()
+                              //     .prioritygetIt<PlannerController>()
+                              //     .value,
                               isValidate: !getIt<PlannerController>()
                                   .projectNameValidator
                                   .value,
                               labelText: 'Project name',
                               hintText: 'Project name',
                               onChange: (value) {
-                                formDataModel.name = value;
+                                getIt<PlannerController>().projectName.value =
+                                    value;
                                 if (value == "") {
                                   getIt<PlannerController>()
                                       .projectNameValidator
@@ -77,6 +68,7 @@ class CreateProjectFrom extends StatelessWidget {
                                       .projectNameValidator
                                       .value = false;
                                 }
+                                getIt<PlannerController>().update();
                               }),
                           const SizedBox(
                             height: 10,
@@ -86,14 +78,18 @@ class CreateProjectFrom extends StatelessWidget {
                               textAlignVertical: TextAlignVertical.top,
                               maxLine: null,
                               expands: true,
-                              initialValue: formDataModel.disciption,
+                              initialValue: getIt<PlannerController>()
+                                  .projectDisciption
+                                  .value,
                               isValidate: !getIt<PlannerController>()
                                   .descriptionValidator
                                   .value,
                               labelText: 'Description',
                               hintText: 'Description',
                               onChange: (value) {
-                                formDataModel.disciption = value;
+                                getIt<PlannerController>()
+                                    .projectDisciption
+                                    .value = value;
                                 if (value == "") {
                                   getIt<PlannerController>()
                                       .descriptionValidator
@@ -103,22 +99,27 @@ class CreateProjectFrom extends StatelessWidget {
                                       .descriptionValidator
                                       .value = false;
                                 }
+                                getIt<PlannerController>().update();
                               }),
                           const SizedBox(
                             height: 10,
                           ),
                           CustomTextField(
-                            // controller: getIt<PlannerController>()
-                            //     .priorityController
-                            //     .value,
-                            initialValue: formDataModel.priority,
+                            initialValue: getIt<PlannerController>()
+                                .projectPriority
+                                .value,
                             isValidate: !getIt<PlannerController>()
                                 .priorityValidator
                                 .value,
                             suffixIcon: const Icon(Icons.keyboard_arrow_down),
                             labelText: '',
-                            hintText: formDataModel.priority != ''
-                                ? formDataModel.priority
+                            hintText: getIt<PlannerController>()
+                                        .projectPriority
+                                        .value !=
+                                    ''
+                                ? getIt<PlannerController>()
+                                    .projectPriority
+                                    .value
                                 : 'Priority',
                             onTap: () {
                               functionPopUpSelection(
@@ -126,14 +127,9 @@ class CreateProjectFrom extends StatelessWidget {
                                 percentHeight: 0.35,
                                 title: "Priority",
                                 ontapDone: (value1, value2) {
-                                  formDataModel.priority = value1;
-                                  // getIt<PlannerController>()
-                                  //     .priorityController
-                                  //     .value
-                                  //     .text = value1;
-                                  // getIt<PlannerController>()
-                                  //     .hintTextProjectPriority
-                                  //     .value = value2;
+                                  getIt<PlannerController>()
+                                      .projectPriority
+                                      .value = value1;
                                 },
                                 // ),
                               );
@@ -144,19 +140,22 @@ class CreateProjectFrom extends StatelessWidget {
                             height: 10,
                           ),
                           CustomTextField(
-                            // controller: getIt<PlannerController>()
-                            //     .selectionDueDateController
-                            //     .value,
-                            initialValue:
-                                '${formDataModel.startDate} - ${formDataModel.endDate}',
+                            initialValue: getIt<PlannerController>()
+                                            .startDate
+                                            .value ==
+                                        '' &&
+                                    getIt<PlannerController>().endDate.value ==
+                                        ''
+                                ? ''
+                                : '${getIt<PlannerController>().startDate.value} - ${getIt<PlannerController>().endDate.value}',
                             isValidate: !getIt<PlannerController>()
                                 .selectionDueDateValidator
                                 .value,
                             suffixIcon: const Icon(Icons.keyboard_arrow_down),
                             labelText: '',
-                            hintText: formDataModel.isCreate
+                            hintText: isCreate
                                 ? 'Selection Due Date'
-                                : '${formDataModel.startDate ?? ''} - ${formDataModel.endDate ?? ''}',
+                                : '${getIt<PlannerController>().startDate.value} - ${getIt<PlannerController>().endDate.value}',
                             onTap: () {
                               debugPrint("-----------Testing...");
                               functionPopUpSelection(
@@ -165,19 +164,10 @@ class CreateProjectFrom extends StatelessWidget {
                                 isCalender: true,
                                 percentHeight: 0.38,
                                 ontapDone: (value1, value2) {
-                                  formDataModel.startDate = value1;
-                                  formDataModel.endDate = value2;
-                                  // getIt<PlannerController>()
-                                  //     .selectionDueDateController
-                                  //     .value
-                                  //     .text = "$value1 - $value2";
-                                  // getIt<PlannerController>()
-                                  //     .hintTextProjectDueDate
-                                  //     .value = "$value1 - $value2";
-                                  // getIt<PlannerController>().startDate.value =
-                                  //     value1;
-                                  // getIt<PlannerController>().startDate.value =
-                                  //     value2;
+                                  getIt<PlannerController>().startDate.value =
+                                      value1;
+                                  getIt<PlannerController>().endDate.value =
+                                      value2;
                                 },
                                 // ),
                               );
@@ -186,7 +176,7 @@ class CreateProjectFrom extends StatelessWidget {
                           const SizedBox(
                             height: 20,
                           ),
-                          formDataModel.cover != ''
+                          getIt<PlannerController>().projectCover.value != ''
                               ? Container(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 18, vertical: 15),
@@ -195,7 +185,9 @@ class CreateProjectFrom extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(10),
                                     image: DecorationImage(
                                         image: NetworkImage(
-                                            '${formDataModel.cover}')),
+                                            getIt<PlannerController>()
+                                                .projectCover
+                                                .value)),
                                   ),
                                 )
                               : Container(
@@ -275,7 +267,8 @@ class CreateProjectFrom extends StatelessWidget {
                             height: 20,
                           ),
                           customListMember(context,
-                              listImage: formDataModel.memberList ?? [],
+                              listImage:
+                                  getIt<PlannerController>().projectMember,
                               heightIF: 40,
                               widthIF: 40),
                           const Spacer(),
@@ -285,24 +278,21 @@ class CreateProjectFrom extends StatelessWidget {
                             child: CustomButton(
                               height: 60,
                               ontap: () {
-                                if (formDataModel.isCreate) {
+                                if (isCreate) {
                                   context.pop();
                                   getIt<PlannerController>()
                                       .functionCreatePlanner(context,
                                           title: getIt<PlannerController>()
-                                              .projectNameController
-                                              .value
-                                              .text,
+                                              .projectName
+                                              .value,
                                           description:
                                               getIt<PlannerController>()
-                                                  .descriptionController
-                                                  .value
-                                                  .text,
+                                                  .projectDisciption
+                                                  .value,
                                           priorityApp:
                                               getIt<PlannerController>()
-                                                  .priorityController
-                                                  .value
-                                                  .text,
+                                                  .projectPriority
+                                                  .value,
                                           startDateApp:
                                               getIt<PlannerController>()
                                                   .startDate
@@ -318,22 +308,37 @@ class CreateProjectFrom extends StatelessWidget {
                                   context.pop();
                                   getIt<PlannerController>()
                                       .functionUpdatePlanner(context,
-                                          id: formDataModel.id!,
-                                          title: formDataModel.name,
-                                          description: formDataModel.disciption,
-                                          priorityApp: formDataModel.priority,
-                                          startDateApp: formDataModel.startDate,
-                                          endDateApp: formDataModel.endDate,
-                                          functionSuccess: () {
+                                          id: getIt<PlannerController>()
+                                              .projectId
+                                              .value,
+                                          title: getIt<PlannerController>()
+                                              .projectName
+                                              .value,
+                                          description:
+                                              getIt<PlannerController>()
+                                                  .projectDisciption
+                                                  .value,
+                                          priorityApp:
+                                              getIt<PlannerController>()
+                                                  .projectPriority
+                                                  .value,
+                                          startDateApp:
+                                              getIt<PlannerController>()
+                                                  .startDate
+                                                  .value,
+                                          endDateApp: getIt<PlannerController>()
+                                              .endDate
+                                              .value, functionSuccess: () {
                                     getIt<PlannerController>()
                                         .functionSuccessUpdateData(context);
                                   });
                                 }
+                                getIt<PlannerController>().update();
                               },
                               color: AppColors.secondColor,
                               borderColor: Colors.white,
                               borderWidth: 2,
-                              titleBTN: formDataModel.isCreate
+                              titleBTN: isCreate
                                   ? 'Create Project'
                                   : 'Update Project',
                               styleBTN: const TextStyle(
@@ -345,14 +350,12 @@ class CreateProjectFrom extends StatelessWidget {
                         ],
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-          // if (getIt<PlannerController>().isLoading.value) const CustomLoading()
-        ],
-      ),
-    );
+            // if (getIt<PlannerController>().isLoading.value) const CustomLoading()
+          ],
+        ));
   }
 }

@@ -52,7 +52,8 @@ class CustomCardProject extends StatelessWidget {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
-                        image: NetworkImage(plannerModel.imageApp != ''
+                        image: NetworkImage(plannerModel.imageApp != '' &&
+                                plannerModel.imageApp != null
                             ? "${plannerModel.imageApp}"
                             : 'https://img.freepik.com/free-photo/rpa-concept-with-blurry-hand-touching-screen_23-2149311914.jpg'),
                         fit: BoxFit.cover),

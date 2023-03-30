@@ -6,7 +6,6 @@ import 'package:pocket_planner/config/app_colors.dart';
 import 'package:pocket_planner/core/auth/presentation/logic/auth_controller.dart';
 import 'package:pocket_planner/core/service_locator/service_locator.dart';
 import 'package:pocket_planner/module/bottom_nav_bar/custom_drawer.dart';
-import 'package:pocket_planner/module/planner/data/model/form_data_model/form_data_model.dart';
 import 'package:pocket_planner/module/planner/data/model/planner_model.dart';
 import 'package:pocket_planner/module/planner/presentation/logic/planner_controller.dart';
 import 'package:pocket_planner/widget/custom_loading.dart';
@@ -114,13 +113,14 @@ class _PlannerScreenState extends State<PlannerScreen> {
                                     ),
                                     const Spacer(),
                                     InkWell(
+                                      radius: 20,
+                                      splashColor: Colors.transparent,
                                       onTap: () async {
-                                        // getIt<PlannerController>()
-                                        //     .uploadImage();
+                                        getIt<PlannerController>()
+                                            .functionClearDataForm();
                                         customModelSheet(context,
-                                            child: CreateProjectFrom(
-                                              formDataModel:
-                                                  FormDataModel(isCreate: true),
+                                            child: const CreateProjectFrom(
+                                              isCreate: true,
                                             ));
                                       },
                                       child: const Icon(

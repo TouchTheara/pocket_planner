@@ -23,8 +23,8 @@ class PlannerRepository implements PlannerRepositoryBase {
         plannerList.add(PlannerModel.fromJson(e));
       }).toList();
 
-      debugPrint(
-          "############# get data success Planner : ${response['result']}");
+      // debugPrint(
+      //     "############# get data success Planner : ${response['result']}");
     }).onError((
       ErrorModel error,
       stackTrace,

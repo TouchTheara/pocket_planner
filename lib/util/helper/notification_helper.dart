@@ -80,12 +80,12 @@ class NotificationHelper {
   static Future<void> initial() async {
     await _configureLocalTimeZone();
     final FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
-    await FirebaseMessaging.instance
-        .setForegroundNotificationPresentationOptions(
-      alert: true, // Required to display a heads up notification
-      badge: true,
-      sound: true,
-    );
+    // await FirebaseMessaging.instance
+    //     .setForegroundNotificationPresentationOptions(
+    //   alert: true, // Required to display a heads up notification
+    //   badge: true,
+    //   sound: true,
+    // );
     const AndroidNotificationChannel channel = AndroidNotificationChannel(
       'high_importance_channel', // id
       'High Importance Notifications', // title
@@ -108,25 +108,25 @@ class NotificationHelper {
 
     print('User granted permission: ${settings.authorizationStatus}');
     if (Platform.isIOS || Platform.isMacOS) {
-      await flutterLocalNotificationsPlugin
-          .resolvePlatformSpecificImplementation<
-              IOSFlutterLocalNotificationsPlugin>()
-          ?.requestPermissions(
-            alert: true,
-            badge: true,
-            sound: true,
-            critical: true,
-          );
+      // await flutterLocalNotificationsPlugin
+      //     .resolvePlatformSpecificImplementation<
+      //         IOSFlutterLocalNotificationsPlugin>()
+      //     ?.requestPermissions(
+      //       alert: true,
+      //       badge: true,
+      //       sound: true,
+      //       critical: true,
+      //     );
 
-      await flutterLocalNotificationsPlugin
-          .resolvePlatformSpecificImplementation<
-              MacOSFlutterLocalNotificationsPlugin>()
-          ?.requestPermissions(
-            alert: true,
-            badge: true,
-            sound: true,
-            critical: true,
-          );
+      // await flutterLocalNotificationsPlugin
+      //     .resolvePlatformSpecificImplementation<
+      //         MacOSFlutterLocalNotificationsPlugin>()
+      //     ?.requestPermissions(
+      //       alert: true,
+      //       badge: true,
+      //       sound: true,
+      //       critical: true,
+      //     );
     } else if (Platform.isAndroid) {
       final AndroidFlutterLocalNotificationsPlugin? androidImplementation =
           flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
@@ -225,21 +225,21 @@ class NotificationHelper {
       requestSoundPermission: false,
       onDidReceiveLocalNotification:
           (int id, String? title, String? body, String? payload) async {
-        didReceiveLocalNotificationStream.add(
-          ReceivedNotification(
-            id: id,
-            title: title,
-            body: body,
-            payload: payload,
-          ),
-        );
+        // didReceiveLocalNotificationStream.add(
+        //   ReceivedNotification(
+        //     id: id,
+        //     title: title,
+        //     body: body,
+        //     payload: payload,
+        //   ),
+        // );
       },
       notificationCategories: darwinNotificationCategories,
     );
     final LinuxInitializationSettings initializationSettingsLinux =
         LinuxInitializationSettings(
       defaultActionName: 'Open notification',
-      defaultIcon: AssetsLinuxIcon('icons/app_icon.png'),
+      defaultIcon: AssetsLinuxIcon('@mipmap/ic_launcher'),
     );
     final InitializationSettings initializationSettings =
         InitializationSettings(
@@ -313,10 +313,10 @@ class NotificationHelper {
       if (message.notification != null) {
         // debugPrint(
         // 'Message also contained a notification: ${json.encode(message.notification)}');
-        NotificationHelper.showNotification(
-          title: message.notification!.title,
-          body: message.notification!.body,
-        );
+        // NotificationHelper.showNotification(
+        //   title: message.notification!.title,
+        //   body: message.notification!.body,
+        // );
       }
     }
 
