@@ -17,7 +17,7 @@ class CreatePassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authController = Get.put(AuthController());
-    final formKey = GlobalKey<FormState>();
+    // final formKey = GlobalKey<FormState>();
     return Stack(
       children: [
         Scaffold(

@@ -131,6 +131,7 @@ ThemeData lightTheme() {
           fontSize: 12,
           height: 1),
     ),
+    brightness: Brightness.light,
     elevatedButtonTheme: const ElevatedButtonThemeData(style: ButtonStyle()),
   );
 }
@@ -264,6 +265,7 @@ ThemeData darkTheme() {
             height: 1),
       ),
       elevatedButtonTheme: const ElevatedButtonThemeData(style: ButtonStyle()),
+      brightness: Brightness.dark,
       listTileTheme: const ListTileThemeData(
         iconColor: Colors.white,
       ));

@@ -12,7 +12,7 @@ class MeetingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final sizeHeight = MediaQuery.of(context).size.height;
-    final sizeWidth = MediaQuery.of(context).size.width;
+    // final sizeWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       backgroundColor: AppColors.primaryColor,

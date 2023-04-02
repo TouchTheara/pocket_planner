@@ -27,7 +27,7 @@ class DioBaseHelper {
       // debugPrint('Error=======');
     }
     var token = await LocalDataStorage.getCurrentUser();
-    var session = await LocalDataStorage.getUserSession();
+    // var session = await LocalDataStorage.getUserSession();
     if (isDebugOn) {
       debugPrint('token===$token');
     }

@@ -291,9 +291,9 @@ class CustomTimerPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(CustomTimerPainter old) {
-    return animation!.value != old.animation!.value ||
-        color != old.color ||
-        backgroundColor != old.backgroundColor;
+  bool shouldRepaint(CustomTimerPainter oldDelegate) {
+    return animation!.value != oldDelegate.animation!.value ||
+        color != oldDelegate.color ||
+        backgroundColor != oldDelegate.backgroundColor;
   }
 }

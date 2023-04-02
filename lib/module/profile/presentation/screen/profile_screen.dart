@@ -1,9 +1,6 @@
-import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:pocket_planner/config/app_colors.dart';
 import 'package:pocket_planner/core/service_locator/service_locator.dart';
@@ -11,6 +8,7 @@ import 'package:pocket_planner/module/profile/presentation/logic/profile_control
 import 'package:pocket_planner/widget/custom_button.dart';
 import 'package:pocket_planner/widget/custom_loading.dart';
 
+import '../widget/change_profile_photo.dart';
 import '../widget/info_profile_custom.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -70,71 +68,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       GestureDetector(
                         onTap: () async {
-                          showDialog(
-                            context: context,
-                            builder: (_) => SimpleDialog(
-                              contentPadding:
-                                  const EdgeInsets.symmetric(vertical: 10),
-                              children: [
-                                InkWell(
-                                  onTap: () async {
-                                    Navigator.pop(context);
-                                    XFile? file = await ImagePicker()
-                                        .pickImage(source: ImageSource.camera);
-
-                                    if (file != null) {
-                                      getIt<ProfileController>().profileImage =
-                                          File(file.path);
-                                      await getIt<ProfileController>()
-                                          .uploadProfileImage();
-                                    }
-                                  },
-                                  child: Container(
-                                    padding: const EdgeInsets.all(16),
-                                    child: Text(
-                                      "Take Photo",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium,
-                                    ),
-                                  ),
-                                ),
-                                InkWell(
-                                  onTap: () async {
-                                    Navigator.pop(context);
-                                    XFile? file = await ImagePicker()
-                                        .pickImage(source: ImageSource.gallery);
-
-                                    if (file != null) {
-                                      getIt<ProfileController>().profileImage =
-                                          File(file.path);
-                                      await getIt<ProfileController>()
-                                          .uploadProfileImage();
-                                    }
-                                  },
-                                  child: Container(
-                                    padding: const EdgeInsets.all(16),
-                                    child: Text(
-                                      "Choose Photo",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
+                          funcChangeProfilePhoto(context);
                         },
                         child: Container(
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: AppColors.primaryColor,
-                              border:
-                                  Border.all(color: Colors.white, width: 2)),
+                              border: Border.all(
+                                  color:
+                                      Theme.of(context).colorScheme.background,
+                                  width: 2)),
+                          padding: const EdgeInsets.all(5),
                           child: const Icon(
-                            Icons.add,
-                            size: 20,
+                            Icons.camera_alt_outlined,
+                            size: 12,
                             color: Colors.white,
                           ),
                         ),

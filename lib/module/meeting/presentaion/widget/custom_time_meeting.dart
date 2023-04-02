@@ -95,10 +95,8 @@ Widget timeRow(BuildContext context,
               ),
               Expanded(
                 child: Container(
-                  child: Container(
-                    height: 1,
-                    color: Colors.grey.shade300,
-                  ),
+                  height: 1,
+                  color: Colors.grey.shade300,
                 ),
               ),
             ],

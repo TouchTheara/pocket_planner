@@ -13,141 +13,139 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: Container(
-        child: Column(
-          children: <Widget>[
-            const SizedBox(
-              height: 50,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: InkWell(
-                onTap: () {
-                  context.push('/profile');
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                      color: Colors.transparent,
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(width: 1, color: Colors.grey)),
-                  child: Row(
-                    // crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      const CircleAvatar(
-                        radius: 30,
-                        backgroundColor: AppColors.primaryColor,
-                        backgroundImage: NetworkImage(
-                            'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text(
-                            'Theara Touch',
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            'dev.theara@gmail.com',
-                          ),
-                        ],
-                      ),
-                      const Icon(Icons.keyboard_arrow_down)
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 6,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: ListView(
-                  scrollDirection: Axis.vertical,
+      child: Column(
+        children: <Widget>[
+          const SizedBox(
+            height: 50,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: InkWell(
+              onTap: () {
+                context.push('/profile');
+              },
+              child: Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(width: 1, color: Colors.grey)),
+                child: Row(
+                  // crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    ListTile(
-                      onTap: () {},
-                      leading: const Icon(Icons.feed),
-                      title: const Text("Feeds"),
-                      // Some Code
+                    const CircleAvatar(
+                      radius: 30,
+                      backgroundColor: AppColors.primaryColor,
+                      backgroundImage: NetworkImage(
+                          'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
                     ),
-                    ListTile(
-                      onTap: () {
-                        getIt<PlannerController>().functionFetchDataPlanner();
-                        context.pop();
-                      },
-                      leading: const Icon(Icons.home),
-                      title: const Text("Home"),
-                      // Some Code
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: const [
+                        Text(
+                          'Theara Touch',
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'dev.theara@gmail.com',
+                        ),
+                      ],
                     ),
-                    ListTile(
-                      onTap: () {
-                        context.push('/meeting');
-                      },
-                      leading: const Icon(Icons.card_travel),
-                      title: const Text("Meeting"),
-                      // Some Code
-                    ),
-                    ListTile(
-                      onTap: () {
-                        context.push('/notification');
-                      },
-                      leading: const Icon(Icons.notification_add),
-                      title: const Text("Notification"),
-                      // Some Code
-                    ),
-                    ListTile(
-                      onTap: () {
-                        getIt<PlannerController>().darkmode.value =
-                            !getIt<PlannerController>().darkmode.value;
-                      },
-                      leading: !getIt<PlannerController>().darkmode.value
-                          ? const Icon(Icons.dark_mode)
-                          : const Icon(Icons.sunny),
-                      title: Text(!getIt<PlannerController>().darkmode.value
-                          ? "Dark Mode"
-                          : "Light Mode"),
-                      // Some Code
-                    ),
-                    ListTile(
-                      onTap: () {},
-                      leading: const Icon(Icons.language),
-                      title: const Text("Language"),
-                      // Some Code
-                    ),
-                    ListTile(
-                      onTap: () {
-                        context.push('/setting');
-                      },
-                      leading: const Icon(Icons.settings),
-                      title: const Text("Setting"),
-                      // Some Code
-                    ),
+                    const Icon(Icons.keyboard_arrow_down)
                   ],
                 ),
               ),
             ),
-            const Spacer(),
-            Padding(
+          ),
+          Expanded(
+            flex: 6,
+            child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: ListTile(
-                onTap: () async {
-                  getIt<AuthController>().functionClearToken(context);
-                },
-                leading: const Icon(Icons.arrow_back),
-                title: const Text("Sign Out"),
-                // Some Code
+              child: ListView(
+                scrollDirection: Axis.vertical,
+                children: <Widget>[
+                  ListTile(
+                    onTap: () {},
+                    leading: const Icon(Icons.feed),
+                    title: const Text("Feeds"),
+                    // Some Code
+                  ),
+                  ListTile(
+                    onTap: () {
+                      getIt<PlannerController>().functionFetchDataPlanner();
+                      context.pop();
+                    },
+                    leading: const Icon(Icons.home),
+                    title: const Text("Home"),
+                    // Some Code
+                  ),
+                  ListTile(
+                    onTap: () {
+                      context.push('/meeting');
+                    },
+                    leading: const Icon(Icons.card_travel),
+                    title: const Text("Meeting"),
+                    // Some Code
+                  ),
+                  ListTile(
+                    onTap: () {
+                      context.push('/notification');
+                    },
+                    leading: const Icon(Icons.notification_add),
+                    title: const Text("Notification"),
+                    // Some Code
+                  ),
+                  ListTile(
+                    onTap: () {
+                      getIt<PlannerController>().darkmode.value =
+                          !getIt<PlannerController>().darkmode.value;
+                    },
+                    leading: !getIt<PlannerController>().darkmode.value
+                        ? const Icon(Icons.dark_mode)
+                        : const Icon(Icons.sunny),
+                    title: Text(!getIt<PlannerController>().darkmode.value
+                        ? "Dark Mode"
+                        : "Light Mode"),
+                    // Some Code
+                  ),
+                  ListTile(
+                    onTap: () {},
+                    leading: const Icon(Icons.language),
+                    title: const Text("Language"),
+                    // Some Code
+                  ),
+                  ListTile(
+                    onTap: () {
+                      context.push('/setting');
+                    },
+                    leading: const Icon(Icons.settings),
+                    title: const Text("Setting"),
+                    // Some Code
+                  ),
+                ],
               ),
             ),
-            const SizedBox(
-              height: 10,
-            )
-          ],
-        ),
+          ),
+          const Spacer(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: ListTile(
+              onTap: () async {
+                getIt<AuthController>().functionClearToken(context);
+              },
+              leading: const Icon(Icons.arrow_back),
+              title: const Text("Sign Out"),
+              // Some Code
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          )
+        ],
       ),
     );
   }
