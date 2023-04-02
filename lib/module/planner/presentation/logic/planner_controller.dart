@@ -16,6 +16,8 @@ class PlannerController extends GetxController {
   @factoryMethod
   static init() => Get.put(PlannerController());
 
+  final darkmode = false.obs;
+
   ///Controller:
 
   final projectNameController = TextEditingController().obs;

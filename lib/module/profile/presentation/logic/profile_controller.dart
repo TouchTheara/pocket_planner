@@ -14,6 +14,7 @@ class ProfileController extends GetxController {
 
   /// Fetch profile API:
   var profileData = ProfileModel().obs;
+
   final isLoading = false.obs;
   Future<ProfileModel> functionGetProfileData(BuildContext context,
       {bool isGoogle = false}) async {
@@ -22,7 +23,8 @@ class ProfileController extends GetxController {
         .getProfileData(context, isGoogle: isGoogle)
         .then((value) {
       profileData.value = value;
-      debugPrint("-----success get controller Planner ==$profileData}");
+      debugPrint(
+          "-----success get controller Planner ==${profileData.value.imageUrl}}");
       isLoading(false);
     });
     return profileData.value;

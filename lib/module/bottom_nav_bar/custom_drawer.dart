@@ -28,7 +28,7 @@ class CustomDrawer extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Colors.transparent,
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(width: 1, color: Colors.grey)),
                   child: Row(
@@ -101,9 +101,16 @@ class CustomDrawer extends StatelessWidget {
                       // Some Code
                     ),
                     ListTile(
-                      onTap: () {},
-                      leading: const Icon(Icons.sunny),
-                      title: const Text("Light Mode"),
+                      onTap: () {
+                        getIt<PlannerController>().darkmode.value =
+                            !getIt<PlannerController>().darkmode.value;
+                      },
+                      leading: !getIt<PlannerController>().darkmode.value
+                          ? const Icon(Icons.dark_mode)
+                          : const Icon(Icons.sunny),
+                      title: Text(!getIt<PlannerController>().darkmode.value
+                          ? "Dark Mode"
+                          : "Light Mode"),
                       // Some Code
                     ),
                     ListTile(

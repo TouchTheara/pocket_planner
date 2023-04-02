@@ -39,7 +39,7 @@ Widget customCardPin(BuildContext context,
             width: Get.width,
             padding: const EdgeInsets.all(15),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.background,
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
                 BoxShadow(
@@ -55,7 +55,6 @@ Widget customCardPin(BuildContext context,
                   Text(
                     projectName,
                     style: const TextStyle(
-                      color: Colors.black,
                       fontSize: 16,
                     ),
                   ),

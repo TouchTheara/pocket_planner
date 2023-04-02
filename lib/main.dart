@@ -3,9 +3,11 @@ import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pocket_planner/config/router.dart';
 import 'package:pocket_planner/config/theme.dart';
 import 'package:pocket_planner/core/auth/presentation/logic/auth_controller.dart';
+import 'package:pocket_planner/module/planner/presentation/logic/planner_controller.dart';
 import 'package:pocket_planner/util/helper/local_data/get_local_data.dart';
 
 import 'core/service_locator/service_locator.dart';
@@ -47,11 +49,17 @@ class _MyAppState extends State<MyApp> {
     return ValueListenableBuilder(
       valueListenable: getIt<AuthController>().appNotifier,
       builder: (context, String value, _) {
-        return MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
-          theme: lightTheme(),
-          routerConfig: router,
+        return Obx(
+          () => MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            title: 'Flutter Demo',
+            theme: lightTheme(),
+            darkTheme: darkTheme(),
+            themeMode: getIt<PlannerController>().darkmode.value
+                ? ThemeMode.dark
+                : ThemeMode.light,
+            routerConfig: router,
+          ),
         );
       },
     );

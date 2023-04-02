@@ -139,9 +139,10 @@ class _PlannerScreenState extends State<PlannerScreen> {
                             Expanded(
                               child: Container(
                                 width: MediaQuery.of(context).size.width,
-                                decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.only(
+                                decoration: BoxDecoration(
+                                  color:
+                                      Theme.of(context).colorScheme.background,
+                                  borderRadius: const BorderRadius.only(
                                     topLeft: Radius.circular(20),
                                     topRight: Radius.circular(20),
                                   ),

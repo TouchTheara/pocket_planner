@@ -39,6 +39,7 @@ class PlannerDetailScreen extends StatelessWidget {
     //   Container(),
     // ];
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: CustomScrollView(
         controller: controller,
         slivers: [
@@ -143,9 +144,7 @@ class PlannerDetailScreen extends StatelessWidget {
                             ? "${plannerModel.titleApp}"
                             : "No Title",
                         style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold),
+                            fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       Row(
                         children: [
@@ -187,10 +186,7 @@ class PlannerDetailScreen extends StatelessWidget {
                   ),
                   const Text(
                     "Description",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(
                     height: 10,
@@ -215,10 +211,7 @@ class PlannerDetailScreen extends StatelessWidget {
                   ),
                   const Text(
                     "Tasks",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(
                     height: 20,

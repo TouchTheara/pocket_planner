@@ -28,28 +28,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   getdata() async {
-    await getIt<ProfileController>().functionGetProfileData(context);
+    await getIt<ProfileController>()
+        .functionGetProfileData(context)
+        .then((value) {
+      debugPrint(value.imageUrl);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("My Profile"),
-        elevation: 0,
-      ),
-      backgroundColor: Theme.of(context).colorScheme.background,
-      body: Obx(
-        () => getIt<ProfileController>().isLoading.value
-            ? const CustomLoading()
-            : Column(
+    return Obx(
+      () => getIt<ProfileController>().isLoading.value
+          ? const CustomLoading()
+          : Scaffold(
+              appBar: AppBar(
+                title: const Text("My Profile"),
+                elevation: 0,
+              ),
+              backgroundColor: Theme.of(context).colorScheme.background,
+              body: Column(
                 children: [
                   Stack(
                     alignment: Alignment.bottomRight,
                     children: [
                       Container(
-                        height: 90,
-                        width: 90,
+                        height: 100,
+                        width: 100,
                         decoration: const BoxDecoration(shape: BoxShape.circle),
                         clipBehavior: Clip.antiAliasWithSaveLayer,
                         child: CachedNetworkImage(
@@ -62,7 +66,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 const CircularProgressIndicator(),
                             errorWidget: (context, url, error) =>
                                 const Icon(Icons.error),
-                            fit: BoxFit.cover),
+                            fit: BoxFit.fill),
                       ),
                       GestureDetector(
                         onTap: () async {
@@ -130,6 +134,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   Border.all(color: Colors.white, width: 2)),
                           child: const Icon(
                             Icons.add,
+                            size: 20,
                             color: Colors.white,
                           ),
                         ),
@@ -179,11 +184,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   const Spacer(),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 10),
                     child: SafeArea(
                       child: CustomButton(
                         titleBTN: "Delete Account",
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.background,
                         borderColor: AppColors.errorColor,
                         styleBTN:
                             Theme.of(context).textTheme.bodyMedium!.copyWith(
@@ -196,7 +202,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   )
                 ],
               ),
-      ),
+            ),
     );
   }
 }
