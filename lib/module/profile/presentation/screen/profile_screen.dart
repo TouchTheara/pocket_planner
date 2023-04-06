@@ -1,9 +1,6 @@
-import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:pocket_planner/config/app_colors.dart';
 import 'package:pocket_planner/core/service_locator/service_locator.dart';
@@ -11,6 +8,7 @@ import 'package:pocket_planner/module/profile/presentation/logic/profile_control
 import 'package:pocket_planner/widget/custom_button.dart';
 import 'package:pocket_planner/widget/custom_loading.dart';
 
+import '../widget/change_profile_photo.dart';
 import '../widget/info_profile_custom.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -28,28 +26,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   getdata() async {
-    await getIt<ProfileController>().functionGetProfileData(context);
+    await getIt<ProfileController>()
+        .functionGetProfileData(context)
+        .then((value) {
+      debugPrint(value.imageUrl);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("My Profile"),
-        elevation: 0,
-      ),
-      backgroundColor: Theme.of(context).colorScheme.background,
-      body: Obx(
-        () => getIt<ProfileController>().isLoading.value
-            ? const CustomLoading()
-            : Column(
+    return Obx(
+      () => getIt<ProfileController>().isLoading.value
+          ? const CustomLoading()
+          : Scaffold(
+              appBar: AppBar(
+                title: const Text("My Profile"),
+                elevation: 0,
+              ),
+              backgroundColor: Theme.of(context).colorScheme.background,
+              body: Column(
                 children: [
                   Stack(
                     alignment: Alignment.bottomRight,
                     children: [
                       Container(
-                        height: 90,
-                        width: 90,
+                        height: 100,
+                        width: 100,
                         decoration: const BoxDecoration(shape: BoxShape.circle),
                         clipBehavior: Clip.antiAliasWithSaveLayer,
                         child: CachedNetworkImage(
@@ -62,74 +64,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 const CircularProgressIndicator(),
                             errorWidget: (context, url, error) =>
                                 const Icon(Icons.error),
-                            fit: BoxFit.cover),
+                            fit: BoxFit.fill),
                       ),
                       GestureDetector(
                         onTap: () async {
-                          showDialog(
-                            context: context,
-                            builder: (_) => SimpleDialog(
-                              contentPadding:
-                                  const EdgeInsets.symmetric(vertical: 10),
-                              children: [
-                                InkWell(
-                                  onTap: () async {
-                                    Navigator.pop(context);
-                                    XFile? file = await ImagePicker()
-                                        .pickImage(source: ImageSource.camera);
-
-                                    if (file != null) {
-                                      getIt<ProfileController>().profileImage =
-                                          File(file.path);
-                                      await getIt<ProfileController>()
-                                          .uploadProfileImage();
-                                    }
-                                  },
-                                  child: Container(
-                                    padding: const EdgeInsets.all(16),
-                                    child: Text(
-                                      "Take Photo",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium,
-                                    ),
-                                  ),
-                                ),
-                                InkWell(
-                                  onTap: () async {
-                                    Navigator.pop(context);
-                                    XFile? file = await ImagePicker()
-                                        .pickImage(source: ImageSource.gallery);
-
-                                    if (file != null) {
-                                      getIt<ProfileController>().profileImage =
-                                          File(file.path);
-                                      await getIt<ProfileController>()
-                                          .uploadProfileImage();
-                                    }
-                                  },
-                                  child: Container(
-                                    padding: const EdgeInsets.all(16),
-                                    child: Text(
-                                      "Choose Photo",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
+                          funcChangeProfilePhoto(context);
                         },
                         child: Container(
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: AppColors.primaryColor,
-                              border:
-                                  Border.all(color: Colors.white, width: 2)),
+                              border: Border.all(
+                                  color:
+                                      Theme.of(context).colorScheme.background,
+                                  width: 2)),
+                          padding: const EdgeInsets.all(5),
                           child: const Icon(
-                            Icons.add,
+                            Icons.camera_alt_outlined,
+                            size: 12,
                             color: Colors.white,
                           ),
                         ),
@@ -179,11 +131,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   const Spacer(),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 10),
                     child: SafeArea(
                       child: CustomButton(
                         titleBTN: "Delete Account",
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.background,
                         borderColor: AppColors.errorColor,
                         styleBTN:
                             Theme.of(context).textTheme.bodyMedium!.copyWith(
@@ -196,7 +149,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   )
                 ],
               ),
-      ),
+            ),
     );
   }
 }

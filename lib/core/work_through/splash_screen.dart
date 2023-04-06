@@ -13,14 +13,17 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 1), () async {
+    () async {
       var token = await LocalDataStorage.getCurrentUser();
-      if (token != '') {
-        GoRouter.of(context).go('/');
-      } else {
-        GoRouter.of(context).go('/onBoarding');
-      }
-    });
+      Future.delayed(const Duration(seconds: 1), () async {
+        if (token != '') {
+          GoRouter.of(context).go('/');
+        } else {
+          GoRouter.of(context).go('/onBoarding');
+        }
+      });
+    };
+
     super.initState();
   }
 

@@ -6,32 +6,30 @@ import 'package:pocket_planner/config/app_colors.dart';
 import 'package:pocket_planner/widget/custom_button.dart';
 import 'package:pocket_planner/widget/custom_card_blur.dart';
 
-import '../../../core/auth/presentation/logic/auth_controller.dart';
-
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final authController = Get.put(AuthController());
-    Map<int, Widget> myTabs = <int, Widget>{
-      0: Container(
-        margin: const EdgeInsets.all(18),
-        child: const Text(
-          "Register",
-          style: TextStyle(
-              color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
-        ),
-      ),
-      1: Container(
-        margin: const EdgeInsets.all(18),
-        child: const Text(
-          "Login",
-          style: TextStyle(
-              color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
-        ),
-      )
-    };
+    // final authController = Get.put(AuthController());
+    // Map<int, Widget> myTabs = <int, Widget>{
+    //   0: Container(
+    //     margin: const EdgeInsets.all(18),
+    //     child: const Text(
+    //       "Register",
+    //       style: TextStyle(
+    //           color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
+    //     ),
+    //   ),
+    //   1: Container(
+    //     margin: const EdgeInsets.all(18),
+    //     child: const Text(
+    //       "Login",
+    //       style: TextStyle(
+    //           color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
+    //     ),
+    //   )
+    // };
     return Scaffold(
       body: SizedBox(
         height: Get.height,

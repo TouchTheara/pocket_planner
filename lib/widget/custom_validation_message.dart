@@ -60,7 +60,7 @@ class CustomValidatorMessage extends StatelessWidget {
               ),
               Expanded(
                 child: Text(description != null ? description! : "",
-                    style: Theme.of(context).textTheme.headline1!.copyWith(
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
                           fontSize: 13,
                           color: (() {
                             if (color != null) {
