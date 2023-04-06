@@ -10,9 +10,11 @@ import '../../widget/custom_popup_selection.dart';
 import '../../widget/custom_list_member.dart';
 
 class CreateTaskFrom extends StatelessWidget {
-  const CreateTaskFrom({Key? key, this.id}) : super(key: key);
+  const CreateTaskFrom({Key? key, this.id, this.isCreate = true})
+      : super(key: key);
 
   final String? id;
+  final bool isCreate;
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +55,10 @@ class CreateTaskFrom extends StatelessWidget {
                         height: 20,
                       ),
                       CustomTextField(
+                          initialValue: getIt<PlannerController>()
+                              .taskNameController
+                              .value
+                              .text,
                           controller: getIt<PlannerController>()
                               .taskNameController
                               .value,
@@ -62,6 +68,20 @@ class CreateTaskFrom extends StatelessWidget {
                           labelText: 'Task name',
                           hintText: 'Task name',
                           onChange: (value) {
+                            getIt<PlannerController>()
+                                .taskNameController
+                                .value
+                                .text = value;
+                            getIt<PlannerController>()
+                                    .taskNameController
+                                    .value
+                                    .selection =
+                                TextSelection.fromPosition(TextPosition(
+                                    offset: getIt<PlannerController>()
+                                        .taskNameController
+                                        .value
+                                        .text
+                                        .length));
                             if (value == "") {
                               getIt<PlannerController>()
                                   .taskNameValidator
@@ -80,6 +100,10 @@ class CreateTaskFrom extends StatelessWidget {
                           textAlignVertical: TextAlignVertical.top,
                           maxLine: null,
                           expands: true,
+                          initialValue: getIt<PlannerController>()
+                              .descriptionTaskController
+                              .value
+                              .text,
                           controller: getIt<PlannerController>()
                               .descriptionTaskController
                               .value,
@@ -89,6 +113,20 @@ class CreateTaskFrom extends StatelessWidget {
                           labelText: 'Description',
                           hintText: 'Description',
                           onChange: (value) {
+                            getIt<PlannerController>()
+                                .descriptionTaskController
+                                .value
+                                .text = value;
+                            getIt<PlannerController>()
+                                    .descriptionTaskController
+                                    .value
+                                    .selection =
+                                TextSelection.fromPosition(TextPosition(
+                                    offset: getIt<PlannerController>()
+                                        .descriptionTaskController
+                                        .value
+                                        .text
+                                        .length));
                             if (value == "") {
                               getIt<PlannerController>()
                                   .descriptionTaskValidator
@@ -103,6 +141,10 @@ class CreateTaskFrom extends StatelessWidget {
                         height: 10,
                       ),
                       CustomTextField(
+                        initialValue: getIt<PlannerController>()
+                            .priorityTaskController
+                            .value
+                            .text,
                         controller: getIt<PlannerController>()
                             .priorityTaskController
                             .value,
@@ -127,9 +169,10 @@ class CreateTaskFrom extends StatelessWidget {
                                 .priorityTaskController
                                 .value
                                 .text = value1;
-                            getIt<PlannerController>()
-                                .hintTextTaskPriority
-                                .value = value2;
+
+                            // getIt<PlannerController>()
+                            //     .hintTextTaskPriority
+                            //     .value = value2;
                           });
                           debugPrint("-----------Testing...");
                         },
@@ -138,6 +181,10 @@ class CreateTaskFrom extends StatelessWidget {
                         height: 10,
                       ),
                       CustomTextField(
+                        initialValue: getIt<PlannerController>()
+                            .selectionDueDateTaskController
+                            .value
+                            .text,
                         controller: getIt<PlannerController>()
                             .selectionDueDateTaskController
                             .value,

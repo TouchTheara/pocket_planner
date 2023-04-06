@@ -233,7 +233,9 @@ class PlannerController extends GetxController {
       endDate.value = '';
       descriptionTaskController.value.clear();
       priorityTaskController.value.clear();
-      await getIt<PlannerController>().functionFetchDataTask(context, id: id);
+      await getIt<PlannerController>()
+          .functionFetchDataTask(context, id: id)
+          .then((value) => context.pop());
     } catch (e) {
       debugPrint("----------$e");
     }

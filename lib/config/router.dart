@@ -13,6 +13,7 @@ import '../core/auth/presentation/screen/otp_screen.dart';
 import '../core/auth/presentation/screen/signup.dart';
 
 import '../core/service_locator/service_locator.dart';
+import '../module/bottom_nav_bar/bottom_nav_bar.dart';
 import '../module/notification/presentation/screen/notification_screen.dart';
 import '../module/onboarding/screen/onboarding_screen.dart';
 import '../module/profile/presentation/screen/profile_screen.dart';
@@ -20,8 +21,8 @@ import '../module/setting/presentation/screen/setting_screen.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'root');
-// final GlobalKey<NavigatorState> _shellNavigatorKey =
-//     GlobalKey<NavigatorState>(debugLabel: 'shell');
+final GlobalKey<NavigatorState> _shellNavigatorKey =
+    GlobalKey<NavigatorState>(debugLabel: 'shell');
 final router = GoRouter(
     navigatorKey: _rootNavigatorKey,
     redirect: (context, state) {
@@ -90,70 +91,72 @@ final router = GoRouter(
         },
         routes: const <RouteBase>[],
       ),
-      // ShellRoute(
-      //   navigatorKey: _shellNavigatorKey,
-      //   builder: (BuildContext context, GoRouterState state, Widget child) {
-      //     return CustomDrawer(child: child);
-      //   },
-      //   routes: <RouteBase>[
-      GoRoute(
-        path: '/',
-        builder: (BuildContext context, GoRouterState state) {
-          return const PlannerScreen();
+      ShellRoute(
+        navigatorKey: _shellNavigatorKey,
+        builder: (BuildContext context, GoRouterState state, Widget child) {
+          return ScaffoldWithNavBar(child: child);
         },
         routes: <RouteBase>[
           GoRoute(
-            name: 'Detail',
-            path: 'detail',
+            path: '/',
             builder: (BuildContext context, GoRouterState state) {
-              return PlannerDetailScreen(
-                plannerModel: state.extra as PlannerModel,
-              );
+              return const PlannerScreen();
             },
-          )
+            routes: <RouteBase>[
+              GoRoute(
+                name: 'Detail',
+                path: 'detail',
+                builder: (BuildContext context, GoRouterState state) {
+                  return PlannerDetailScreen(
+                    plannerModel: state.extra as PlannerModel,
+                  );
+                },
+              )
+            ],
+          ),
+          GoRoute(
+            path: '/meeting',
+            builder: (BuildContext context, GoRouterState state) {
+              return const MeetingScreen();
+            },
+            routes: const <RouteBase>[],
+          ),
+          GoRoute(
+            path: '/notification',
+            builder: (BuildContext context, GoRouterState state) {
+              return const NotificationScreen();
+            },
+            routes: const <RouteBase>[],
+          ),
+          GoRoute(
+            path: '/profile',
+            builder: (BuildContext context, GoRouterState state) {
+              return const ProfileScreen();
+            },
+            routes: const <RouteBase>[],
+          ),
+          GoRoute(
+            path: '/feed',
+            builder: (BuildContext context, GoRouterState state) {
+              return const ProfileScreen();
+            },
+            routes: const <RouteBase>[],
+          ),
+          GoRoute(
+            path: '/setting',
+            builder: (BuildContext context, GoRouterState state) {
+              return const SettingScreen();
+            },
+            routes: const <RouteBase>[],
+          ),
+          GoRoute(
+            path: '/setting',
+            builder: (BuildContext context, GoRouterState state) {
+              return const ProfileScreen();
+            },
+            routes: const <RouteBase>[],
+          ),
         ],
-      ),
-      GoRoute(
-        path: '/meeting',
-        builder: (BuildContext context, GoRouterState state) {
-          return const MeetingScreen();
-        },
-        routes: const <RouteBase>[],
-      ),
-      GoRoute(
-        path: '/notification',
-        builder: (BuildContext context, GoRouterState state) {
-          return const NotificationScreen();
-        },
-        routes: const <RouteBase>[],
-      ),
-      GoRoute(
-        path: '/profile',
-        builder: (BuildContext context, GoRouterState state) {
-          return const ProfileScreen();
-        },
-        routes: const <RouteBase>[],
-      ),
-      GoRoute(
-        path: '/feed',
-        builder: (BuildContext context, GoRouterState state) {
-          return const ProfileScreen();
-        },
-        routes: const <RouteBase>[],
-      ),
-      GoRoute(
-        path: '/setting',
-        builder: (BuildContext context, GoRouterState state) {
-          return const SettingScreen();
-        },
-        routes: const <RouteBase>[],
-      ),
-      GoRoute(
-        path: '/setting',
-        builder: (BuildContext context, GoRouterState state) {
-          return const ProfileScreen();
-        },
-        routes: const <RouteBase>[],
-      ),
+      )
     ],
     refreshListenable: getIt<AuthController>().appNotifier);
