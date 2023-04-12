@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:injectable/injectable.dart';
@@ -21,8 +22,9 @@ class ProfileController extends GetxController {
     isLoading(true);
     await getIt<ProfileRepository>()
         .getProfileData(context, isGoogle: isGoogle)
-        .then((value) {
+        .then((value) async {
       profileData.value = value;
+      await FirebaseMessaging.instance.subscribeToTopic("${value.userName}");
       debugPrint(
           "-----success get controller Planner ==${profileData.value.imageUrl}}");
       isLoading(false);

@@ -1,3 +1,5 @@
+// ignore_for_file: await_only_futures
+
 import 'dart:async';
 import 'dart:convert';
 
@@ -169,7 +171,7 @@ class DioBaseHelper {
             statusCode: response.statusCode, bodyString: response.data));
       case 401:
         Timer.periodic(const Duration(seconds: 1), (timer) async {
-          await getIt<AuthController>().getRefreshToken();
+          await getIt<AuthController>().getRefreshToken;
         });
         return Future.error(ErrorModel(
             statusCode: response.statusCode, bodyString: response.data));
@@ -178,7 +180,7 @@ class DioBaseHelper {
             statusCode: response.statusCode, bodyString: response.data));
       case 403:
         Timer.periodic(const Duration(seconds: 1), (timer) async {
-          await getIt<AuthController>().getRefreshToken();
+          await getIt<AuthController>().getRefreshToken;
         });
         return Future.error(ErrorModel(
             statusCode: response.statusCode, bodyString: response.data));

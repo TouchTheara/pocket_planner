@@ -74,7 +74,7 @@ class AuthReposity implements AuthRepositoryBase {
         debugPrint("--------------$value----------");
       }).onError((ErrorModel error, stackTrace) {
         if (error.statusCode == 401 || error.statusCode == 403) {
-          getIt<AuthController>().getRefreshToken();
+          getIt<AuthController>().getRefreshToken(context);
         }
         debugPrint(error.bodyString.toString());
       });
@@ -108,7 +108,7 @@ class AuthReposity implements AuthRepositoryBase {
         debugPrint("--------------$value----------");
       }).onError((ErrorModel error, stackTrace) {
         if (error.statusCode == 401) {
-          getIt<AuthController>().getRefreshToken();
+          getIt<AuthController>().getRefreshToken(context);
         }
         debugPrint(error.bodyString.toString());
       });
@@ -118,7 +118,7 @@ class AuthReposity implements AuthRepositoryBase {
   }
 
   @override
-  Future<void> getRefreshToken({String? phone}) async {
+  Future<void> getRefreshToken(BuildContext context, {String? phone}) async {
     try {
       var refreshToken = await LocalDataStorage.getString('refreshToken');
 
@@ -136,7 +136,7 @@ class AuthReposity implements AuthRepositoryBase {
         await LocalDataStorage.storeCurrentUser(value['token'])
             .then((value) async {
           await getIt<AuthController>().funtionFetchFirst();
-          await getIt<PlannerController>().functionFetchDataPlanner();
+          await getIt<PlannerController>().functionFetchDataPlanner(context);
         });
 
         // debugPrint("----ddd----------$value----------");

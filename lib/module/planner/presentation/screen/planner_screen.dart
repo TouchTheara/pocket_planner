@@ -41,7 +41,7 @@ class _PlannerScreenState extends State<PlannerScreen> {
           // Timer.periodic(const Duration(seconds: 1), (timer) async {
           //   await getIt<PlannerController>().functionFetchDataPlanner(context);
           // });
-          await getIt<PlannerController>().functionFetchDataPlanner();
+          await getIt<PlannerController>().functionFetchDataPlanner(context);
         },
         builder: (plcontroller) {
           return Stack(

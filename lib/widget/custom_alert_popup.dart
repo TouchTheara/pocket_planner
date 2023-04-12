@@ -1,3 +1,5 @@
+// ignore_for_file: await_only_futures
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pocket_planner/config/app_colors.dart';
@@ -51,9 +53,9 @@ openAlertBox(BuildContext context) {
                   contextAlert.pop();
                   getIt<PlannerController>().functionDeleteDataPlanner(context,
                       id: getIt<PlannerController>().projectId.value,
-                      functionSuccess: () {
+                      functionSuccess: () async {
                     context.pop();
-                    getIt<PlannerController>().functionFetchDataPlanner();
+                    await getIt<PlannerController>().functionFetchDataPlanner;
                   });
                 },
                 child: Row(

@@ -76,7 +76,8 @@ class CustomDrawer extends StatelessWidget {
                   ),
                   ListTile(
                     onTap: () {
-                      getIt<PlannerController>().functionFetchDataPlanner();
+                      getIt<PlannerController>()
+                          .functionFetchDataPlanner(context);
                       context.pop();
                     },
                     leading: const Icon(Icons.home),

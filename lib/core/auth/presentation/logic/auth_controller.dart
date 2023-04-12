@@ -134,11 +134,14 @@ class AuthController extends GetxController
 
   ///Function Refresh Token:
 
-  getRefreshToken() async {
+  getRefreshToken(
+    BuildContext context,
+  ) async {
     isLoading(true);
 
     await getIt<AuthReposity>()
         .getRefreshToken(
+      context,
       phone: "855${phoneController.value.text.removeZeroFront()}",
     )
         .then((value) {

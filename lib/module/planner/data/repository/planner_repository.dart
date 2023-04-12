@@ -1,3 +1,5 @@
+// ignore_for_file: await_only_futures
+
 import 'package:flutter/material.dart';
 import 'package:pocket_planner/module/planner/data/model/tesk_model/task_model.dart';
 import 'package:pocket_planner/module/planner/domain/planner_base_repository.dart';
@@ -30,7 +32,7 @@ class PlannerRepository implements PlannerRepositoryBase {
       stackTrace,
     ) async {
       if (error.statusCode == 401 || error.statusCode == 403) {
-        await getIt<AuthController>().getRefreshToken();
+        await getIt<AuthController>().getRefreshToken;
       }
       debugPrint("on status error data planner : ${error.statusCode}");
       debugPrint("on status error data Body planner: ${error.bodyString}");

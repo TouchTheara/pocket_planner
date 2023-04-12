@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pocket_planner/core/service_locator/service_locator.dart';
 import 'package:pocket_planner/module/planner/data/model/tesk_model/task_model.dart';
+import 'package:pocket_planner/module/profile/presentation/logic/profile_controller.dart';
 import 'package:pocket_planner/util/helper/local_data/get_local_data.dart';
 
 import '../../data/model/planner_model.dart';
@@ -68,17 +69,23 @@ class PlannerController extends GetxController {
   ///Function Fetch Data Planner:
   var plannerDataList = <PlannerModel>[].obs;
   final pagePlanData = 1.obs;
-  Future<List<PlannerModel>> functionFetchDataPlanner() async {
+
+  Future<List<PlannerModel>> functionFetchDataPlanner(
+      BuildContext context) async {
     isLoading(true);
     await getIt<PlannerRepository>()
         .getPlannerData(
       page: pagePlanData.value,
     )
-        .then((value) {
+        .then((value) async {
       isLoading(false);
       plannerDataList.value = value;
+
       update();
       refresh();
+    }).then((value) {
+      getIt<ProfileController>()
+          .functionGetProfileData(context, isGoogle: false);
     });
     isLoading(false);
     refresh();
@@ -198,7 +205,9 @@ class PlannerController extends GetxController {
 
   functionSuccessCreateData(BuildContext context) async {
     try {
-      await getIt<PlannerController>().functionFetchDataPlanner().then((value) {
+      await getIt<PlannerController>()
+          .functionFetchDataPlanner(context)
+          .then((value) {
         functionClearDataForm();
       });
     } catch (e) {
@@ -210,7 +219,7 @@ class PlannerController extends GetxController {
     try {
       context.pop('/');
       await getIt<PlannerController>()
-          .functionFetchDataPlanner()
+          .functionFetchDataPlanner(context)
           .then((value) {});
     } catch (e) {
       debugPrint("-------- $e");
