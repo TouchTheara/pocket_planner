@@ -34,13 +34,13 @@ class SignUpScreen extends StatelessWidget {
                     SliverFillRemaining(
                       hasScrollBody: false,
                       child: CustomCardBlur(
-                        colors: [
-                          Colors.grey.shade200,
-                          Colors.blueGrey.shade50,
-                          Colors.grey.shade100,
-                          Colors.grey.shade200,
-                          Colors.blueGrey.shade100,
-                        ],
+                        // colors: [
+                        //   Colors.grey.shade200,
+                        //   Colors.blueGrey.shade50,
+                        //   Colors.grey.shade100,
+                        //   Colors.grey.shade200,
+                        //   Colors.blueGrey.shade100,
+                        // ],
                         child: Column(
                           children: [
                             Expanded(

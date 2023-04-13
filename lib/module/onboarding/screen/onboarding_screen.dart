@@ -35,13 +35,13 @@ class OnBoardingScreen extends StatelessWidget {
         height: Get.height,
         width: double.infinity,
         child: CustomCardBlur(
-          colors: [
-            Colors.grey.shade200,
-            Colors.blueGrey.shade50,
-            Colors.grey.shade100,
-            Colors.grey.shade200,
-            Colors.blueGrey.shade100,
-          ],
+          // colors: [
+          //   Colors.grey.shade200,
+          //   Colors.blueGrey.shade50,
+          //   Colors.grey.shade100,
+          //   Colors.grey.shade200,
+          //   Colors.blueGrey.shade100,
+          // ],
           child: Center(
             child: Column(children: [
               Expanded(

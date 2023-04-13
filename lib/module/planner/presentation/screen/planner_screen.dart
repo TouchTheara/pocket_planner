@@ -11,8 +11,6 @@ import 'package:pocket_planner/module/planner/data/model/planner_model.dart';
 import 'package:pocket_planner/module/planner/presentation/logic/planner_controller.dart';
 import 'package:pocket_planner/widget/custom_loading.dart';
 
-import '../../../../util/form_builder/create_project_form.dart';
-import '../../../../widget/custom_modal_sheet.dart';
 import '../widget/custom_card_pin.dart';
 import '../widget/custom_card_project.dart';
 
@@ -151,10 +149,7 @@ class _PlannerScreenState extends State<PlannerScreen> {
                                         onTap: () async {
                                           getIt<PlannerController>()
                                               .functionClearDataForm();
-                                          customModelSheet(context,
-                                              child: const CreateProjectFrom(
-                                                isCreate: true,
-                                              ));
+                                          context.push('/create-project');
                                         },
                                         child: const Icon(
                                           Icons.add,

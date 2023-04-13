@@ -5,6 +5,7 @@ import 'package:pocket_planner/module/meeting/presentaion/screen/meeting_screen.
 import 'package:pocket_planner/module/planner/data/model/planner_model.dart';
 import 'package:pocket_planner/module/planner/presentation/screen/planner_detail_screen.dart';
 import 'package:pocket_planner/module/planner/presentation/screen/planner_screen.dart';
+import 'package:pocket_planner/util/form_builder/create_project_form.dart';
 
 import '../core/auth/presentation/logic/auth_controller.dart';
 import '../core/auth/presentation/screen/create_password.dart';
@@ -14,10 +15,8 @@ import '../core/auth/presentation/screen/signup.dart';
 
 import '../core/service_locator/service_locator.dart';
 import '../module/bottom_nav_bar/bottom_nav_bar.dart';
-import '../module/notification/presentation/screen/notification_screen.dart';
 import '../module/onboarding/screen/onboarding_screen.dart';
 import '../module/profile/presentation/screen/profile_screen.dart';
-import '../module/setting/presentation/screen/setting_screen.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'root');
@@ -99,58 +98,40 @@ final router = GoRouter(
         routes: <RouteBase>[
           GoRoute(
             path: '/',
+            parentNavigatorKey: _shellNavigatorKey,
             builder: (BuildContext context, GoRouterState state) {
               return const PlannerScreen();
             },
             routes: <RouteBase>[
               GoRoute(
-                name: 'Detail',
                 path: 'detail',
+                parentNavigatorKey: _rootNavigatorKey,
                 builder: (BuildContext context, GoRouterState state) {
                   return PlannerDetailScreen(
                     plannerModel: state.extra as PlannerModel,
                   );
+                },
+              ),
+              GoRoute(
+                path: 'create-project',
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const CreateProjectFrom();
                 },
               )
             ],
           ),
           GoRoute(
             path: '/meeting',
+            parentNavigatorKey: _shellNavigatorKey,
             builder: (BuildContext context, GoRouterState state) {
               return const MeetingScreen();
             },
             routes: const <RouteBase>[],
           ),
           GoRoute(
-            path: '/notification',
-            builder: (BuildContext context, GoRouterState state) {
-              return const NotificationScreen();
-            },
-            routes: const <RouteBase>[],
-          ),
-          GoRoute(
             path: '/profile',
-            builder: (BuildContext context, GoRouterState state) {
-              return const ProfileScreen();
-            },
-            routes: const <RouteBase>[],
-          ),
-          GoRoute(
-            path: '/feed',
-            builder: (BuildContext context, GoRouterState state) {
-              return const ProfileScreen();
-            },
-            routes: const <RouteBase>[],
-          ),
-          GoRoute(
-            path: '/setting',
-            builder: (BuildContext context, GoRouterState state) {
-              return const SettingScreen();
-            },
-            routes: const <RouteBase>[],
-          ),
-          GoRoute(
-            path: '/setting',
+            parentNavigatorKey: _shellNavigatorKey,
             builder: (BuildContext context, GoRouterState state) {
               return const ProfileScreen();
             },
