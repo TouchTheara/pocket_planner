@@ -150,6 +150,7 @@ class _PlannerScreenState extends State<PlannerScreen> {
                                           getIt<PlannerController>()
                                               .functionClearDataForm();
                                           context.push('/create-project');
+                                          getIt<PlannerController>().update();
                                         },
                                         child: const Icon(
                                           Icons.add,
@@ -208,6 +209,8 @@ class _PlannerScreenState extends State<PlannerScreen> {
                                                       (data) =>
                                                           CustomCardProject(
                                                         ontap: () {
+                                                          debugPrint(
+                                                              "=======ID========: ${data.value.idApp}");
                                                           context.push(
                                                               '/detail',
                                                               extra:
