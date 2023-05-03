@@ -40,223 +40,228 @@ class PlannerDetailScreen extends StatelessWidget {
     // ];
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      body: CustomScrollView(
-        controller: controller,
-        slivers: [
-          SliverAppBar(
-            backgroundColor: Colors.grey.shade100,
-            leading: Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: InkWell(
-                borderRadius: BorderRadius.circular(30),
-                onTap: () {
-                  context.pop();
-                },
-                child: Platform.isIOS
-                    ? Container(
-                        decoration: BoxDecoration(
-                            color: Colors.grey.shade400.withOpacity(0.6),
-                            shape: BoxShape.circle),
-                        child: const Padding(
-                          padding: EdgeInsets.only(left: 6),
-                          child: Icon(
-                            Icons.arrow_back_ios,
-                            size: 22,
-                          ),
-                        ))
-                    : Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.grey.shade400.withOpacity(0.6),
-                        ),
-                        child: const Icon(
-                          Icons.arrow_back,
-                          size: 22,
-                        )),
-              ),
-            ),
-            actions: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(right: 10),
+      body: Obx(
+        () => CustomScrollView(
+          controller: controller,
+          slivers: [
+            SliverAppBar(
+              backgroundColor: Colors.grey.shade100,
+              leading: Padding(
+                padding: const EdgeInsets.only(left: 10),
                 child: InkWell(
                   borderRadius: BorderRadius.circular(30),
                   onTap: () {
-                    getIt<PlannerController>().projectName.value =
-                        plannerModel.titleApp ?? '';
-                    getIt<PlannerController>().projectDisciption.value =
-                        plannerModel.description ?? '';
-                    getIt<PlannerController>().projectPriority.value =
-                        plannerModel.priorityApp ?? '';
-                    getIt<PlannerController>().startDate.value =
-                        plannerModel.startDateApp ?? '';
-                    getIt<PlannerController>().endDate.value =
-                        plannerModel.endDateApp ?? '';
-                    getIt<PlannerController>().projectCover.value =
-                        plannerModel.imageApp ?? '';
-                    getIt<PlannerController>().projectId.value =
-                        int.parse(plannerModel.idApp ?? '');
-
-                    openAlertBox(
-                      context,
-                    );
-                    debugPrint("------->>>><<<<< ID : ${plannerModel.idApp}");
+                    context.pop();
                   },
-                  child: Container(
-                      padding: const EdgeInsets.all(11),
-                      decoration: BoxDecoration(
-                          color: Colors.grey.shade400.withOpacity(0.6),
-                          shape: BoxShape.circle),
-                      child: const Icon(
-                        Icons.more_vert,
-                        size: 22,
-                      )),
+                  child: Platform.isIOS
+                      ? Container(
+                          decoration: BoxDecoration(
+                              color: Colors.grey.shade400.withOpacity(0.6),
+                              shape: BoxShape.circle),
+                          child: const Padding(
+                            padding: EdgeInsets.only(left: 6),
+                            child: Icon(
+                              Icons.arrow_back_ios,
+                              size: 22,
+                            ),
+                          ))
+                      : Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.grey.shade400.withOpacity(0.6),
+                          ),
+                          child: const Icon(
+                            Icons.arrow_back,
+                            size: 22,
+                          )),
                 ),
-              )
-            ],
-            pinned: false,
-            snap: false,
-            floating: true,
-            expandedHeight: Get.height * 0.24,
-            flexibleSpace: FlexibleSpaceBar(
-              title: const Text(''),
-              background: Image.network(
-                plannerModel.imageApp != '' && plannerModel.imageApp != null
-                    ? "${plannerModel.imageApp}"
-                    : 'https://img.freepik.com/free-photo/rpa-concept-with-blurry-hand-touching-screen_23-2149311914.jpg',
-                fit: BoxFit.cover,
+              ),
+              actions: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(30),
+                    onTap: () {
+                      getIt<PlannerController>().projectName.value =
+                          plannerModel.titleApp ?? '';
+                      getIt<PlannerController>().projectDisciption.value =
+                          plannerModel.description ?? '';
+                      getIt<PlannerController>().projectPriority.value =
+                          plannerModel.priorityApp ?? '';
+                      getIt<PlannerController>().startDate.value =
+                          plannerModel.startDateApp ?? '';
+                      getIt<PlannerController>().endDate.value =
+                          plannerModel.endDateApp ?? '';
+                      getIt<PlannerController>().projectCover.value =
+                          plannerModel.imageApp ?? '';
+                      getIt<PlannerController>().projectId.value =
+                          int.parse(plannerModel.idApp ?? '');
+
+                      openAlertBox(
+                        context,
+                      );
+                      debugPrint("------->>>><<<<< ID : ${plannerModel.idApp}");
+                    },
+                    child: Container(
+                        padding: const EdgeInsets.all(11),
+                        decoration: BoxDecoration(
+                            color: Colors.grey.shade400.withOpacity(0.6),
+                            shape: BoxShape.circle),
+                        child: const Icon(
+                          Icons.more_vert,
+                          size: 22,
+                        )),
+                  ),
+                )
+              ],
+              pinned: false,
+              snap: false,
+              floating: true,
+              expandedHeight: Get.height * 0.24,
+              flexibleSpace: FlexibleSpaceBar(
+                title: const Text(''),
+                background: Image.network(
+                  plannerModel.imageApp != '' && plannerModel.imageApp != null
+                      ? "${plannerModel.imageApp}"
+                      : 'https://img.freepik.com/free-photo/rpa-concept-with-blurry-hand-touching-screen_23-2149311914.jpg',
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-          ),
-          SliverFillRemaining(
-            hasScrollBody: false,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        plannerModel.titleApp != '' &&
-                                plannerModel.titleApp != null
-                            ? "${plannerModel.titleApp}"
-                            : "No Title",
-                        style: const TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.calendar_today,
-                            size: 20,
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Text(plannerModel.endDateApp != '' &&
-                                  plannerModel.endDateApp != null
-                              ? "${plannerModel.endDateApp}"
-                              : "No Due"),
-                        ],
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  Text(
-                    plannerModel.projectType != '' &&
-                            plannerModel.projectType != null
-                        ? "${plannerModel.projectType}"
-                        : "No Type",
-                    style: const TextStyle(
-                        color: Colors.grey,
-                        fontSize: 14,
-                        fontWeight: FontWeight.normal),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  customListMember(context,
-                      listImage: listImage, heightIF: 40, widthIF: 40),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const Text(
-                    "Description",
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    plannerModel.description != '' &&
-                            plannerModel.description != null
-                        ? "${plannerModel.description}"
-                        : "No Description",
-                    style: const TextStyle(
-                        wordSpacing: 1.8,
-                        height: 1.4,
-                        color: Colors.grey,
-                        fontSize: 14,
-                        fontWeight: FontWeight.normal),
-                    textAlign: TextAlign.justify,
-                    maxLines: 8,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const Text(
-                    "Tasks",
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  getIt<PlannerController>().taskDataList.isEmpty
-                      ? const Text("No Task Yet")
-                      : SingleChildScrollView(
-                          child: Column(
-                            children: getIt<PlannerController>()
-                                .taskDataList
-                                .map((e) => Padding(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 12),
-                                      child: customCardTask(context,
-                                          object: Object()),
-                                    ))
-                                .toList(),
-                          ),
+            SliverFillRemaining(
+              hasScrollBody: false,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          plannerModel.titleApp != '' &&
+                                  plannerModel.titleApp != null
+                              ? "${plannerModel.titleApp}"
+                              : "No Title",
+                          style: const TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
                         ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const Spacer(),
-                  SafeArea(
-                    top: false,
-                    bottom: false,
-                    minimum: const EdgeInsets.only(bottom: 10),
-                    child: CustomButton(
-                      ontap: () {
-                        customModelSheet(context,
-                            child: CreateTaskFrom(
-                              id: plannerModel.idApp,
-                            ));
-                      },
-                      titleBTN: 'Create Task',
-                      styleBTN: const TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                      color: AppColors.primaryColor,
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.calendar_today,
+                              size: 20,
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text(plannerModel.endDateApp != '' &&
+                                    plannerModel.endDateApp != null
+                                ? "${plannerModel.endDateApp}"
+                                : "No Due"),
+                          ],
+                        ),
+                      ],
                     ),
-                  )
-                ],
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      plannerModel.projectType != '' &&
+                              plannerModel.projectType != null
+                          ? "${plannerModel.projectType}"
+                          : "No Type",
+                      style: const TextStyle(
+                          color: Colors.grey,
+                          fontSize: 14,
+                          fontWeight: FontWeight.normal),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    customListMember(context,
+                        listImage: listImage, heightIF: 40, widthIF: 40),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      "Description",
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      plannerModel.description != '' &&
+                              plannerModel.description != null
+                          ? "${plannerModel.description}"
+                          : "No Description",
+                      style: const TextStyle(
+                          wordSpacing: 1.8,
+                          height: 1.4,
+                          color: Colors.grey,
+                          fontSize: 14,
+                          fontWeight: FontWeight.normal),
+                      textAlign: TextAlign.justify,
+                      maxLines: 8,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      "Tasks",
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    getIt<PlannerController>().taskDataList.isEmpty
+                        ? const Text("No Task Yet")
+                        : SingleChildScrollView(
+                            child: Column(
+                              children: getIt<PlannerController>()
+                                  .taskDataList
+                                  .map((e) => Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 12),
+                                        child: customCardTask(context,
+                                            object: Object()),
+                                      ))
+                                  .toList(),
+                            ),
+                          ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Spacer(),
+                    SafeArea(
+                      top: false,
+                      bottom: false,
+                      minimum: const EdgeInsets.only(bottom: 10),
+                      child: CustomButton(
+                        ontap: () {
+                          customModelSheet(context,
+                              child: CreateTaskFrom(
+                                id: plannerModel.idApp,
+                              ));
+                        },
+                        titleBTN: 'Create Task',
+                        styleBTN: const TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                        color: AppColors.primaryColor,
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

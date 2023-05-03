@@ -5,7 +5,7 @@
     </queries>
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="pocket_planner"
+        android:label="Plan Pro"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:requestLegacyExternalStorage="true">

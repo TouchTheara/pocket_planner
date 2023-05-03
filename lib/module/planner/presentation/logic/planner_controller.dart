@@ -1,5 +1,6 @@
 import 'package:dio_base_helper/dio_base_helper.dart' as dio;
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
@@ -40,6 +41,7 @@ class PlannerController extends GetxController {
   final priorityTaskValidator = false.obs;
   final selectionDueDateTaskController = TextEditingController().obs;
   final selectionDueDateTaskValidator = false.obs;
+  final advancedDrawerController = AdvancedDrawerController();
 
   ///init value:
   final hintTextProjectPriority = ''.obs;

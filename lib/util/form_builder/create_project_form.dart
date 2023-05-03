@@ -278,7 +278,7 @@ class CreateProjectFrom extends StatelessWidget {
                             const Spacer(),
                             SafeArea(
                               top: false,
-                              minimum: const EdgeInsets.only(bottom: 10),
+                              minimum: const EdgeInsets.only(bottom: 20),
                               child: CustomButton(
                                 height: 60,
                                 ontap: () {

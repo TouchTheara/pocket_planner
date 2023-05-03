@@ -9,7 +9,7 @@ class CustomLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color(0xff000000).withOpacity(0.7),
+      color: Colors.white,
       width: double.infinity,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

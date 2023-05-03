@@ -41,36 +41,20 @@ Widget customTimeMeeting(BuildContext context) {
           ],
         ),
       ),
-      Positioned(
-        bottom: 20,
-        right: 20,
-        child: InkWell(
-          onTap: () {
-            functionPopUpSelection(context,
-                isCalender: true,
-                isSeletionTime: true,
-                title: "Seletion Time",
-                percentHeight: 0.36);
-          },
-          child: Container(
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.grey.shade300,
-                      blurRadius: 2,
-                      spreadRadius: 0,
-                      offset: const Offset(1, 1))
-                ]),
-            child: const Icon(
-              Icons.add,
-              color: AppColors.btnColor,
-            ),
-          ),
-        ),
-      ),
+      // Positioned(
+      //   bottom: 20,
+      //   right: 20,
+      //   child: InkWell(
+      //     onTap: () {
+      //       functionPopUpSelection(context,
+      //           isCalender: true,
+      //           isSeletionTime: true,
+      //           title: "Seletion Time",
+      //           percentHeight: 0.36);
+      //     },
+      //     child: ,
+      //   ),
+      // ),
     ],
   );
 }

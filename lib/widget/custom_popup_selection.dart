@@ -28,155 +28,151 @@ functionPopUpSelection(
           init: getIt<PlannerController>(),
           builder: (controller) {
             return Material(
-              child: ClipRRect(
-                child: Container(
-                  height: MediaQuery.of(context).size.height * percentHeight,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                  ),
-                  child: Column(
-                    children: [
-                      Container(
-                        height: 50,
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        decoration: BoxDecoration(
-                          color: Colors.grey[100],
-                        ),
-                        alignment: Alignment.centerLeft,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "$title",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .displayLarge!
-                                  .copyWith(
-                                      fontSize: 18,
-                                      color: AppColors.primaryColor,
-                                      fontWeight: FontWeight.w600),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                if (isCalender) {
-                                  ontapDone!(controller.getValueDropDown1.value,
-                                      controller.getValueDropDown2.value);
-                                } else {
-                                  ontapDone!(
-                                      controller.getValueDropDown1.value, '');
-                                }
-                                controller.update();
-                                context.pop();
-                              },
-                              child: Container(
-                                color: Colors.transparent,
-                                padding: const EdgeInsets.all(10),
-                                child: Text(
-                                  "Done",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .displayLarge!
-                                      .copyWith(
-                                          fontSize: 18,
-                                          color: AppColors.primaryColor,
-                                          fontWeight: FontWeight.w600),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
+              child: Container(
+                height: MediaQuery.of(context).size.height * percentHeight,
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                ),
+                child: Column(
+                  children: [
+                    Container(
+                      height: 50,
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                        color: Colors.grey[100],
                       ),
-                      Expanded(
-                        child: !isCalender
-                            ? Column(
-                                children: [
-                                  ...listPriority
-                                      .map(
-                                        (e) => Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 10, left: 10, right: 10),
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              controller
-                                                  .getValueDropDown1.value = e;
-                                              controller.update();
-                                            },
-                                            child: Container(
-                                                alignment: Alignment.center,
-                                                width: double.infinity,
-                                                decoration: BoxDecoration(
-                                                    color: controller
-                                                                .getValueDropDown1
-                                                                .value ==
-                                                            e
-                                                        ? Colors.grey.shade400
-                                                        : Colors.grey.shade100
-                                                            .withOpacity(0.5),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5)),
-                                                padding:
-                                                    const EdgeInsets.all(10),
-                                                child: Text(
-                                                  e,
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .displayLarge!
-                                                      .copyWith(
-                                                          fontSize: 14,
-                                                          color: controller
-                                                                      .getValueDropDown1
-                                                                      .value ==
-                                                                  e
-                                                              ? Colors.white
-                                                              : Colors.grey,
-                                                          fontWeight:
-                                                              FontWeight.w600),
-                                                )),
-                                          ),
+                      alignment: Alignment.centerLeft,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "$title",
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayLarge!
+                                .copyWith(
+                                    fontSize: 18,
+                                    color: AppColors.primaryColor,
+                                    fontWeight: FontWeight.w600),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              if (isCalender) {
+                                ontapDone!(controller.getValueDropDown1.value,
+                                    controller.getValueDropDown2.value);
+                              } else {
+                                ontapDone!(
+                                    controller.getValueDropDown1.value, '');
+                              }
+                              controller.update();
+                              context.pop();
+                            },
+                            child: Container(
+                              color: Colors.transparent,
+                              padding: const EdgeInsets.all(10),
+                              child: Text(
+                                "Done",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .displayLarge!
+                                    .copyWith(
+                                        fontSize: 18,
+                                        color: AppColors.primaryColor,
+                                        fontWeight: FontWeight.w600),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: !isCalender
+                          ? Column(
+                              children: [
+                                ...listPriority
+                                    .map(
+                                      (e) => Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 10, left: 10, right: 10),
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            controller.getValueDropDown1.value =
+                                                e;
+                                            controller.update();
+                                          },
+                                          child: Container(
+                                              alignment: Alignment.center,
+                                              width: double.infinity,
+                                              decoration: BoxDecoration(
+                                                  color: controller
+                                                              .getValueDropDown1
+                                                              .value ==
+                                                          e
+                                                      ? Colors.grey.shade400
+                                                      : Colors.grey.shade100
+                                                          .withOpacity(0.5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5)),
+                                              padding: const EdgeInsets.all(10),
+                                              child: Text(
+                                                e,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .displayLarge!
+                                                    .copyWith(
+                                                        fontSize: 14,
+                                                        color: controller
+                                                                    .getValueDropDown1
+                                                                    .value ==
+                                                                e
+                                                            ? Colors.white
+                                                            : Colors.grey,
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                              )),
                                         ),
-                                      )
-                                      .toList()
-                                ],
-                              )
-                            : isSeletionTime
-                                ? SfCalendar(
-                                    onSelectionChanged:
-                                        (CalendarSelectionDetails value) {
-                                      debugPrint("---------${value.resource}");
-                                    },
-                                    view: CalendarView.day,
-                                    timeSlotViewSettings:
-                                        const TimeSlotViewSettings(
-                                            timeInterval: Duration(hours: 2)),
-                                  )
-                                : SfDateRangePicker(
-                                    onSelectionChanged:
-                                        (DateRangePickerSelectionChangedArgs
-                                            args) {
-                                      if (args.value is PickerDateRange) {
-                                        if (isCalender && isSeletionTime) {
-                                          controller.getValueDropDown1.value =
-                                              DateFormat('dd/MM/yyyy')
-                                                  .format(args.value);
-                                        }
+                                      ),
+                                    )
+                                    .toList()
+                              ],
+                            )
+                          : isSeletionTime
+                              ? SfCalendar(
+                                  onSelectionChanged:
+                                      (CalendarSelectionDetails value) {
+                                    debugPrint("---------${value.resource}");
+                                  },
+                                  view: CalendarView.day,
+                                  timeSlotViewSettings:
+                                      const TimeSlotViewSettings(
+                                          timeInterval: Duration(hours: 2)),
+                                )
+                              : SfDateRangePicker(
+                                  onSelectionChanged:
+                                      (DateRangePickerSelectionChangedArgs
+                                          args) {
+                                    if (args.value is PickerDateRange) {
+                                      if (isCalender && isSeletionTime) {
                                         controller.getValueDropDown1.value =
                                             DateFormat('dd/MM/yyyy')
-                                                .format(args.value.startDate);
-                                        controller.getValueDropDown2.value =
-                                            DateFormat('dd/MM/yyyy')
-                                                .format(args.value.endDate);
+                                                .format(args.value);
                                       }
-                                      controller.update();
-                                    },
-                                    selectionMode:
-                                        DateRangePickerSelectionMode.range,
-                                    initialSelectedRange: PickerDateRange(
-                                        DateTime.now(), DateTime.now()),
-                                  ),
-                      )
-                    ],
-                  ),
+                                      controller.getValueDropDown1.value =
+                                          DateFormat('dd/MM/yyyy')
+                                              .format(args.value.startDate);
+                                      controller.getValueDropDown2.value =
+                                          DateFormat('dd/MM/yyyy')
+                                              .format(args.value.endDate);
+                                    }
+                                    controller.update();
+                                  },
+                                  selectionMode:
+                                      DateRangePickerSelectionMode.range,
+                                  initialSelectedRange: PickerDateRange(
+                                      DateTime.now(), DateTime.now()),
+                                ),
+                    )
+                  ],
                 ),
               ),
             );

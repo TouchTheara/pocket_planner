@@ -314,6 +314,7 @@ class CreateTaskFrom extends StatelessWidget {
                             ontap: () {
                               getIt<PlannerController>().functionCreateTask(
                                   context,
+                                  iDApp: int.parse(id!),
                                   title: getIt<PlannerController>()
                                       .taskNameController
                                       .value
@@ -329,7 +330,13 @@ class CreateTaskFrom extends StatelessWidget {
                                   estimatetime: getIt<PlannerController>()
                                       .selectionDueDateTaskController
                                       .value
-                                      .text, functionSuccess: () {
+                                      .text,
+                                  isdone: false,
+                                  status: "Start",
+                                  date: getIt<PlannerController>()
+                                      .startDate
+                                      .value,
+                                  progress: '', functionSuccess: () {
                                 getIt<PlannerController>()
                                     .functionSuccessCreateTask(context, id: id);
                               });

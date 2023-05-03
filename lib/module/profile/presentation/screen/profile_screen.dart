@@ -6,8 +6,8 @@ import 'package:pocket_planner/config/app_colors.dart';
 import 'package:pocket_planner/core/service_locator/service_locator.dart';
 import 'package:pocket_planner/module/profile/presentation/logic/profile_controller.dart';
 import 'package:pocket_planner/widget/custom_button.dart';
-import 'package:pocket_planner/widget/custom_loading.dart';
 
+import '../../../../widget/custom_loading.dart';
 import '../widget/change_profile_photo.dart';
 import '../widget/info_profile_custom.dart';
 

@@ -52,7 +52,7 @@ class _MyAppState extends State<MyApp> {
         return Obx(
           () => MaterialApp.router(
             debugShowCheckedModeBanner: false,
-            title: 'Flutter Demo',
+            title: 'Plan Pro',
             theme: lightTheme(),
             darkTheme: darkTheme(),
             themeMode: getIt<PlannerController>().darkmode.value
