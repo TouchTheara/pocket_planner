@@ -17,8 +17,9 @@ class PlannerModel with _$PlannerModel {
     @JsonKey(name: "start_date_ap") String? startDateApp,
     @JsonKey(name: "end_date_ap") String? endDateApp,
     @JsonKey(name: "description") String? description,
-    @JsonKey(name: "progress_ap") String? progressAp,
+    @JsonKey(name: "is_owner") bool? isOwner,
     @JsonKey(name: "project_type") String? projectType,
+    @JsonKey(name: "image_url") String? imageUrl,
     @JsonKey(name: "ispin") bool? ispin,
   }) = _PlannerModel;
 

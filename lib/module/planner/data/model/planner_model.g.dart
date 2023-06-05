@@ -17,8 +17,9 @@ _$_PlannerModel _$$_PlannerModelFromJson(Map<String, dynamic> json) =>
       startDateApp: json['start_date_ap'] as String?,
       endDateApp: json['end_date_ap'] as String?,
       description: json['description'] as String?,
-      progressAp: json['progress_ap'] as String?,
+      isOwner: json['is_owner'] as bool?,
       projectType: json['project_type'] as String?,
+      imageUrl: json['image_url'] as String?,
       ispin: json['ispin'] as bool?,
     );
 
@@ -33,7 +34,8 @@ Map<String, dynamic> _$$_PlannerModelToJson(_$_PlannerModel instance) =>
       'start_date_ap': instance.startDateApp,
       'end_date_ap': instance.endDateApp,
       'description': instance.description,
-      'progress_ap': instance.progressAp,
+      'is_owner': instance.isOwner,
       'project_type': instance.projectType,
+      'image_url': instance.imageUrl,
       'ispin': instance.ispin,
     };

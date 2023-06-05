@@ -6,10 +6,8 @@ import 'package:pocket_planner/config/app_colors.dart';
 import 'package:pocket_planner/module/planner/presentation/logic/planner_controller.dart';
 
 import '../core/service_locator/service_locator.dart';
-import '../util/form_builder/create_project_form.dart';
-import 'custom_modal_sheet.dart';
 
-openAlertBox(BuildContext context) {
+openAlertBox(BuildContext context, {bool isPin = false}) {
   return showDialog(
       context: context,
       builder: (BuildContext contextAlert) {
@@ -50,12 +48,13 @@ openAlertBox(BuildContext context) {
               ),
               InkWell(
                 onTap: () {
-                  contextAlert.pop();
+                  context.pop();
                   getIt<PlannerController>().functionDeleteDataPlanner(context,
                       id: getIt<PlannerController>().projectId.value,
                       functionSuccess: () async {
-                    context.pop();
-                    await getIt<PlannerController>().functionFetchDataPlanner;
+                    await getIt<PlannerController>()
+                        .functionFetchDataPlanner(context)
+                        .then((value) => context.pop());
                   });
                 },
                 child: Row(
@@ -87,6 +86,19 @@ openAlertBox(BuildContext context) {
               InkWell(
                 onTap: () {
                   contextAlert.pop();
+                  getIt<PlannerController>().functionUpdatePlanner(context,
+                      id: getIt<PlannerController>().projectId.value,
+                      title: getIt<PlannerController>().projectName.value,
+                      description:
+                          getIt<PlannerController>().projectDisciption.value,
+                      priorityApp:
+                          getIt<PlannerController>().projectPriority.value,
+                      startDateApp: getIt<PlannerController>().startDate.value,
+                      endDateApp: getIt<PlannerController>().endDate.value,
+                      ispin: true, functionSuccess: () {
+                    getIt<PlannerController>()
+                        .functionSuccessUpdateData(context);
+                  });
                 },
                 child: Row(
                   children: [
@@ -117,11 +129,10 @@ openAlertBox(BuildContext context) {
               ),
               InkWell(
                 onTap: () {
-                  context.pop();
-                  customModelSheet(context,
-                      child: const CreateProjectFrom(
-                        isCreate: false,
-                      ));
+                  contextAlert.pop();
+                  context.push(
+                    '/create-project/false',
+                  );
                 },
                 child: Row(
                   children: [

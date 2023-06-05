@@ -22,22 +22,42 @@ TaskModel _$TaskModelFromJson(Map<String, dynamic> json) {
 mixin _$TaskModel {
   @JsonKey(name: "id_ap")
   String? get idApp => throw _privateConstructorUsedError;
+  @JsonKey(name: "id_ap")
+  set idApp(String? value) => throw _privateConstructorUsedError;
   @JsonKey(name: "id_task")
   String? get idTask => throw _privateConstructorUsedError;
+  @JsonKey(name: "id_task")
+  set idTask(String? value) => throw _privateConstructorUsedError;
   @JsonKey(name: "isdone")
   bool? get isdone => throw _privateConstructorUsedError;
+  @JsonKey(name: "isdone")
+  set isdone(bool? value) => throw _privateConstructorUsedError;
   @JsonKey(name: "title")
   String? get title => throw _privateConstructorUsedError;
+  @JsonKey(name: "title")
+  set title(String? value) => throw _privateConstructorUsedError;
   @JsonKey(name: "status")
   String? get status => throw _privateConstructorUsedError;
+  @JsonKey(name: "status")
+  set status(String? value) => throw _privateConstructorUsedError;
   @JsonKey(name: "desciption")
   String? get desciption => throw _privateConstructorUsedError;
+  @JsonKey(name: "desciption")
+  set desciption(String? value) => throw _privateConstructorUsedError;
   @JsonKey(name: "progress")
   String? get progress => throw _privateConstructorUsedError;
+  @JsonKey(name: "progress")
+  set progress(String? value) => throw _privateConstructorUsedError;
   @JsonKey(name: "date")
   String? get date => throw _privateConstructorUsedError;
+  @JsonKey(name: "date")
+  set date(String? value) => throw _privateConstructorUsedError;
   @JsonKey(name: "priority")
   String? get priority => throw _privateConstructorUsedError;
+  @JsonKey(name: "priority")
+  set priority(String? value) => throw _privateConstructorUsedError;
+  bool get isSelected => throw _privateConstructorUsedError;
+  set isSelected(bool value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -59,7 +79,8 @@ abstract class $TaskModelCopyWith<$Res> {
       @JsonKey(name: "desciption") String? desciption,
       @JsonKey(name: "progress") String? progress,
       @JsonKey(name: "date") String? date,
-      @JsonKey(name: "priority") String? priority});
+      @JsonKey(name: "priority") String? priority,
+      bool isSelected});
 }
 
 /// @nodoc
@@ -84,6 +105,7 @@ class _$TaskModelCopyWithImpl<$Res, $Val extends TaskModel>
     Object? progress = freezed,
     Object? date = freezed,
     Object? priority = freezed,
+    Object? isSelected = null,
   }) {
     return _then(_value.copyWith(
       idApp: freezed == idApp
@@ -122,6 +144,10 @@ class _$TaskModelCopyWithImpl<$Res, $Val extends TaskModel>
           ? _value.priority
           : priority // ignore: cast_nullable_to_non_nullable
               as String?,
+      isSelected: null == isSelected
+          ? _value.isSelected
+          : isSelected // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -142,7 +168,8 @@ abstract class _$$_TaskModelCopyWith<$Res> implements $TaskModelCopyWith<$Res> {
       @JsonKey(name: "desciption") String? desciption,
       @JsonKey(name: "progress") String? progress,
       @JsonKey(name: "date") String? date,
-      @JsonKey(name: "priority") String? priority});
+      @JsonKey(name: "priority") String? priority,
+      bool isSelected});
 }
 
 /// @nodoc
@@ -165,6 +192,7 @@ class __$$_TaskModelCopyWithImpl<$Res>
     Object? progress = freezed,
     Object? date = freezed,
     Object? priority = freezed,
+    Object? isSelected = null,
   }) {
     return _then(_$_TaskModel(
       idApp: freezed == idApp
@@ -203,6 +231,10 @@ class __$$_TaskModelCopyWithImpl<$Res>
           ? _value.priority
           : priority // ignore: cast_nullable_to_non_nullable
               as String?,
+      isSelected: null == isSelected
+          ? _value.isSelected
+          : isSelected // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -219,67 +251,47 @@ class _$_TaskModel implements _TaskModel {
       @JsonKey(name: "desciption") this.desciption,
       @JsonKey(name: "progress") this.progress,
       @JsonKey(name: "date") this.date,
-      @JsonKey(name: "priority") this.priority});
+      @JsonKey(name: "priority") this.priority,
+      this.isSelected = false});
 
   factory _$_TaskModel.fromJson(Map<String, dynamic> json) =>
       _$$_TaskModelFromJson(json);
 
   @override
   @JsonKey(name: "id_ap")
-  final String? idApp;
+  String? idApp;
   @override
   @JsonKey(name: "id_task")
-  final String? idTask;
+  String? idTask;
   @override
   @JsonKey(name: "isdone")
-  final bool? isdone;
+  bool? isdone;
   @override
   @JsonKey(name: "title")
-  final String? title;
+  String? title;
   @override
   @JsonKey(name: "status")
-  final String? status;
+  String? status;
   @override
   @JsonKey(name: "desciption")
-  final String? desciption;
+  String? desciption;
   @override
   @JsonKey(name: "progress")
-  final String? progress;
+  String? progress;
   @override
   @JsonKey(name: "date")
-  final String? date;
+  String? date;
   @override
   @JsonKey(name: "priority")
-  final String? priority;
+  String? priority;
+  @override
+  @JsonKey()
+  bool isSelected;
 
   @override
   String toString() {
-    return 'TaskModel(idApp: $idApp, idTask: $idTask, isdone: $isdone, title: $title, status: $status, desciption: $desciption, progress: $progress, date: $date, priority: $priority)';
+    return 'TaskModel(idApp: $idApp, idTask: $idTask, isdone: $isdone, title: $title, status: $status, desciption: $desciption, progress: $progress, date: $date, priority: $priority, isSelected: $isSelected)';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_TaskModel &&
-            (identical(other.idApp, idApp) || other.idApp == idApp) &&
-            (identical(other.idTask, idTask) || other.idTask == idTask) &&
-            (identical(other.isdone, isdone) || other.isdone == isdone) &&
-            (identical(other.title, title) || other.title == title) &&
-            (identical(other.status, status) || other.status == status) &&
-            (identical(other.desciption, desciption) ||
-                other.desciption == desciption) &&
-            (identical(other.progress, progress) ||
-                other.progress == progress) &&
-            (identical(other.date, date) || other.date == date) &&
-            (identical(other.priority, priority) ||
-                other.priority == priority));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, idApp, idTask, isdone, title,
-      status, desciption, progress, date, priority);
 
   @JsonKey(ignore: true)
   @override
@@ -297,15 +309,16 @@ class _$_TaskModel implements _TaskModel {
 
 abstract class _TaskModel implements TaskModel {
   factory _TaskModel(
-      {@JsonKey(name: "id_ap") final String? idApp,
-      @JsonKey(name: "id_task") final String? idTask,
-      @JsonKey(name: "isdone") final bool? isdone,
-      @JsonKey(name: "title") final String? title,
-      @JsonKey(name: "status") final String? status,
-      @JsonKey(name: "desciption") final String? desciption,
-      @JsonKey(name: "progress") final String? progress,
-      @JsonKey(name: "date") final String? date,
-      @JsonKey(name: "priority") final String? priority}) = _$_TaskModel;
+      {@JsonKey(name: "id_ap") String? idApp,
+      @JsonKey(name: "id_task") String? idTask,
+      @JsonKey(name: "isdone") bool? isdone,
+      @JsonKey(name: "title") String? title,
+      @JsonKey(name: "status") String? status,
+      @JsonKey(name: "desciption") String? desciption,
+      @JsonKey(name: "progress") String? progress,
+      @JsonKey(name: "date") String? date,
+      @JsonKey(name: "priority") String? priority,
+      bool isSelected}) = _$_TaskModel;
 
   factory _TaskModel.fromJson(Map<String, dynamic> json) =
       _$_TaskModel.fromJson;
@@ -313,30 +326,51 @@ abstract class _TaskModel implements TaskModel {
   @override
   @JsonKey(name: "id_ap")
   String? get idApp;
+  @JsonKey(name: "id_ap")
+  set idApp(String? value);
   @override
   @JsonKey(name: "id_task")
   String? get idTask;
+  @JsonKey(name: "id_task")
+  set idTask(String? value);
   @override
   @JsonKey(name: "isdone")
   bool? get isdone;
+  @JsonKey(name: "isdone")
+  set isdone(bool? value);
   @override
   @JsonKey(name: "title")
   String? get title;
+  @JsonKey(name: "title")
+  set title(String? value);
   @override
   @JsonKey(name: "status")
   String? get status;
+  @JsonKey(name: "status")
+  set status(String? value);
   @override
   @JsonKey(name: "desciption")
   String? get desciption;
+  @JsonKey(name: "desciption")
+  set desciption(String? value);
   @override
   @JsonKey(name: "progress")
   String? get progress;
+  @JsonKey(name: "progress")
+  set progress(String? value);
   @override
   @JsonKey(name: "date")
   String? get date;
+  @JsonKey(name: "date")
+  set date(String? value);
   @override
   @JsonKey(name: "priority")
   String? get priority;
+  @JsonKey(name: "priority")
+  set priority(String? value);
+  @override
+  bool get isSelected;
+  set isSelected(bool value);
   @override
   @JsonKey(ignore: true)
   _$$_TaskModelCopyWith<_$_TaskModel> get copyWith =>

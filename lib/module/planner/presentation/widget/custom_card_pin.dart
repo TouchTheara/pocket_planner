@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:pocket_planner/config/app_colors.dart';
+import 'package:pocket_planner/module/planner/data/model/planner_model.dart';
 
 import '../../../../widget/custom_list_member.dart';
 
 Widget customCardPin(BuildContext context,
     {Function? ontap,
-    String projectName = 'CIC App',
-    String description =
-        'Lorem ipsum dolor sit amet, consectetur sdfad ipiscing elit sdfhdsfll sdfs',
+    required PlannerModel plannerModel,
     List<String> listImageMember = const [
       'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80',
       'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
@@ -25,7 +24,7 @@ Widget customCardPin(BuildContext context,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          projectName,
+          plannerModel.titleApp!,
           style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
         const SizedBox(
@@ -53,7 +52,7 @@ Widget customCardPin(BuildContext context,
               children: [
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   Text(
-                    projectName,
+                    plannerModel.titleApp!,
                     style: const TextStyle(
                       fontSize: 16,
                     ),
@@ -61,7 +60,9 @@ Widget customCardPin(BuildContext context,
                   const SizedBox(
                     height: 25,
                   ),
-                  SizedBox(width: Get.width * 0.45, child: Text(description)),
+                  SizedBox(
+                      width: Get.width * 0.45,
+                      child: Text(plannerModel.description!)),
                   const SizedBox(
                     height: 30,
                   ),

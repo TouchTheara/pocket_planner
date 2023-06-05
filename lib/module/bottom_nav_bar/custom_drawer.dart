@@ -56,7 +56,7 @@ class CustomDrawer extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              '${getIt<ProfileController>().profileData.value.firstName} ${getIt<ProfileController>().profileData.value.lastName}',
+                              '${getIt<ProfileController>().profileData.value.firstName?.toUpperCase()} ${getIt<ProfileController>().profileData.value.lastName?.toUpperCase()}',
                             ),
                             const SizedBox(
                               height: 10,
@@ -83,6 +83,9 @@ class CustomDrawer extends StatelessWidget {
                   children: <Widget>[
                     ListTile(
                       onTap: () async {
+                        getIt<PlannerController>()
+                            .advancedDrawerController
+                            .hideDrawer();
                         await onShowBottomSheet(
                             isNoAppBar: true,
                             backgroundColor: Colors.transparent,
@@ -125,6 +128,9 @@ class CustomDrawer extends StatelessWidget {
                     ),
                     ListTile(
                       onTap: () async {
+                        getIt<PlannerController>()
+                            .advancedDrawerController
+                            .hideDrawer();
                         await onShowBottomSheet(
                             isNoAppBar: true,
                             backgroundColor: Colors.transparent,
@@ -148,6 +154,9 @@ class CustomDrawer extends StatelessWidget {
                     ),
                     ListTile(
                       onTap: () {
+                        getIt<PlannerController>()
+                            .advancedDrawerController
+                            .hideDrawer();
                         getIt<PlannerController>().darkmode.value =
                             !getIt<PlannerController>().darkmode.value;
                       },
@@ -161,6 +170,9 @@ class CustomDrawer extends StatelessWidget {
                     ),
                     ListTile(
                       onTap: () async {
+                        getIt<PlannerController>()
+                            .advancedDrawerController
+                            .hideDrawer();
                         await onShowBottomSheet(
                             isNoAppBar: true,
                             backgroundColor: Colors.transparent,
@@ -183,6 +195,9 @@ class CustomDrawer extends StatelessWidget {
                     ),
                     ListTile(
                       onTap: () async {
+                        getIt<PlannerController>()
+                            .advancedDrawerController
+                            .hideDrawer();
                         await onShowBottomSheet(
                             isNoAppBar: true,
                             backgroundColor: Colors.transparent,

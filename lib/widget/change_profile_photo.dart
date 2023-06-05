@@ -2,12 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
-import '../../../../core/service_locator/service_locator.dart';
-import '../logic/profile_controller.dart';
-
-Future<dynamic> funcChangeProfilePhoto(BuildContext context) {
+Future<dynamic> funcChangeProfilePhoto(BuildContext context,
+    {Function? ontapTakePhoto, Function? ontapChoosePhoto}) {
   if (Platform.isAndroid) {
     return showDialog(
       context: context,
@@ -17,13 +14,17 @@ Future<dynamic> funcChangeProfilePhoto(BuildContext context) {
           InkWell(
             onTap: () async {
               Navigator.pop(context);
-              XFile? file =
-                  await ImagePicker().pickImage(source: ImageSource.camera);
-
-              if (file != null) {
-                getIt<ProfileController>().profileImage = File(file.path);
-                await getIt<ProfileController>().uploadProfileImage();
+              if (ontapTakePhoto != null) {
+                ontapTakePhoto();
               }
+
+              // XFile? file =
+              //     await ImagePicker().pickImage(source: ImageSource.camera);
+
+              // if (file != null) {
+              //   getIt<ProfileController>().profileImage = File(file.path);
+              //   await getIt<ProfileController>().uploadProfileImage(context);
+              // }
             },
             child: Container(
               padding: const EdgeInsets.all(16),
@@ -36,13 +37,16 @@ Future<dynamic> funcChangeProfilePhoto(BuildContext context) {
           InkWell(
             onTap: () async {
               Navigator.pop(context);
-              XFile? file =
-                  await ImagePicker().pickImage(source: ImageSource.gallery);
-
-              if (file != null) {
-                getIt<ProfileController>().profileImage = File(file.path);
-                await getIt<ProfileController>().uploadProfileImage();
+              if (ontapChoosePhoto != null) {
+                ontapChoosePhoto();
               }
+              // XFile? file =
+              //     await ImagePicker().pickImage(source: ImageSource.gallery);
+
+              // if (file != null) {
+              //   getIt<ProfileController>().profileImage = File(file.path);
+              //   await getIt<ProfileController>().uploadProfileImage(context);
+              // }
             },
             child: Container(
               padding: const EdgeInsets.all(16),
@@ -64,13 +68,16 @@ Future<dynamic> funcChangeProfilePhoto(BuildContext context) {
             CupertinoActionSheetAction(
               onPressed: () async {
                 Navigator.pop(context);
-                XFile? file =
-                    await ImagePicker().pickImage(source: ImageSource.camera);
-
-                if (file != null) {
-                  getIt<ProfileController>().profileImage = File(file.path);
-                  await getIt<ProfileController>().uploadProfileImage();
+                if (ontapTakePhoto != null) {
+                  ontapTakePhoto();
                 }
+                // XFile? file =
+                //     await ImagePicker().pickImage(source: ImageSource.camera);
+
+                // if (file != null) {
+                //   getIt<ProfileController>().profileImage = File(file.path);
+                //   await getIt<ProfileController>().uploadProfileImage(context);
+                // }
               },
               child: Text(
                 "Take Photo",
@@ -83,13 +90,16 @@ Future<dynamic> funcChangeProfilePhoto(BuildContext context) {
             CupertinoActionSheetAction(
               onPressed: () async {
                 Navigator.pop(context);
-                XFile? file =
-                    await ImagePicker().pickImage(source: ImageSource.gallery);
-
-                if (file != null) {
-                  getIt<ProfileController>().profileImage = File(file.path);
-                  await getIt<ProfileController>().uploadProfileImage();
+                if (ontapChoosePhoto != null) {
+                  ontapChoosePhoto();
                 }
+                // XFile? file =
+                //     await ImagePicker().pickImage(source: ImageSource.gallery);
+                // debugPrint("------------------Choose Photo: ${file?.path}");
+                // if (file != null) {
+                //   getIt<ProfileController>().profileImage = File(file.path);
+                //   await getIt<ProfileController>().uploadProfileImage(context);
+                // }
               },
               child: Text(
                 "Choose Photo",

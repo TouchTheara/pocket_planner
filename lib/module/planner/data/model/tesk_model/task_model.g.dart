@@ -16,6 +16,7 @@ _$_TaskModel _$$_TaskModelFromJson(Map<String, dynamic> json) => _$_TaskModel(
       progress: json['progress'] as String?,
       date: json['date'] as String?,
       priority: json['priority'] as String?,
+      isSelected: json['isSelected'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_TaskModelToJson(_$_TaskModel instance) =>
@@ -29,4 +30,5 @@ Map<String, dynamic> _$$_TaskModelToJson(_$_TaskModel instance) =>
       'progress': instance.progress,
       'date': instance.date,
       'priority': instance.priority,
+      'isSelected': instance.isSelected,
     };

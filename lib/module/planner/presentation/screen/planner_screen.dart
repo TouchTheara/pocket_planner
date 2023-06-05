@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
 
 import 'package:pocket_planner/config/app_colors.dart';
 import 'package:pocket_planner/core/auth/presentation/logic/auth_controller.dart';
 import 'package:pocket_planner/core/service_locator/service_locator.dart';
 import 'package:pocket_planner/module/bottom_nav_bar/custom_drawer.dart';
-import 'package:pocket_planner/module/planner/data/model/planner_model.dart';
 import 'package:pocket_planner/module/planner/presentation/logic/planner_controller.dart';
 import 'package:pocket_planner/module/profile/presentation/logic/profile_controller.dart';
 import 'package:pocket_planner/widget/custom_loading.dart';
@@ -16,45 +14,29 @@ import 'package:pocket_planner/widget/custom_loading.dart';
 import '../widget/custom_card_pin.dart';
 import '../widget/custom_card_project.dart';
 
-class PlannerScreen extends StatefulWidget {
+class PlannerScreen extends StatelessWidget {
   const PlannerScreen({Key? key}) : super(key: key);
 
   @override
-  State<PlannerScreen> createState() => _PlannerScreenState();
-}
-
-class _PlannerScreenState extends State<PlannerScreen> {
-  int timeKhmer = int.parse(DateFormat('kk').format(DateTime.now()));
-  String messageByTime = '';
-  @override
   Widget build(BuildContext context) {
+    // final con = Get.find<MainController>();
+
     GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     ScrollController? controller;
     void handleMenuButtonPressed() {
-      // NOTICE: Manage Advanced Drawer state through the Controller.
-      // _advancedDrawerController.value = AdvancedDrawerValue.visible();
       getIt<PlannerController>().advancedDrawerController.showDrawer();
     }
 
     return GetBuilder(
+        dispose: (state) {},
         init: getIt<PlannerController>(),
         initState: (state) async {
-          if (timeKhmer <= 12) {
-            messageByTime = '☀️ Good Morning!';
-          } else if ((timeKhmer > 12) && (timeKhmer <= 16)) {
-            messageByTime = '🌤️ Good Afternoon!';
-          } else if ((timeKhmer > 16) && (timeKhmer < 20)) {
-            messageByTime = '🌤️ Good Evening!';
-          } else {
-            messageByTime = '🌙 Good Night!';
-          }
-          // Timer.periodic(const Duration(seconds: 1), (timer) async {
-          //   await getIt<PlannerController>().functionFetchDataPlanner(context);
-          // });
           await getIt<PlannerController>()
               .functionFetchDataPlanner(context)
               .then((value) async {
-            await getIt<ProfileController>().functionGetProfileData(context);
+            await getIt<ProfileController>()
+                .functionGetProfileData(context)
+                .then((value) {});
           });
         },
         builder: (plcontroller) {
@@ -88,8 +70,7 @@ class _PlannerScreenState extends State<PlannerScreen> {
                                 // fillOverscroll: true,
                                 child: Column(children: [
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 20),
+                                    padding: const EdgeInsets.only(right: 20),
                                     child: SizedBox(
                                       child: Row(
                                         crossAxisAlignment:
@@ -146,7 +127,9 @@ class _PlannerScreenState extends State<PlannerScreen> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                messageByTime,
+                                                getIt<PlannerController>()
+                                                    .messageByTime
+                                                    .value,
                                                 style: const TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 14),
@@ -165,7 +148,7 @@ class _PlannerScreenState extends State<PlannerScreen> {
                                                           .lastName !=
                                                       null)
                                                 Text(
-                                                    '${getIt<ProfileController>().profileData.value.firstName} ${getIt<ProfileController>().profileData.value.lastName}',
+                                                    '${getIt<ProfileController>().profileData.value.firstName?.toUpperCase()} ${getIt<ProfileController>().profileData.value.lastName?.toUpperCase()}',
                                                     style: const TextStyle(
                                                         color: Colors.white,
                                                         fontSize: 16,
@@ -180,7 +163,8 @@ class _PlannerScreenState extends State<PlannerScreen> {
                                             onTap: () async {
                                               getIt<PlannerController>()
                                                   .functionClearDataForm();
-                                              context.push('/create-project');
+                                              context
+                                                  .push('/create-project/true');
                                               getIt<PlannerController>()
                                                   .update();
                                             },
@@ -303,11 +287,33 @@ class _PlannerScreenState extends State<PlannerScreen> {
                                               height: 20,
                                             ),
                                             Expanded(
-                                              child: customCardPin(context,
-                                                  ontap: () {
-                                                context.push('/detail',
-                                                    extra: PlannerModel());
-                                              }),
+                                              child: Column(
+                                                children: [
+                                                  ...getIt<PlannerController>()
+                                                      .plannerDataList
+                                                      .asMap()
+                                                      .entries
+                                                      .map((data) {
+                                                    if (data.value.ispin ==
+                                                        true) {
+                                                      return customCardPin(
+                                                          context,
+                                                          plannerModel:
+                                                              data.value,
+                                                          ontap: () {
+                                                        context.push('/detail',
+                                                            extra: data.value);
+                                                        getIt<PlannerController>()
+                                                            .functionFetchDataTask(
+                                                                context,
+                                                                id: data.value
+                                                                    .idApp);
+                                                      });
+                                                    }
+                                                    return Container();
+                                                  }).toList(),
+                                                ],
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -323,6 +329,8 @@ class _PlannerScreenState extends State<PlannerScreen> {
                 ),
               ),
               if (getIt<PlannerController>().isLoading.value ||
+                  getIt<PlannerController>().isLoadingUpdatePlan.value ||
+                  getIt<PlannerController>().isLoadUpload.value ||
                   getIt<AuthController>().isLoading.value)
                 const CustomLoading()
             ],

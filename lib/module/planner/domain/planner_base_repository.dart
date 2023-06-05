@@ -9,6 +9,8 @@ abstract class PlannerRepositoryBase {
   });
   Future<void> deletePlannerData(BuildContext context,
       {required int appId, Function functionSuccess});
+  Future<void> deleteTaskData(BuildContext context,
+      {required int taskId, Function functionSuccess});
   Future<List<TaskModel>> getTaskData(BuildContext context, {String id});
   Future<void> createPlannerData(BuildContext context,
       {String priorityApp,
@@ -19,7 +21,7 @@ abstract class PlannerRepositoryBase {
       bool? ispin,
       bool? isOwner,
       String? projectType,
-      String? progressAp,
+      // String? progressAp,
       Function functionSuccess});
   Future<void> updatePlannerData(BuildContext context,
       {required int id,
@@ -44,4 +46,17 @@ abstract class PlannerRepositoryBase {
       String date,
       String priority,
       Function functionSuccess});
+  Future<void> udpateTaskData(BuildContext context,
+      {required int iDTask,
+      int iDApp,
+      bool isdone,
+      String title,
+      String status,
+      String desciption,
+      String estimatetime,
+      String progress,
+      String date,
+      String priority,
+      Function functionSuccess});
+  Future<void> uploadProject({String? image, int id});
 }

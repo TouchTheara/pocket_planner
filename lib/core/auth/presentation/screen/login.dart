@@ -48,10 +48,10 @@ class LoginSignUpScreen extends StatelessWidget {
                               child: Container(
                                 width: MediaQuery.of(context).size.width,
                                 decoration: const BoxDecoration(),
-                                child: Column(
+                                child: const Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [
+                                  children: [
                                     Text('Hello Again!',
                                         style: TextStyle(
                                             fontSize: 35,
@@ -166,20 +166,19 @@ class LoginSignUpScreen extends StatelessWidget {
                                           height: 60,
                                           ontap: () {
                                             getIt<AuthController>()
-                                                .functionLogIn(context,
-                                                    phone:
-                                                        getIt<AuthController>()
-                                                            .phoneController
-                                                            .value
-                                                            .text,
-                                                    password:
-                                                        getIt<AuthController>()
-                                                            .passwordController
-                                                            .value
-                                                            .text,
-                                            //         funcWhenSuccess: () {
-                                            //   context.go('/');
-                                            // }
+                                                .functionLogIn(
+                                              context,
+                                              phone: getIt<AuthController>()
+                                                  .phoneController
+                                                  .value
+                                                  .text,
+                                              password: getIt<AuthController>()
+                                                  .passwordController
+                                                  .value
+                                                  .text,
+                                              //         funcWhenSuccess: () {
+                                              //   context.go('/');
+                                              // }
                                             );
                                           },
                                           color: AppColors.btnColor,

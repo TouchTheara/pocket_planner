@@ -17,6 +17,7 @@ import '../core/service_locator/service_locator.dart';
 import '../module/bottom_nav_bar/bottom_nav_bar.dart';
 import '../module/onboarding/screen/onboarding_screen.dart';
 import '../module/profile/presentation/screen/profile_screen.dart';
+import '../util/form_builder/create_task_form.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'root');
@@ -64,7 +65,7 @@ final router = GoRouter(
         path: '/signup/:register',
         builder: (BuildContext context, GoRouterState state) {
           return SignUpScreen(
-            isRegister: state.params['register'].toString() == "true",
+            isRegister: state.pathParameters['register'].toString() == "true",
           );
         },
         routes: const <RouteBase>[],
@@ -113,10 +114,24 @@ final router = GoRouter(
                 },
               ),
               GoRoute(
-                path: 'create-project',
+                path: 'create-project/:iscreate',
                 parentNavigatorKey: _rootNavigatorKey,
                 builder: (BuildContext context, GoRouterState state) {
-                  return const CreateProjectFrom();
+                  return CreateProjectFrom(
+                    isCreate:
+                        state.pathParameters['iscreate'].toString() == "true",
+                  );
+                },
+              ),
+              GoRoute(
+                path: 'create-task/:id',
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (BuildContext context, GoRouterState state) {
+                  debugPrint(state.pathParameters['id'].toString());
+                  return CreateTaskFrom(
+                      id: int.tryParse(
+                    state.pathParameters['id'].toString(),
+                  ));
                 },
               )
             ],

@@ -14,7 +14,7 @@ import 'local_data/get_local_data.dart';
 
 @injectable
 class DioBaseHelper {
-  final String _baseUrl = 'https://a758-136-228-141-114.ngrok-free.app/api/v1/';
+  final String _baseUrl = 'https://2b0c-163-53-29-18.ngrok-free.app/api/v1/';
 
   Future<dynamic> onRequest({
     String? url,

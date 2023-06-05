@@ -8,18 +8,19 @@
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import '../../module/meeting/data/repository/meeting_repository.dart' as _i8;
-import '../../module/meeting/presentaion/logic/meeting_controller.dart' as _i7;
+import '../../module/meeting/data/repository/meeting_repository.dart' as _i9;
+import '../../module/meeting/presentaion/logic/meeting_controller.dart' as _i8;
 import '../../module/notification/data/repository/notification_repository.dart'
-    as _i10;
-import '../../module/notification/presentation/logic/notification_controller.dart'
-    as _i9;
-import '../../module/planner/data/repository/planner_repository.dart' as _i12;
-import '../../module/planner/presentation/logic/planner_controller.dart'
     as _i11;
-import '../../module/profile/data/repository/profile_repository.dart' as _i14;
+import '../../module/notification/presentation/logic/notification_controller.dart'
+    as _i10;
+import '../../module/planner/data/repository/planner_repository.dart' as _i13;
+import '../../module/planner/presentation/logic/planner_controller.dart'
+    as _i12;
+import '../../module/profile/data/repository/profile_repository.dart' as _i15;
 import '../../module/profile/presentation/logic/profile_controller.dart'
-    as _i13;
+    as _i14;
+import '../../util/file_handler/file_controller.dart' as _i7;
 import '../../util/helper/api_base_helper.dart' as _i3;
 import '../../util/helper/dio_bese_helper.dart' as _i6;
 import '../auth/data/repository/auth_repository.dart' as _i5;
@@ -42,13 +43,14 @@ _i1.GetIt $initGetIt(
   gh.factory<_i4.AuthController>(() => _i4.AuthController.init());
   gh.factory<_i5.AuthReposity>(() => _i5.AuthReposity());
   gh.factory<_i6.DioBaseHelper>(() => _i6.DioBaseHelper());
-  gh.factory<_i7.MeetingController>(() => _i7.MeetingController());
-  gh.factory<_i8.MeetingReposity>(() => _i8.MeetingReposity());
-  gh.factory<_i9.NotificationController>(() => _i9.NotificationController());
-  gh.factory<_i10.NotificationReposity>(() => _i10.NotificationReposity());
-  gh.factory<_i11.PlannerController>(() => _i11.PlannerController.init());
-  gh.factory<_i12.PlannerRepository>(() => _i12.PlannerRepository());
-  gh.factory<_i13.ProfileController>(() => _i13.ProfileController.init());
-  gh.factory<_i14.ProfileRepository>(() => _i14.ProfileRepository());
+  gh.factory<_i7.FileController>(() => _i7.FileController.init());
+  gh.factory<_i8.MeetingController>(() => _i8.MeetingController());
+  gh.factory<_i9.MeetingReposity>(() => _i9.MeetingReposity());
+  gh.factory<_i10.NotificationController>(() => _i10.NotificationController());
+  gh.factory<_i11.NotificationReposity>(() => _i11.NotificationReposity());
+  gh.factory<_i12.PlannerController>(() => _i12.PlannerController.init());
+  gh.factory<_i13.PlannerRepository>(() => _i13.PlannerRepository());
+  gh.factory<_i14.ProfileController>(() => _i14.ProfileController.init());
+  gh.factory<_i15.ProfileRepository>(() => _i15.ProfileRepository());
   return get;
 }

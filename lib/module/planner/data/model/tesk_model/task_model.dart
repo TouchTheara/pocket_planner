@@ -5,7 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'task_model.freezed.dart';
 part 'task_model.g.dart';
 
-@freezed
+@unfreezed
 class TaskModel with _$TaskModel {
   factory TaskModel({
     @JsonKey(name: "id_ap") String? idApp,
@@ -17,6 +17,7 @@ class TaskModel with _$TaskModel {
     @JsonKey(name: "progress") String? progress,
     @JsonKey(name: "date") String? date,
     @JsonKey(name: "priority") String? priority,
+    @Default(false) bool isSelected,
   }) = _TaskModel;
 
   factory TaskModel.fromJson(Map<String, dynamic> json) =>

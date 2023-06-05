@@ -33,11 +33,18 @@ class $AssetsImagesGen {
   AssetGenImage get googlelogo =>
       const AssetGenImage('assets/images/googlelogo.png');
 
+  /// File path: assets/images/new_splash.png
+  AssetGenImage get newSplash =>
+      const AssetGenImage('assets/images/new_splash.png');
+
   /// File path: assets/images/splash.png
   AssetGenImage get splash => const AssetGenImage('assets/images/splash.png');
 
+  $AssetsImagesSvgFileGen get svgFile => const $AssetsImagesSvgFileGen();
+
   /// List of all assets
-  List<AssetGenImage> get values => [applelogo, fblogo, googlelogo, splash];
+  List<AssetGenImage> get values =>
+      [applelogo, fblogo, googlelogo, newSplash, splash];
 }
 
 class $AssetsLottieAnimationGen {
@@ -48,6 +55,16 @@ class $AssetsLottieAnimationGen {
 
   /// List of all assets
   List<String> get values => [onboard];
+}
+
+class $AssetsImagesSvgFileGen {
+  const $AssetsImagesSvgFileGen();
+
+  /// File path: assets/images/svgFile/underDevelopment.svg
+  String get underDevelopment => 'assets/images/svgFile/underDevelopment.svg';
+
+  /// List of all assets
+  List<String> get values => [underDevelopment];
 }
 
 class Assets {

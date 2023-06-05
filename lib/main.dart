@@ -1,23 +1,23 @@
 import 'dart:async';
 
 import 'package:firebase_core/firebase_core.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pocket_planner/config/router.dart';
 import 'package:pocket_planner/config/theme.dart';
 import 'package:pocket_planner/core/auth/presentation/logic/auth_controller.dart';
 import 'package:pocket_planner/module/planner/presentation/logic/planner_controller.dart';
-import 'package:pocket_planner/util/helper/local_data/get_local_data.dart';
 
 import 'core/service_locator/service_locator.dart';
+import 'util/helper/local_data/get_local_data.dart';
 import 'util/helper/notification_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  configureDependencies();
   await Firebase.initializeApp();
   await NotificationHelper.initial();
-  configureDependencies();
   await runZonedGuarded(() async {
     await LocalDataStorage.getString('refreshToken');
     await LocalDataStorage.getCurrentUser();
@@ -27,6 +27,7 @@ void main() async {
   });
 
   runApp(const MyApp());
+  // Get.put<MainService>(MainService(), permanent: true);
 }
 
 class MyApp extends StatefulWidget {
@@ -59,6 +60,9 @@ class _MyAppState extends State<MyApp> {
                 ? ThemeMode.dark
                 : ThemeMode.light,
             routerConfig: router,
+            // routeInformationParser: router.routeInformationParser,
+            // routerDelegate: router.routerDelegate,
+            // initialBinding: MainBinding(),
           ),
         );
       },
